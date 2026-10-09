@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,18 +14,20 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 
 export default function App() {
+  const [faceRevealed, setFaceRevealed] = useState(false);
+
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-purple-100 selection:text-iris-900 relative">
       {/* Desktop Custom Interactive Cursor */}
       <CustomCursor />
 
-      {/* Floating Minimal Glass Navbar */}
-      <Navbar />
+      {/* Floating Minimal Glass Navbar — appears when face is revealed or on scroll */}
+      <Navbar visible={faceRevealed} />
 
       {/* Main Content Sections */}
       <main>
-        {/* 1. Hero Experience — Cinematic Video Intro */}
-        <Hero />
+        {/* 1. Hero Experience — Cinematic Video Intro with Audio & 8s Face Lock */}
+        <Hero onFaceRevealed={setFaceRevealed} />
 
         {/* 2. Who I Am — Narrative & Statistics */}
         <About />
