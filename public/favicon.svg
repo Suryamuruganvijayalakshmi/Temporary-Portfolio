@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#0f172a"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="url(#iris-stroke)" stroke-width="2"/>
+  <path d="M42 22C38 18 26 18 22 22C18 26 18 30 22 33C26 36 38 38 42 41C46 44 46 48 42 52C38 56 26 56 22 52" stroke="url(#iris-grad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="44" cy="20" r="3" fill="#818cf8"/>
+  <defs>
+    <linearGradient id="iris-grad" x1="18" y1="18" x2="46" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818cf8"/>
+      <stop offset="0.5" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="iris-stroke" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c3aed" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+</svg>
