@@ -9,14 +9,14 @@ export default function StartupSection() {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-iris-500/8 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="bg-gradient-to-b from-surface-subtle via-white to-surface-subtle rounded-3xl p-8 sm:p-12 lg:p-16 border border-iris-200/90 shadow-iris relative overflow-hidden">
+        <div className="bg-gradient-to-br from-iris-100/80 via-white to-purple-100/70 rounded-3xl p-8 sm:p-12 lg:p-16 border-2 border-iris-300 shadow-iris-lg relative overflow-hidden">
           {/* Subtle decorative grid lines */}
-          <div className="absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br from-iris-500/10 to-purple-600/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -top-12 -right-12 w-64 h-64 bg-gradient-to-br from-iris-600/20 to-purple-600/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="space-y-8 max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-iris-50 border border-iris-200 text-xs font-mono font-semibold text-iris-700 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-iris-600" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-iris-200/80 border border-iris-400 text-xs font-mono font-bold text-iris-950 shadow-iris-sm">
+              <Sparkles className="w-4 h-4 text-iris-700" />
               <span>STARTUP VENTURE & PRODUCT VISION</span>
             </div>
 

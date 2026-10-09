@@ -50,22 +50,22 @@ export default function About() {
   const [activeStage, setActiveStage] = useState(0);
 
   return (
-    <section id="about" className="py-24 sm:py-32 bg-surface-subtle border-y border-slate-200/60 relative overflow-hidden">
+    <section id="about" className="py-24 sm:py-32 bg-gradient-to-b from-white via-iris-50/60 to-white border-y border-iris-200/60 relative overflow-hidden">
       {/* Background ambient accents */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-iris-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-iris-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="space-y-3 mb-16 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-iris-200 shadow-xs text-xs font-mono font-semibold text-iris-700">
-            <span className="w-1.5 h-1.5 rounded-full bg-iris-600"></span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-iris-100/80 border border-iris-300 shadow-iris-sm text-xs font-mono font-bold text-iris-900">
+            <span className="w-2 h-2 rounded-full bg-iris-600"></span>
             ABOUT SURYA
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Who I Am
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-iris-600 to-indigo-500 rounded-full" />
+          <div className="w-20 h-1.5 bg-gradient-to-r from-iris-600 via-indigo-600 to-purple-600 rounded-full" />
         </div>
 
         {/* Narrative & Philosophy Grid */}
@@ -93,12 +93,12 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:border-iris-300 hover:shadow-iris-sm transition-all duration-300 group"
+                  className="bg-white/95 p-5 rounded-2xl border-2 border-iris-200/80 shadow-iris-sm hover:border-iris-500 hover:shadow-iris transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-iris-50 border border-iris-100 flex items-center justify-center text-iris-600 mb-3 group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-iris-100 border border-iris-300 flex items-center justify-center text-iris-700 mb-3 group-hover:scale-105 transition-transform shadow-xs">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <div className="text-[11px] font-mono text-iris-600 font-semibold uppercase tracking-wider mb-1">
+                  <div className="text-[11px] font-mono text-iris-700 font-bold uppercase tracking-wider mb-1">
                     {item.metric}
                   </div>
                   <h3 className="text-sm font-bold text-slate-900 mb-1">

@@ -79,14 +79,14 @@ export default function Works() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative bg-white rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 overflow-hidden ${
+                className={`group relative bg-white rounded-3xl border-2 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden ${
                   isFounderCard
-                    ? 'border-iris-300 shadow-iris hover:border-iris-500 hover:shadow-iris-lg ring-1 ring-iris-200'
-                    : 'border-slate-200/90 shadow-card hover:border-iris-300 hover:shadow-card-hover'
+                    ? 'border-iris-400 shadow-iris hover:border-iris-600 hover:shadow-iris-lg ring-2 ring-iris-300'
+                    : 'border-iris-200/90 shadow-iris-sm hover:border-iris-500 hover:shadow-iris-lg'
                 }`}
               >
                 {/* Subtle Iris Gradient Overlay on Hover */}
-                <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-iris-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-iris-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 <div className="p-6 sm:p-8 lg:p-10">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -141,7 +141,7 @@ export default function Works() {
                       <div className="flex flex-wrap items-center gap-3 pt-3">
                         <button
                           onClick={() => setActiveProject(project)}
-                          className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-iris-600 text-white text-xs sm:text-sm font-semibold transition-all inline-flex items-center gap-2 group-hover:shadow-md"
+                          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-iris-600 to-indigo-600 hover:from-iris-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-semibold transition-all inline-flex items-center gap-2 shadow-iris-sm group-hover:shadow-iris"
                         >
                           <span>Explore Case Study</span>
                           <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />

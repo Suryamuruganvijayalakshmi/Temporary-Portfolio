@@ -32,8 +32,8 @@ export default function Skills() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-3 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-iris-50 border border-iris-200 text-xs font-mono font-semibold text-iris-700">
-              <span className="w-1.5 h-1.5 rounded-full bg-iris-600"></span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-iris-100/80 border border-iris-300 text-xs font-mono font-bold text-iris-900 shadow-iris-sm">
+              <span className="w-2 h-2 rounded-full bg-iris-600"></span>
               CORE COMPETENCIES
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -48,10 +48,10 @@ export default function Skills() {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
                 selectedCategory === 'all'
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
+                  ? 'bg-gradient-to-r from-iris-600 to-indigo-600 text-white shadow-iris'
+                  : 'bg-iris-50 text-iris-800 hover:bg-iris-100 border border-iris-200'
               }`}
             >
               All Skills ({skillCategories.reduce((acc, cat) => acc + cat.skills.length, 0)})
@@ -115,27 +115,27 @@ export default function Skills() {
                   {cat.skills.map((skill) => (
                     <div
                       key={skill.name}
-                      className="group relative bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-iris-400 hover:shadow-iris cursor-default overflow-hidden"
+                      className="group relative bg-white rounded-2xl p-4 border-2 border-iris-200/80 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-iris-500 hover:shadow-iris cursor-default overflow-hidden"
                     >
                       {/* Subtle Iris hover glow background */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-iris-50/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-iris-100/60 via-iris-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                       <div className="flex items-start justify-between mb-2">
-                        <span className="font-bold text-slate-900 text-sm group-hover:text-iris-700 transition-colors">
+                        <span className="font-bold text-slate-900 text-sm group-hover:text-iris-800 transition-colors">
                           {skill.name}
                         </span>
-                        <div className="w-5 h-5 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center group-hover:bg-iris-100 group-hover:text-iris-600 transition-all transform group-hover:rotate-12">
+                        <div className="w-5 h-5 rounded-lg bg-iris-50 text-iris-500 flex items-center justify-center group-hover:bg-iris-600 group-hover:text-white transition-all transform group-hover:rotate-12">
                           <Zap className="w-3 h-3" />
                         </div>
                       </div>
 
-                      <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">
                         {skill.desc}
                       </p>
 
-                      <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono">
+                      <div className="mt-3 pt-2.5 border-t border-iris-100 flex items-center justify-between text-[10px] font-mono">
                         <span className="text-slate-400">LEVEL</span>
-                        <span className="text-iris-600 font-semibold">{skill.level}</span>
+                        <span className="text-iris-700 font-bold">{skill.level}</span>
                       </div>
                     </div>
                   ))}

@@ -25,7 +25,7 @@ export default function Journey() {
         </div>
 
         {/* Modern Vertical Timeline */}
-        <div className="relative border-l-2 border-iris-200/80 ml-4 sm:ml-32 pl-6 sm:pl-10 space-y-12">
+        <div className="relative border-l-4 border-iris-400 ml-4 sm:ml-32 pl-6 sm:pl-10 space-y-12">
           {journeyMilestones.map((item, idx) => {
             return (
               <motion.div
@@ -37,17 +37,17 @@ export default function Journey() {
                 className="relative group"
               >
                 {/* Timeline node dot */}
-                <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-white border-4 border-iris-600 shadow-iris-sm group-hover:scale-125 transition-transform" />
+                <div className="absolute -left-[32px] sm:-left-[48px] top-1.5 w-5 h-5 rounded-full bg-white border-4 border-iris-600 shadow-iris group-hover:scale-125 transition-transform" />
 
                 {/* Left Year Badge for desktop */}
-                <div className="sm:absolute sm:-left-36 sm:top-1 font-mono text-xs font-bold text-slate-400 group-hover:text-iris-600 transition-colors mb-2 sm:mb-0">
+                <div className="sm:absolute sm:-left-36 sm:top-1 font-mono text-xs font-bold text-iris-800 bg-iris-100/70 px-2 py-0.5 rounded border border-iris-200 group-hover:text-iris-950 transition-colors mb-2 sm:mb-0">
                   [{item.year}]
                 </div>
 
                 {/* Content Card */}
-                <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-card hover:border-iris-300 hover:shadow-card-hover transition-all duration-300">
+                <div className="bg-white rounded-2xl p-6 sm:p-7 border-2 border-iris-200/90 shadow-iris-sm hover:border-iris-500 hover:shadow-iris transition-all duration-300">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                    <span className="text-xs font-mono font-bold text-iris-600 bg-iris-50 px-2.5 py-0.5 rounded border border-iris-200">
+                    <span className="text-xs font-mono font-bold text-iris-800 bg-iris-100 px-3 py-1 rounded-full border border-iris-300">
                       {item.highlight}
                     </span>
                     <span className="text-xs font-semibold text-slate-400 font-mono">

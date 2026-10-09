@@ -67,24 +67,24 @@ export default function Navbar() {
           <nav
             className={`flex items-center justify-between px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 ${
               isScrolled
-                ? 'bg-white/85 backdrop-blur-md border border-slate-200/80 shadow-md shadow-slate-900/5'
-                : 'bg-white/60 backdrop-blur-sm border border-slate-200/40'
+                ? 'bg-white/90 backdrop-blur-md border border-iris-300 shadow-md shadow-iris-500/10'
+                : 'bg-white/80 backdrop-blur-sm border border-iris-200/80 shadow-xs'
             }`}
           >
             {/* Brand Logo Left */}
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className="flex items-center space-x-2 group"
+              className="flex items-center space-x-2.5 group"
             >
-              <div className="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white font-mono font-bold text-sm tracking-wider group-hover:bg-iris-600 transition-colors shadow-xs">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-iris-700 to-indigo-600 flex items-center justify-center text-white font-mono font-bold text-sm tracking-wider shadow-sm group-hover:shadow-iris transition-all">
                 S
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-slate-900 tracking-tight text-sm sm:text-base group-hover:text-iris-600 transition-colors">
+                <span className="font-extrabold text-slate-900 tracking-tight text-sm sm:text-base group-hover:text-iris-700 transition-colors">
                   SURYA V M
                 </span>
-                <span className="text-[10px] text-slate-500 font-mono -mt-0.5 hidden sm:inline">
+                <span className="text-[10px] text-iris-600 font-mono font-semibold -mt-0.5 hidden sm:inline">
                   BUILDER • FOUNDER
                 </span>
               </div>
@@ -101,10 +101,10 @@ export default function Navbar() {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className={`relative px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
+                    className={`relative px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
                       isActive
-                        ? 'text-iris-700 font-semibold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                        ? 'text-iris-900 font-bold'
+                        : 'text-slate-600 hover:text-iris-700 hover:bg-iris-50/70'
                     }`}
                   >
                     {item.label}
@@ -113,7 +113,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute inset-0 bg-iris-50 border border-iris-200/80 rounded-full -z-10 shadow-iris-sm"
+                        className="absolute inset-0 bg-iris-100/90 border border-iris-300 rounded-full -z-10 shadow-iris-sm"
                         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                       />
                     )}
@@ -126,7 +126,7 @@ export default function Navbar() {
                 href="https://signbridge.click/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 px-3 py-1.5 rounded-full bg-slate-900 hover:bg-iris-600 text-white text-xs font-semibold inline-flex items-center gap-1 transition-all shadow-xs"
+                className="ml-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-iris-600 to-indigo-600 hover:from-iris-700 hover:to-indigo-700 text-white text-xs font-semibold inline-flex items-center gap-1 shadow-iris-sm transition-all"
               >
                 <span>SignBridge</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />

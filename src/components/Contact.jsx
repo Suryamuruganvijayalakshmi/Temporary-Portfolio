@@ -151,14 +151,14 @@ export default function Contact() {
         </div>
 
         {/* Contact Form Card */}
-        <div className="max-w-2xl mx-auto bg-surface-subtle rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-card">
+        <div className="max-w-2xl mx-auto bg-gradient-to-b from-white via-iris-50/30 to-white rounded-3xl p-8 sm:p-10 border-2 border-iris-300 shadow-iris">
           {status.success ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-10 space-y-4"
             >
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-iris-100 text-iris-600 flex items-center justify-center mx-auto shadow-sm">
                 <CheckCircle className="w-8 h-8" />
               </div>
               <h3 className="text-2xl font-bold text-slate-900">
@@ -169,7 +169,7 @@ export default function Contact() {
               </p>
               <button
                 onClick={() => setStatus({ submitting: false, success: false, error: null })}
-                className="mt-4 px-6 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors"
+                className="mt-4 px-6 py-2.5 rounded-xl bg-iris-600 text-white text-xs font-semibold hover:bg-iris-700 transition-colors shadow-iris-sm"
               >
                 Send Another Message
               </button>
@@ -200,7 +200,7 @@ export default function Contact() {
 
               {/* Name */}
               <div>
-                <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase font-mono tracking-wider">
+                <label htmlFor="contact-name" className="block text-xs font-bold text-iris-900 mb-1.5 uppercase font-mono tracking-wider">
                   Name
                 </label>
                 <input
@@ -211,13 +211,13 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Your Name or Organization"
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-iris-600 focus:ring-2 focus:ring-iris-100 text-slate-900 text-sm outline-none transition-all placeholder:text-slate-400"
+                  className="w-full px-4 py-3 rounded-xl bg-white border-2 border-iris-200 focus:border-iris-600 focus:ring-4 focus:ring-iris-100 text-slate-900 text-sm outline-none transition-all placeholder:text-slate-400"
                 />
               </div>
 
               {/* Email */}
               <div>
-                <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase font-mono tracking-wider">
+                <label htmlFor="contact-email" className="block text-xs font-bold text-iris-900 mb-1.5 uppercase font-mono tracking-wider">
                   Email Address
                 </label>
                 <input
@@ -228,13 +228,13 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="name@example.com"
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-iris-600 focus:ring-2 focus:ring-iris-100 text-slate-900 text-sm outline-none transition-all placeholder:text-slate-400"
+                  className="w-full px-4 py-3 rounded-xl bg-white border-2 border-iris-200 focus:border-iris-600 focus:ring-4 focus:ring-iris-100 text-slate-900 text-sm outline-none transition-all placeholder:text-slate-400"
                 />
               </div>
 
               {/* Message */}
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase font-mono tracking-wider">
+                <label htmlFor="contact-message" className="block text-xs font-bold text-iris-900 mb-1.5 uppercase font-mono tracking-wider">
                   Message
                 </label>
                 <textarea
@@ -245,7 +245,7 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Tell me about your product vision, system requirements, or idea..."
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-iris-600 focus:ring-2 focus:ring-iris-100 text-slate-900 text-sm outline-none transition-all placeholder:text-slate-400 resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white border-2 border-iris-200 focus:border-iris-600 focus:ring-4 focus:ring-iris-100 text-slate-900 text-sm outline-none transition-all placeholder:text-slate-400 resize-none"
                 />
               </div>
 
@@ -253,7 +253,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status.submitting}
-                className="w-full py-4 rounded-xl bg-iris-600 hover:bg-iris-700 text-white font-semibold text-sm shadow-iris hover:shadow-iris-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group"
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-iris-600 via-indigo-600 to-purple-600 hover:from-iris-700 hover:to-indigo-700 text-white font-bold text-sm shadow-iris hover:shadow-iris-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group border border-iris-400"
               >
                 {status.submitting ? (
                   <>
