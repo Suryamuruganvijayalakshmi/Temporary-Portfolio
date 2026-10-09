@@ -50,11 +50,11 @@ export default function CustomCursor() {
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
       {/* Center cursor dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-iris-600 -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-2.5 h-2.5 rounded-full bg-indigo-600 -translate-x-1/2 -translate-y-1/2 shadow-xs"
         animate={{
           x: mousePosition.x,
           y: mousePosition.y,
-          scale: isHovered ? 1.5 : 1,
+          scale: isHovered ? 1.4 : 1,
         }}
         transition={{
           type: 'spring',
@@ -64,12 +64,12 @@ export default function CustomCursor() {
         }}
       />
 
-      {/* Outer subtle Iris ring */}
+      {/* Outer subtle electric ring */}
       <motion.div
-        className={`fixed top-0 left-0 rounded-full border border-iris-500/50 -translate-x-1/2 -translate-y-1/2 transition-colors duration-200 ${
+        className={`fixed top-0 left-0 rounded-full border -translate-x-1/2 -translate-y-1/2 transition-colors duration-200 ${
           isHovered
-            ? 'w-10 h-10 bg-iris-500/10 border-iris-600'
-            : 'w-7 h-7 bg-transparent border-slate-400/40'
+            ? 'w-10 h-10 bg-indigo-500/15 border-indigo-600 shadow-sm'
+            : 'w-7 h-7 bg-transparent border-slate-400/50'
         }`}
         animate={{
           x: mousePosition.x,

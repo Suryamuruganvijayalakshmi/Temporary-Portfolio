@@ -11,7 +11,8 @@ export default function CurrentFocus() {
       description: 'Building modern full-stack web applications and digital products.',
       deepDive: 'React 19, high-throughput Node.js microservices, structured RESTful interfaces, and reactive real-time database layers.',
       icon: Code2,
-      accent: 'from-blue-600 to-indigo-600',
+      gradient: 'from-blue-600 via-indigo-600 to-indigo-700',
+      bgGlow: 'from-blue-500/10 to-transparent',
     },
     {
       id: 'ai',
@@ -20,7 +21,8 @@ export default function CurrentFocus() {
       description: 'Exploring AI-powered applications, predictive systems and intelligent automation.',
       deepDive: 'Machine learning for anomaly detection, harvest time-series forecasting, explainable resume intelligence, and LLM reasoning pipelines.',
       icon: Sparkles,
-      accent: 'from-iris-600 to-purple-600',
+      gradient: 'from-indigo-600 via-purple-600 to-pink-600',
+      bgGlow: 'from-purple-500/10 to-transparent',
     },
     {
       id: 'iot',
@@ -29,20 +31,21 @@ export default function CurrentFocus() {
       description: 'Building real-world connected systems using ESP32, sensors and AIoT technologies.',
       deepDive: 'ESP32 microcontrollers, non-invasive CT current sensors, 3-axis MPU6050 vibration analysis, and edge baseline learning.',
       icon: Cpu,
-      accent: 'from-violet-600 to-rose-600',
+      gradient: 'from-cyan-600 via-teal-600 to-emerald-600',
+      bgGlow: 'from-cyan-500/10 to-transparent',
     },
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-surface-subtle border-t border-slate-200/60 relative overflow-hidden">
+    <section className="py-28 sm:py-36 bg-white relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-iris-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-iris-200 text-xs font-mono font-semibold text-iris-700 shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-iris-600"></span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-xs font-mono font-bold text-indigo-700 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
             ACTIVE CONVERGENCE
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -67,8 +70,8 @@ export default function CurrentFocus() {
               <defs>
                 <linearGradient id="pulse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#818cf8" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#818cf8" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#4f46e5" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.4" />
                 </linearGradient>
               </defs>
             </svg>
@@ -85,14 +88,15 @@ export default function CurrentFocus() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.15, duration: 0.6 }}
-                  className="group relative bg-white rounded-3xl p-8 border border-slate-200/90 shadow-card hover:border-iris-400 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between"
+                  className="group relative bg-white rounded-3xl p-8 border border-slate-200/90 shadow-[0_10px_35px_rgba(15,23,42,0.04)] hover:border-indigo-400 hover:shadow-[0_20px_50px_rgba(99,102,241,0.12)] transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between overflow-hidden"
                 >
                   {/* Subtle top accent gradient */}
-                  <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full bg-gradient-to-r ${card.accent} opacity-70 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
+                  <div className={`absolute top-0 right-0 w-44 h-44 bg-gradient-to-br ${card.bgGlow} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity`} />
 
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-iris-50 border border-iris-100 flex items-center justify-center text-iris-600 group-hover:bg-iris-600 group-hover:text-white transition-all transform group-hover:rotate-6">
+                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${card.gradient} flex items-center justify-center text-white shadow-md transform group-hover:scale-105 transition-all`}>
                         <Icon className="w-6 h-6" />
                       </div>
                       <span className="font-mono text-xs font-bold text-slate-400">
@@ -100,7 +104,7 @@ export default function CurrentFocus() {
                       </span>
                     </div>
 
-                    <div className="text-xs font-mono font-semibold text-iris-600 uppercase tracking-wider mb-1">
+                    <div className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-wider mb-1">
                       {card.tag}
                     </div>
 
@@ -108,7 +112,7 @@ export default function CurrentFocus() {
                       {card.title}
                     </h3>
 
-                    <p className="text-slate-700 font-medium text-sm sm:text-base leading-relaxed mb-4">
+                    <p className="text-slate-700 font-semibold text-sm sm:text-base leading-relaxed mb-4">
                       {card.description}
                     </p>
 

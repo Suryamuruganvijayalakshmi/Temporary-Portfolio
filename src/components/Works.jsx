@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { projects } from '../data/projectsData';
 import ProjectModal from './ProjectModal';
 import { 
-  ArrowRight, ExternalLink, Cpu, Activity, Sparkles, Layers, 
-  Satellite, Wheat, ShieldAlert, FileText, ChevronRight 
+  ArrowRight, ExternalLink, ChevronRight, Layers, Sparkles 
 } from 'lucide-react';
 import {
   EcoClampVisual,
@@ -38,20 +37,20 @@ export default function Works() {
   };
 
   return (
-    <section id="works" className="py-24 sm:py-32 bg-surface-subtle border-t border-slate-200/60 relative overflow-hidden">
+    <section id="works" className="py-28 sm:py-36 bg-white relative overflow-hidden">
       {/* Anchor for Projects */}
       <div id="projects" className="absolute -top-20" />
 
       {/* Subtle ambient lighting */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-iris-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-iris-200 text-xs font-mono font-semibold text-iris-700 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-iris-600"></span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-xs font-mono font-bold text-indigo-700 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
               PORTFOLIO SHOWCASE
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -68,7 +67,7 @@ export default function Works() {
         </div>
 
         {/* Project Cards Grid */}
-        <div className="space-y-12">
+        <div className="space-y-14">
           {projects.map((project, idx) => {
             const isFounderCard = project.id === 'signbridge';
 
@@ -79,14 +78,14 @@ export default function Works() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative bg-white rounded-3xl border-2 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden ${
+                className={`group relative bg-white rounded-3xl border transition-all duration-300 hover:-translate-y-1.5 overflow-hidden ${
                   isFounderCard
-                    ? 'border-iris-400 shadow-iris hover:border-iris-600 hover:shadow-iris-lg ring-2 ring-iris-300'
-                    : 'border-iris-200/90 shadow-iris-sm hover:border-iris-500 hover:shadow-iris-lg'
+                    ? 'border-indigo-300 shadow-[0_20px_50px_rgba(99,102,241,0.12)] hover:border-indigo-500 ring-2 ring-indigo-100'
+                    : 'border-slate-200/90 shadow-[0_10px_35px_rgba(15,23,42,0.04)] hover:border-indigo-400 hover:shadow-[0_25px_60px_rgba(15,23,42,0.08)]'
                 }`}
               >
-                {/* Subtle Iris Gradient Overlay on Hover */}
-                <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-iris-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                {/* Subtle Gradient Glow on Hover */}
+                <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-br from-indigo-500/8 via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 <div className="p-6 sm:p-8 lg:p-10">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -94,7 +93,7 @@ export default function Works() {
                     {/* Left Column: Details & Tech */}
                     <div className="lg:col-span-6 space-y-5">
                       <div className="flex items-center space-x-3">
-                        <span className="font-mono text-xs font-bold text-iris-600 bg-iris-50 px-3 py-1 rounded-full border border-iris-200">
+                        <span className="font-mono text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200">
                           PROJECT {project.number}
                         </span>
                         <span className="text-xs font-semibold text-slate-500">
@@ -108,10 +107,10 @@ export default function Works() {
                       </div>
 
                       <div>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight group-hover:text-iris-700 transition-colors">
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">
                           {project.title}
                         </h3>
-                        <p className="text-xs sm:text-sm font-medium text-iris-600 mt-1">
+                        <p className="text-xs sm:text-sm font-medium text-indigo-600 mt-1">
                           {project.tagline}
                         </p>
                       </div>
@@ -125,7 +124,7 @@ export default function Works() {
                         {project.technologies.slice(0, 6).map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 text-slate-700 border border-slate-200/60"
+                            className="px-3 py-1 text-xs font-medium rounded-lg bg-slate-100 text-slate-700 border border-slate-200/60"
                           >
                             {tech}
                           </span>
@@ -141,7 +140,7 @@ export default function Works() {
                       <div className="flex flex-wrap items-center gap-3 pt-3">
                         <button
                           onClick={() => setActiveProject(project)}
-                          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-iris-600 to-indigo-600 hover:from-iris-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-semibold transition-all inline-flex items-center gap-2 shadow-iris-sm group-hover:shadow-iris"
+                          className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-700 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-indigo-500/25 transition-all inline-flex items-center gap-2 group-hover:shadow-lg"
                         >
                           <span>Explore Case Study</span>
                           <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -152,7 +151,7 @@ export default function Works() {
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2.5 rounded-xl bg-iris-50 hover:bg-iris-100 text-iris-700 text-xs sm:text-sm font-semibold border border-iris-200 transition-colors inline-flex items-center gap-1.5"
+                            className="px-4 py-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs sm:text-sm font-semibold border border-indigo-200 transition-colors inline-flex items-center gap-1.5"
                           >
                             <span>Live Site</span>
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -167,8 +166,8 @@ export default function Works() {
                         {renderCardVisualPreview(project.id)}
                       </div>
                       <div className="flex justify-between items-center text-[11px] font-mono text-slate-400 mt-2 px-1">
-                        <span>Click visual to expand full architecture</span>
-                        <span className="text-iris-600 font-sans font-medium flex items-center gap-0.5">
+                        <span>Interactive live telemetry simulation</span>
+                        <span className="text-indigo-600 font-sans font-medium flex items-center gap-0.5">
                           Deep Dive <ChevronRight className="w-3.5 h-3.5" />
                         </span>
                       </div>

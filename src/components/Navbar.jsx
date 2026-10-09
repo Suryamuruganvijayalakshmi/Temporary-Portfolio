@@ -24,7 +24,6 @@ export default function Navbar({ visible = true }) {
         setIsScrolled(false);
       }
 
-      // Detect active section
       const sections = ['home', 'about', 'skills', 'works', 'experience', 'contact'];
       const scrollPos = window.scrollY + 200;
 
@@ -56,106 +55,105 @@ export default function Navbar({ visible = true }) {
     }
   };
 
-  const showNavbar = visible || isScrolled;
+  // When intro video is playing at the start, render ZERO elements!
+  if (!visible && !isScrolled) {
+    return null;
+  }
 
   return (
     <>
-      {/* Floating Desktop / Tablet Header */}
       <AnimatePresence>
-        {showNavbar && (
-          <motion.header
-            initial={{ opacity: 0, y: -25 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -25 }}
-            transition={{ duration: 0.4 }}
-            className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-3 sm:py-4 px-4 sm:px-8 ${
-              isScrolled ? 'pt-3' : 'pt-5'
-            }`}
-          >
-            <div className="max-w-6xl mx-auto">
-              <nav
-                className={`flex items-center justify-between px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 ${
-                  isScrolled
-                    ? 'bg-white/90 backdrop-blur-md border border-iris-300 shadow-md shadow-iris-500/10'
-                    : 'bg-white/80 backdrop-blur-sm border border-iris-200/80 shadow-xs'
-                }`}
+        <motion.header
+          initial={{ opacity: 0, y: -25 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -25 }}
+          transition={{ duration: 0.4 }}
+          className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-3 sm:py-4 px-4 sm:px-8 ${
+            isScrolled ? 'pt-3' : 'pt-5'
+          }`}
+        >
+          <div className="max-w-6xl mx-auto">
+            <nav
+              className={`flex items-center justify-between px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 ${
+                isScrolled
+                  ? 'bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_10px_30px_rgba(15,23,42,0.06)]'
+                  : 'bg-white/85 backdrop-blur-md border border-slate-200/60 shadow-sm'
+              }`}
+            >
+              {/* Brand Logo Left */}
+              <a
+                href="#home"
+                onClick={(e) => handleNavClick(e, '#home')}
+                className="flex items-center space-x-2.5 group"
               >
-                {/* Brand Logo Left */}
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-cyan-500 flex items-center justify-center text-white font-mono font-bold text-sm tracking-wider shadow-sm group-hover:scale-105 transition-all">
+                  S
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-extrabold text-slate-900 tracking-tight text-sm sm:text-base group-hover:text-indigo-600 transition-colors">
+                    SURYA V M
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-mono font-semibold -mt-0.5 hidden sm:inline">
+                    BUILDER • FOUNDER
+                  </span>
+                </div>
+              </a>
+
+              {/* Desktop Navigation Links Right */}
+              <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+                {navItems.map((item) => {
+                  const sectionId = item.href.replace('#', '');
+                  const isActive = activeSection === sectionId;
+
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className={`relative px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                        isActive
+                          ? 'text-indigo-900 font-bold'
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                      }`}
+                    >
+                      {item.label}
+
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNavIndicator"
+                          className="absolute inset-0 bg-indigo-50 border border-indigo-200/90 rounded-full -z-10 shadow-xs"
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </a>
+                  );
+                })}
+
+                {/* Founder Venture Quick Action */}
                 <a
-                  href="#home"
-                  onClick={(e) => handleNavClick(e, '#home')}
-                  className="flex items-center space-x-2.5 group"
+                  href="https://signbridge.click/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 px-4 py-1.5 rounded-full bg-slate-900 hover:bg-indigo-600 text-white text-xs font-semibold inline-flex items-center gap-1 shadow-sm transition-all"
                 >
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-iris-700 to-indigo-600 flex items-center justify-center text-white font-mono font-bold text-sm tracking-wider shadow-sm group-hover:shadow-iris transition-all">
-                    S
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-extrabold text-slate-900 tracking-tight text-sm sm:text-base group-hover:text-iris-700 transition-colors">
-                      SURYA V M
-                    </span>
-                    <span className="text-[10px] text-iris-600 font-mono font-semibold -mt-0.5 hidden sm:inline">
-                      BUILDER • FOUNDER
-                    </span>
-                  </div>
+                  <span>SignBridge</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
+              </div>
 
-                {/* Desktop Navigation Links Right */}
-                <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
-                  {navItems.map((item) => {
-                    const sectionId = item.href.replace('#', '');
-                    const isActive = activeSection === sectionId;
-
-                    return (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        onClick={(e) => handleNavClick(e, item.href)}
-                        className={`relative px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                          isActive
-                            ? 'text-iris-900 font-bold'
-                            : 'text-slate-600 hover:text-iris-700 hover:bg-iris-50/70'
-                        }`}
-                      >
-                        {item.label}
-
-                        {/* Iris active underline/pill indicator */}
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeNavIndicator"
-                            className="absolute inset-0 bg-iris-100/90 border border-iris-300 rounded-full -z-10 shadow-iris-sm"
-                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                          />
-                        )}
-                      </a>
-                    );
-                  })}
-
-                  {/* Founder Venture Quick Action */}
-                  <a
-                    href="https://signbridge.click/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-iris-600 to-indigo-600 hover:from-iris-700 hover:to-indigo-700 text-white text-xs font-semibold inline-flex items-center gap-1 shadow-iris-sm transition-all"
-                  >
-                    <span>SignBridge</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                {/* Mobile Hamburger Toggle */}
-                <div className="md:hidden flex items-center">
-                  <button
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="p-2 rounded-full text-slate-700 hover:bg-slate-100 transition-colors"
-                    aria-label="Toggle Navigation Menu"
-                  >
-                    {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                  </button>
-                </div>
-              </nav>
-            </div>
-          </motion.header>
-        )}
+              {/* Mobile Hamburger Toggle */}
+              <div className="md:hidden flex items-center">
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 rounded-full text-slate-700 hover:bg-slate-100 transition-colors"
+                  aria-label="Toggle Navigation Menu"
+                >
+                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
+              </div>
+            </nav>
+          </div>
+        </motion.header>
       </AnimatePresence>
 
       {/* Full-Screen Mobile Navigation Overlay */}
@@ -182,7 +180,7 @@ export default function Navbar({ visible = true }) {
                     onClick={(e) => handleNavClick(e, item.href)}
                     className={`block px-4 py-3 rounded-2xl text-lg font-bold transition-all ${
                       isActive
-                        ? 'bg-iris-100 text-iris-900 border border-iris-300'
+                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                         : 'text-slate-800 hover:bg-slate-100'
                     }`}
                   >
@@ -197,7 +195,7 @@ export default function Navbar({ visible = true }) {
                 href="https://signbridge.click/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-iris-600 to-indigo-600 text-white font-semibold text-center block shadow-iris text-sm"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold text-center block shadow-md text-sm"
               >
                 Explore SignBridge Platform ↗
               </a>

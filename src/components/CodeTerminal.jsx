@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, ExternalLink, Play, Copy, Check, Code2 } from 'lucide-react';
 import { GithubIcon } from './SocialIcons';
@@ -38,15 +38,15 @@ export default function CodeTerminal() {
   };
 
   return (
-    <section className="py-24 sm:py-32 bg-white relative overflow-hidden">
+    <section className="py-28 sm:py-36 bg-slate-50/50 border-t border-slate-200/80 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-iris-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-iris-50 border border-iris-200 text-xs font-mono font-semibold text-iris-700 shadow-xs">
-            <Terminal className="w-3.5 h-3.5 text-iris-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-indigo-200 text-xs font-mono font-bold text-indigo-700 shadow-xs">
+            <Terminal className="w-3.5 h-3.5 text-indigo-600" />
             <span>DEVELOPER WORKSPACE</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -58,7 +58,7 @@ export default function CodeTerminal() {
         </div>
 
         {/* Terminal Window */}
-        <div className="max-w-4xl mx-auto rounded-3xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm text-slate-200 mb-12">
+        <div className="max-w-4xl mx-auto rounded-3xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm text-slate-200 mb-14">
           {/* Terminal Title Bar */}
           <div className="flex items-center justify-between px-5 py-3.5 bg-slate-900/90 border-b border-slate-800">
             <div className="flex items-center space-x-2">
@@ -93,7 +93,7 @@ export default function CodeTerminal() {
                       : isSuccess
                       ? 'text-emerald-400'
                       : isInfo
-                      ? 'text-iris-300'
+                      ? 'text-cyan-400'
                       : 'text-slate-400'
                   }`}
                 >
@@ -101,15 +101,15 @@ export default function CodeTerminal() {
                 </div>
               );
             })}
-            <div className="flex items-center text-iris-400 pt-1">
+            <div className="flex items-center text-indigo-400 pt-1">
               <span>$ </span>
-              <span className="inline-block w-2.5 h-4 bg-iris-500 ml-1 animate-pulse" />
+              <span className="inline-block w-2.5 h-4 bg-indigo-500 ml-1 animate-pulse" />
             </div>
           </div>
         </div>
 
         {/* Technology Badges Grid */}
-        <div className="mb-10">
+        <div className="mb-12">
           <div className="text-center text-xs font-mono text-slate-400 uppercase tracking-widest mb-6">
             Core Technology Stack Badges
           </div>
@@ -117,10 +117,10 @@ export default function CodeTerminal() {
             {techBadges.map((badge) => (
               <div
                 key={badge.name}
-                className="bg-surface-subtle hover:bg-white px-4 py-2.5 rounded-2xl border border-slate-200/80 hover:border-iris-300 shadow-xs hover:shadow-iris-sm transition-all duration-300 flex items-center gap-2 group cursor-default"
+                className="bg-white hover:bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200 shadow-xs hover:border-indigo-400 hover:shadow-sm transition-all duration-300 flex items-center gap-2 group cursor-default"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-iris-600 group-hover:scale-125 transition-transform" />
-                <span className="text-sm font-bold text-slate-900 group-hover:text-iris-700 transition-colors">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 group-hover:scale-125 transition-transform" />
+                <span className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
                   {badge.name}
                 </span>
                 <span className="text-[11px] text-slate-400 hidden sm:inline">
@@ -137,7 +137,7 @@ export default function CodeTerminal() {
             href="https://github.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 sm:px-8 py-3.5 rounded-2xl bg-slate-900 hover:bg-iris-600 text-white font-semibold text-sm sm:text-base shadow-sm hover:shadow-iris transition-all duration-300 inline-flex items-center gap-2 group"
+            className="px-8 py-4 rounded-2xl bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-300 inline-flex items-center gap-2.5 group"
           >
             <GithubIcon className="w-4 h-4" />
             <span>View GitHub Profile</span>

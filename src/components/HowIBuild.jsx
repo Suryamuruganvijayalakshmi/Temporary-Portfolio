@@ -9,15 +9,15 @@ export default function HowIBuild() {
   const [selectedStep, setSelectedStep] = useState(0);
 
   return (
-    <section className="py-24 sm:py-32 bg-white relative overflow-hidden">
+    <section className="py-28 sm:py-36 bg-slate-50/50 border-t border-slate-200/80 relative overflow-hidden">
       {/* Background ambient gradient */}
-      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-iris-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-iris-50 border border-iris-200 text-xs font-mono font-semibold text-iris-700 shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-iris-600"></span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-indigo-200 text-xs font-mono font-bold text-indigo-700 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
             HOW I BUILD
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -44,8 +44,8 @@ export default function HowIBuild() {
                 onClick={() => setSelectedStep(idx)}
                 className={`cursor-pointer rounded-2xl p-4 transition-all duration-300 border flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-white border-iris-500 shadow-iris ring-1 ring-iris-300'
-                    : 'bg-surface-subtle border-slate-200/80 hover:border-slate-300 hover:bg-white'
+                    ? 'bg-white border-2 border-indigo-600 shadow-md ring-4 ring-indigo-50'
+                    : 'bg-white border-slate-200/80 hover:border-indigo-300 hover:shadow-xs'
                 }`}
               >
                 <div>
@@ -56,7 +56,7 @@ export default function HowIBuild() {
                     <div
                       className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
                         isSelected
-                          ? 'bg-iris-600 text-white'
+                          ? 'bg-gradient-to-br from-indigo-600 to-cyan-600 text-white shadow-xs'
                           : 'bg-slate-100 text-slate-500'
                       }`}
                     >
@@ -73,7 +73,7 @@ export default function HowIBuild() {
                 </div>
 
                 <div className="mt-4 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono">
-                  <span className={isSelected ? 'text-iris-600 font-semibold' : 'text-slate-400'}>
+                  <span className={isSelected ? 'text-indigo-600 font-bold' : 'text-slate-400'}>
                     {isSelected ? 'ACTIVE VIEW' : 'STAGE ' + item.step}
                   </span>
                 </div>
@@ -88,15 +88,15 @@ export default function HowIBuild() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="bg-surface-subtle rounded-3xl p-6 sm:p-8 border border-iris-200/80 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+          className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
         >
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-iris-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-sm shadow-iris-600/30">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-sm">
               {buildProcess[selectedStep].step}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-iris-600 uppercase">
+                <span className="text-xs font-mono font-bold text-indigo-600 uppercase">
                   Stage Milestone:
                 </span>
                 <h4 className="text-lg font-bold text-slate-900">
