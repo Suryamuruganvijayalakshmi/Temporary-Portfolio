@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1440" viewBox="0 0 1024 1440">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#faf9f6" />
+      <stop offset="100%" stop-color="#eceae4" />
+    </linearGradient>
+    <linearGradient id="irisGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2c974" />
+      <stop offset="100%" stop-color="#caa23d" />
+    </linearGradient>
+
+    <!-- Micro Grid Pattern -->
+    <pattern id="cardGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="1" />
+      <circle cx="32" cy="0" r="1.5" fill="rgba(0,0,0,0.08)" />
+    </pattern>
+  </defs>
+
+  <!-- Card Background -->
+  <rect width="1024" height="1440" rx="48" fill="url(#bgGrad)" />
+  <rect width="1024" height="1440" rx="48" fill="url(#cardGrid)" />
+
+  <!-- Outer Border -->
+  <rect x="24" y="24" width="976" height="1392" rx="36" fill="none" stroke="#222222" stroke-width="3" stroke-opacity="0.25" />
+  <rect x="36" y="36" width="952" height="1368" rx="28" fill="none" stroke="#222222" stroke-width="1" stroke-dasharray="8 6" stroke-opacity="0.4" />
+
+  <!-- Top Punch Slot Marker -->
+  <rect x="422" y="58" width="180" height="34" rx="17" fill="#222222" opacity="0.12" />
+
+  <!-- Header Bar -->
+  <g transform="translate(64, 130)">
+    <rect x="0" y="0" width="896" height="60" rx="8" fill="#18181b" />
+    <text x="24" y="38" font-family="monospace" font-size="22" font-weight="bold" fill="#ffffff" letter-spacing="4">
+      SVM::GLOBAL IDENTITY ALL-ACCESS PASS
+    </text>
+    <text x="872" y="38" text-anchor="end" font-family="monospace" font-size="20" font-weight="bold" fill="#6366f1">
+      2026//VERIFIED
+    </text>
+  </g>
+
+  <!-- Large Central Monogram Aura -->
+  <g transform="translate(512, 400)">
+    <!-- Rotating Radial Marks -->
+    <circle cx="0" cy="0" r="180" fill="none" stroke="#18181b" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.25" />
+    <circle cx="0" cy="0" r="160" fill="none" stroke="#6366f1" stroke-width="2" stroke-dasharray="12 12" opacity="0.4" />
+    <circle cx="0" cy="0" r="140" fill="#ffffff" stroke="#18181b" stroke-width="3" />
+    
+    <!-- (S) Monogram Inner -->
+    <circle cx="0" cy="0" r="115" fill="none" stroke="#18181b" stroke-width="2" />
+    <text x="0" y="38" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="120" font-weight="900" fill="#18181b">
+      S
+    </text>
+  </g>
+
+  <!-- Smart Chip Security Icon -->
+  <g transform="translate(100, 350)">
+    <rect x="0" y="0" width="90" height="72" rx="10" fill="url(#chipGrad)" stroke="#92701b" stroke-width="2" />
+    <line x1="0" y1="36" x2="90" y2="36" stroke="#92701b" stroke-width="2" />
+    <line x1="45" y1="0" x2="45" y2="72" stroke="#92701b" stroke-width="2" />
+    <rect x="22" y="18" width="46" height="36" rx="6" fill="none" stroke="#92701b" stroke-width="2" />
+  </g>
+
+  <!-- Rubber Stamp on Right -->
+  <g transform="translate(860, 360) rotate(12)">
+    <rect x="-80" y="-24" width="160" height="48" rx="6" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="6 3" />
+    <text x="0" y="8" text-anchor="middle" font-family="monospace" font-size="18" font-weight="900" fill="#dc2626" letter-spacing="2">
+      CONFIRMED
+    </text>
+  </g>
+
+  <!-- Identity Details -->
+  <g transform="translate(512, 650)">
+    <!-- Role Sub-label -->
+    <text x="0" y="0" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="#6366f1" letter-spacing="6">
+      FOUNDER &amp; TECHNOLOGY INNOVATOR
+    </text>
+
+    <!-- Name Oversized Editorial -->
+    <text x="0" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="64" font-weight="900" fill="#09090b" letter-spacing="-1">
+      SURYA V M
+    </text>
+
+    <!-- Enterprise / Startup -->
+    <text x="0" y="125" text-anchor="middle" font-family="monospace" font-size="24" font-weight="bold" fill="#27272a">
+      SIGNBRIDGE // signbridge.click
+    </text>
+
+    <!-- Location & Origin -->
+    <text x="0" y="165" text-anchor="middle" font-family="monospace" font-size="18" fill="#71717a">
+      TAMIL NADU, INDIA → GLOBAL
+    </text>
+  </g>
+
+  <!-- Technical Spec Boxes -->
+  <g transform="translate(96, 880)">
+    <!-- Box 1 -->
+    <rect x="0" y="0" width="260" height="100" rx="12" fill="#ffffff" stroke="#d4d4d8" stroke-width="2" />
+    <text x="20" y="32" font-family="monospace" font-size="14" fill="#a1a1aa">SPECIALIZATION</text>
+    <text x="20" y="65" font-family="monospace" font-size="18" font-weight="bold" fill="#18181b">AIoT &amp; Full-Stack</text>
+
+    <!-- Box 2 -->
+    <rect x="286" y="0" width="260" height="100" rx="12" fill="#ffffff" stroke="#d4d4d8" stroke-width="2" />
+    <text x="20" y="32" font-family="monospace" font-size="14" fill="#a1a1aa">AUTHORITY LEVEL</text>
+    <text x="20" y="65" font-family="monospace" font-size="18" font-weight="bold" fill="#18181b">Class 04 // Root</text>
+
+    <!-- Box 3 -->
+    <rect x="572" y="0" width="260" height="100" rx="12" fill="#ffffff" stroke="#d4d4d8" stroke-width="2" />
+    <text x="20" y="32" font-family="monospace" font-size="14" fill="#a1a1aa">ISSUED RECORD</text>
+    <text x="20" y="65" font-family="monospace" font-size="18" font-weight="bold" fill="#18181b">SVM-IND-2026</text>
+  </g>
+
+  <!-- Barcode & Tracking Section -->
+  <g transform="translate(512, 1160)">
+    <!-- Vector Barcode -->
+    <rect x="-360" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="-344" y="0" width="16" height="90" fill="#18181b" />
+    <rect x="-316" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="-298" y="0" width="24" height="90" fill="#18181b" />
+    <rect x="-264" y="0" width="12" height="90" fill="#18181b" />
+    <rect x="-240" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="-220" y="0" width="28" height="90" fill="#18181b" />
+    <rect x="-180" y="0" width="16" height="90" fill="#18181b" />
+    <rect x="-150" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="-132" y="0" width="20" height="90" fill="#18181b" />
+    <rect x="-100" y="0" width="12" height="90" fill="#18181b" />
+    <rect x="-76" y="0" width="28" height="90" fill="#18181b" />
+    <rect x="-36" y="0" width="16" height="90" fill="#18181b" />
+    <rect x="-10" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="8" y="0" width="24" height="90" fill="#18181b" />
+    <rect x="42" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="60" y="0" width="16" height="90" fill="#18181b" />
+    <rect x="86" y="0" width="28" height="90" fill="#18181b" />
+    <rect x="124" y="0" width="12" height="90" fill="#18181b" />
+    <rect x="146" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="164" y="0" width="24" height="90" fill="#18181b" />
+    <rect x="198" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="216" y="0" width="16" height="90" fill="#18181b" />
+    <rect x="242" y="0" width="28" height="90" fill="#18181b" />
+    <rect x="280" y="0" width="8" height="90" fill="#18181b" />
+    <rect x="298" y="0" width="20" height="90" fill="#18181b" />
+    <rect x="328" y="0" width="12" height="90" fill="#18181b" />
+    <rect x="350" y="0" width="8" height="90" fill="#18181b" />
+
+    <!-- Barcode Numeric Readout -->
+    <text x="0" y="130" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="#27272a" letter-spacing="8">
+      * 9284 0192 4819 04 *
+    </text>
+  </g>
+
+  <!-- Bottom Footer Line -->
+  <text x="512" y="1370" text-anchor="middle" font-family="monospace" font-size="14" fill="#a1a1aa">
+    PROPERTY OF SURYA V M // FOUNDER AT SIGNBRIDGE // surya.signbridge.click
+  </text>
+</svg>

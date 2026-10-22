@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1440" viewBox="0 0 1024 1440">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="darkBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141518" />
+      <stop offset="100%" stop-color="#0a0b0d" />
+    </linearGradient>
+
+    <!-- Magnetic Stripe -->
+    <linearGradient id="magStripe" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2b30" />
+      <stop offset="50%" stop-color="#191a1d" />
+      <stop offset="100%" stop-color="#2a2b30" />
+    </linearGradient>
+
+    <!-- Dark Grid Pattern -->
+    <pattern id="darkGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+      <circle cx="32" cy="0" r="1.5" fill="rgba(255,255,255,0.06)" />
+    </pattern>
+  </defs>
+
+  <!-- Card Background -->
+  <rect width="1024" height="1440" rx="48" fill="url(#darkBg)" />
+  <rect width="1024" height="1440" rx="48" fill="url(#darkGrid)" />
+
+  <!-- Outer Border -->
+  <rect x="24" y="24" width="976" height="1392" rx="36" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.15" />
+
+  <!-- Top Punch Slot Marker -->
+  <rect x="422" y="48" width="180" height="34" rx="17" fill="#ffffff" opacity="0.15" />
+
+  <!-- Magnetic Stripe -->
+  <g transform="translate(0, 110)">
+    <rect width="1024" height="140" fill="url(#magStripe)" />
+    <line x1="0" y1="10" x2="1024" y2="10" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+    <line x1="0" y1="130" x2="1024" y2="130" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+  </g>
+
+  <!-- Signature Strip Area -->
+  <g transform="translate(64, 300)">
+    <rect width="896" height="110" rx="10" fill="#f4f4f5" />
+    <text x="30" y="40" font-family="monospace" font-size="14" fill="#71717a">AUTHORIZED SIGNATURE // SVM-VERIFIED</text>
+    <!-- Stylized Signature -->
+    <path d="M 60 85 Q 120 50 160 80 T 260 70 T 360 85 M 180 55 L 200 95 M 300 60 Q 340 40 380 90" fill="none" stroke="#18181b" stroke-width="4" stroke-linecap="round" />
+    <text x="860" y="75" text-anchor="end" font-family="monospace" font-size="28" font-weight="bold" fill="#18181b">
+      749
+    </text>
+  </g>
+
+  <!-- Central Credentials Matrix -->
+  <g transform="translate(64, 460)">
+    <!-- Terminal Header -->
+    <rect width="896" height="50" rx="8" fill="#1e2025" />
+    <circle cx="28" cy="25" r="7" fill="#ef4444" />
+    <circle cx="50" cy="25" r="7" fill="#f59e0b" />
+    <circle cx="72" cy="25" r="7" fill="#10b981" />
+    <text x="100" y="32" font-family="monospace" font-size="18" fill="#a1a1aa">SVM_SECURITY_DESCRIPTOR::ROOT</text>
+
+    <!-- Terminal Body -->
+    <rect y="60" width="896" height="420" rx="12" fill="#14161a" stroke="#27272a" stroke-width="2" />
+    
+    <g transform="translate(30, 110)" font-family="monospace" font-size="20" fill="#e4e4e7">
+      <text y="0">
+        <tspan fill="#6366f1">NODE ID:</tspan> SURYA-VM-01 [FOUNDER_ACTIVE]
+      </text>
+      <text y="40">
+        <tspan fill="#6366f1">PORTFOLIO:</tspan> https://surya.signbridge.click
+      </text>
+      <text y="80">
+        <tspan fill="#6366f1">STARTUP:</tspan> SignBridge (https://signbridge.click)
+      </text>
+      <text y="120">
+        <tspan fill="#6366f1">GITHUB:</tspan> github.com/Suryamuruganvijayalakshmi
+      </text>
+      <text y="160">
+        <tspan fill="#6366f1">HARDWARE:</tspan> EcoClamp AIoT Industrial Intelligence
+      </text>
+      <text y="200">
+        <tspan fill="#6366f1">LOGISTICS:</tspan> FarmCargo Predictive Intake Balancing
+      </text>
+      <text y="240">
+        <tspan fill="#6366f1">LOCATION:</tspan> Tamil Nadu, India [Coordinates: 11.3410° N, 77.7172° E]
+      </text>
+      <text y="280">
+        <tspan fill="#6366f1">STATUS:</tspan> <tspan fill="#10b981">● CONNECTED // 60 FPS // ONLINE</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- QR Matrix Mockup and Hologram Seal -->
+  <g transform="translate(64, 980)">
+    <!-- QR Area -->
+    <rect x="0" y="0" width="220" height="220" rx="16" fill="#ffffff" />
+    <!-- Stylized QR Blocks -->
+    <rect x="20" y="20" width="60" height="60" fill="#18181b" />
+    <rect x="30" y="30" width="40" height="40" fill="#ffffff" />
+    <rect x="40" y="40" width="20" height="20" fill="#18181b" />
+
+    <rect x="140" y="20" width="60" height="60" fill="#18181b" />
+    <rect x="150" y="30" width="40" height="40" fill="#ffffff" />
+    <rect x="160" y="40" width="20" height="20" fill="#18181b" />
+
+    <rect x="20" y="140" width="60" height="60" fill="#18181b" />
+    <rect x="30" y="150" width="40" height="40" fill="#ffffff" />
+    <rect x="40" y="160" width="20" height="20" fill="#18181b" />
+
+    <!-- Center Data Dots -->
+    <rect x="100" y="40" width="20" height="40" fill="#18181b" />
+    <rect x="90" y="100" width="40" height="20" fill="#18181b" />
+    <rect x="140" y="100" width="20" height="60" fill="#18181b" />
+    <rect x="100" y="140" width="20" height="40" fill="#18181b" />
+    <rect x="180" y="160" width="20" height="40" fill="#18181b" />
+
+    <!-- QR Explanatory text -->
+    <g transform="translate(260, 40)" font-family="monospace" text-anchor="start">
+      <text y="0" font-size="22" font-weight="bold" fill="#ffffff">SCAN FOR INSTANT DISPATCH</text>
+      <text y="35" font-size="16" fill="#a1a1aa">Direct access to portfolio source &amp; founder contact</text>
+      <text y="75" font-size="16" fill="#6366f1">PUBLIC KEY: 0x892F...789B</text>
+      <text y="115" font-size="14" fill="#71717a">END-TO-END VERIFIED CREDENTIAL // SURYA V M</text>
+    </g>
+  </g>
+
+  <!-- Bottom Regulatory Notice -->
+  <g transform="translate(512, 1340)" font-family="monospace" text-anchor="middle" font-size="14" fill="#71717a">
+    <text y="0">OFFICIAL PASS IDENTIFICATION · NON-TRANSFERABLE</text>
+    <text y="24">ALL RIGHTS RESERVED // SIGNBRIDGE INNOVATIONS // 2026</text>
+  </g>
+</svg>

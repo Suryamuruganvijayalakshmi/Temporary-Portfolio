@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="192" viewBox="0 0 1024 192">
+  <defs>
+    <linearGradient id="strapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f2024" />
+      <stop offset="50%" stop-color="#121316" />
+      <stop offset="100%" stop-color="#1f2024" />
+    </linearGradient>
+  </defs>
+
+  <!-- Strap Fabric Background -->
+  <rect width="1024" height="192" fill="url(#strapGrad)" />
+
+  <!-- Stitching Lines along top and bottom -->
+  <line x1="0" y1="18" x2="1024" y2="18" stroke="#ffffff" stroke-width="3" stroke-dasharray="14 10" stroke-opacity="0.35" />
+  <line x1="0" y1="174" x2="1024" y2="174" stroke="#ffffff" stroke-width="3" stroke-dasharray="14 10" stroke-opacity="0.35" />
+
+  <!-- Repeating Branding Text -->
+  <g font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="44" fill="#ffffff" letter-spacing="4">
+    <text x="24" y="112">★ SURYA V M</text>
+    <text x="360" y="112" fill="#818cf8">★ SIGNBRIDGE</text>
+    <text x="730" y="112">★ FOUNDER</text>
+  </g>
+</svg>

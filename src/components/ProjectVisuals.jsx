@@ -483,3 +483,113 @@ export function SentinelVisual() {
     </div>
   );
 }
+
+// 5. Merry Berry Ice Cream Cafe Visual
+export function MerryBerryVisual() {
+  const [flavorIndex, setFlavorIndex] = useState(0);
+  const flavors = [
+    { name: 'Wild Boysenberry Ribbon', color: '#9333ea', notes: 'Tart Berry • Velvet Cream • Fresh Mint', temp: '-14°C' },
+    { name: 'Sicilian Pistachio Crunch', color: '#10b981', notes: 'Roasted Nut • Sea Salt • Cocoa Nibs', temp: '-12°C' },
+    { name: 'Madagascar Smoked Vanilla', color: '#f59e0b', notes: 'Pure Bean • Bourbon Caramel • Oak Smoke', temp: '-13°C' }
+  ];
+
+  const currentFlavor = flavors[flavorIndex];
+
+  return (
+    <div className="bg-slate-950 text-slate-100 rounded-2xl p-5 border border-slate-800 shadow-xl font-sans text-xs">
+      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+        <div className="flex items-center space-x-2">
+          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: currentFlavor.color }} />
+          <span className="font-mono font-bold text-slate-200">MERRY BERRY // KINETIC STORYTELLING</span>
+        </div>
+        <span className="text-[10px] text-purple-400 bg-purple-950/60 border border-purple-800 px-2 py-0.5 rounded font-mono">
+          PARALLAX ENGINE ACTIVE
+        </span>
+      </div>
+
+      <div className="py-4 text-center space-y-3">
+        <div className="inline-block p-4 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-inner">
+          <div 
+            className="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl shadow-lg transition-transform duration-500 hover:scale-110"
+            style={{ 
+              background: `radial-gradient(circle at 30% 30%, ${currentFlavor.color}, #09090b)` 
+            }}
+          >
+            🍨
+          </div>
+        </div>
+        <div>
+          <div className="text-base font-bold text-slate-100">{currentFlavor.name}</div>
+          <div className="text-xs text-slate-400 mt-0.5">{currentFlavor.notes}</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 font-mono text-center border-t border-slate-800 pt-3">
+        {flavors.map((flv, idx) => (
+          <button
+            key={flv.name}
+            onClick={() => setFlavorIndex(idx)}
+            className={`p-2 rounded-lg border transition-all text-[10px] ${
+              idx === flavorIndex 
+                ? 'bg-purple-950/40 border-purple-500 text-purple-200 font-bold' 
+                : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:bg-slate-900'
+            }`}
+          >
+            {flv.name.split(' ')[0]}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 6. eSIM Visa Overstay Detection & Alert System Visual
+export function EsimVisaVisual() {
+  const [country, setCountry] = useState('ESP');
+  const [daysRemaining, setDaysRemaining] = useState(14);
+  const [privacyProtected, setPrivacyProtected] = useState(true);
+
+  return (
+    <div className="bg-slate-950 text-slate-100 rounded-2xl p-5 border border-slate-800 shadow-xl font-sans text-xs">
+      <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+        <div className="flex items-center space-x-2">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+          <span className="font-mono font-bold text-slate-200">eSIM TELECOM ROAMING ADVISORY</span>
+        </div>
+        <span className="text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-800 px-2 py-0.5 rounded font-mono">
+          ZERO-KNOWLEDGE PRIVACY
+        </span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 py-2 font-mono">
+        <div className="bg-slate-900/90 p-3 rounded-xl border border-slate-800 space-y-1">
+          <div className="text-[10px] text-slate-400">ROAMING MCC/MNC</div>
+          <div className="text-sm font-bold text-slate-100 flex items-center gap-1.5">
+            <span>214-07 ({country})</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          </div>
+          <div className="text-[9px] text-slate-500">Cellular Session Active</div>
+        </div>
+        <div className="bg-slate-900/90 p-3 rounded-xl border border-slate-800 space-y-1">
+          <div className="text-[10px] text-slate-400">VISA QUOTA ALLOWANCE</div>
+          <div className="text-sm font-bold text-amber-400">{daysRemaining} Days Left</div>
+          <div className="text-[9px] text-slate-500">Schengen 90/180 Window</div>
+        </div>
+      </div>
+
+      <div className="border-t border-slate-800 pt-3 flex items-center justify-between font-mono text-[11px] text-slate-400">
+        <div className="flex items-center gap-1.5">
+          <span className="text-emerald-400">✓</span>
+          <span>Zero Itinerary Stored (On-Device State)</span>
+        </div>
+        <button
+          onClick={() => setDaysRemaining(prev => prev > 1 ? prev - 1 : 14)}
+          className="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] transition-colors"
+        >
+          Advance Day
+        </button>
+      </div>
+    </div>
+  );
+}
+

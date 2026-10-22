@@ -1,0 +1,7 @@
+name = "surya-portfolio"
+compatibility_date = "2026-10-22"
+pages_build_output_dir = "dist"
+
+[vars]
+ENVIRONMENT = "production"
+CANONICAL_DOMAIN = "https://surya.signbridge.click"

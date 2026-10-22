@@ -55,7 +55,7 @@ export const journeyMilestones = [
   {
     year: "2026",
     role: "AI & Industrial IoT Engineer",
-    initiative: "EcoClamp & BeltSentinel Industrial Platforms",
+    initiative: "EcoClamp AIoT Industrial Intelligence",
     highlight: "Predictive Maintenance • Edge Telemetry • Anomaly AI",
     description: "Architected non-invasive hardware monitoring using ESP32, current transformers, and 3-axis vibration sensors to capture machine baselines and predict mechanical failure in manufacturing.",
     tags: ["ESP32", "TinyML", "Predictive Analytics", "Machine Health"]

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://surya.signbridge.click/sitemap.xml
+Host: https://surya.signbridge.click

@@ -9,8 +9,6 @@ import {
   EcoClampVisual,
   AgriFlowVisual,
   SignBridgeVisual,
-  BeltSentinelVisual,
-  SynthetixHRVisual,
   SentinelVisual
 } from './ProjectVisuals';
 
@@ -19,16 +17,13 @@ export default function Works() {
 
   const renderCardVisualPreview = (id) => {
     switch (id) {
-      case 'ecoclamp-iot':
-        return <EcoClampVisual />;
-      case 'agriflow':
-        return <AgriFlowVisual />;
       case 'signbridge':
         return <SignBridgeVisual />;
-      case 'beltsentinel':
-        return <BeltSentinelVisual />;
-      case 'synthetix-hr':
-        return <SynthetixHRVisual />;
+      case 'ecoclamp-iot':
+        return <EcoClampVisual />;
+      case 'farmcargo':
+      case 'agriflow':
+        return <AgriFlowVisual />;
       case 'sentinel':
         return <SentinelVisual />;
       default:
@@ -62,7 +57,7 @@ export default function Works() {
           </div>
 
           <div className="text-xs font-mono text-slate-400 hidden sm:block">
-            [ 06 PRODUCTION ARCHITECTURES ]
+            [ 04 PRODUCTION ARCHITECTURES ]
           </div>
         </div>
 
