@@ -2,6 +2,11 @@ name = "surya-portfolio"
 compatibility_date = "2026-10-22"
 pages_build_output_dir = "dist"
 
+[assets]
+directory = "./dist"
+html_handling = "auto-trailing-slash"
+not_found_handling = "single-page-application"
+
 [vars]
 ENVIRONMENT = "production"
 CANONICAL_DOMAIN = "https://surya.signbridge.click"
