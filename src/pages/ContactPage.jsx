@@ -207,7 +207,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="lg:col-span-8 bg-[#faf8f5] dark:bg-card text-stone-900 dark:text-stone-100 rounded-2xl border-2 border-strong p-8 sm:p-12 shadow-2xl relative space-y-8 overflow-hidden"
+          className="lg:col-span-8 bg-[#faf8f5] dark:bg-card text-stone-900 dark:text-stone-100 rounded-2xl border-2 border-strong p-5 xs:p-6 sm:p-10 md:p-12 shadow-2xl relative space-y-6 sm:space-y-8 overflow-hidden"
         >
           {/* Animated Torn-Paper Top Edge */}
           <div className="absolute -top-1 left-0 right-0 h-4 overflow-hidden pointer-events-none">
@@ -221,7 +221,7 @@ export default function ContactPage() {
           </div>
 
           {/* Letter Header */}
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-stone-300 dark:border-subtle pb-6 font-mono text-xs">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-stone-300 dark:border-subtle pb-5 sm:pb-6 font-mono text-xs">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full bg-stone-900 text-white dark:bg-iris-600 flex items-center justify-center font-bold text-xs shadow-xs">
@@ -425,7 +425,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={status.submitting}
-                className="px-6 py-3 rounded-full bg-stone-900 text-white dark:bg-primary dark:text-canvas font-mono text-xs font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-md disabled:opacity-50 select-none cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-stone-900 text-white dark:bg-primary dark:text-canvas font-mono text-xs font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-md disabled:opacity-50 select-none cursor-pointer min-h-[44px] active:scale-[0.98]"
               >
                 {status.submitting ? (
                   <>

@@ -44,7 +44,7 @@ export default function Hero28() {
               y: mousePos.y * -6
             }}
             transition={{ type: 'spring', damping: 40, stiffness: 180 }}
-            className="relative w-full max-w-4xl h-[46vh] sm:h-[60vh] md:h-[85vh] flex items-center justify-center -mt-6 sm:-mt-4 md:mt-0"
+            className="relative w-full max-w-4xl h-[34vh] xs:h-[38vh] sm:h-[60vh] md:h-[85vh] flex items-center justify-center mt-1 sm:-mt-4 md:mt-0"
           >
             <img
               src="/surya.jpeg"
@@ -62,7 +62,7 @@ export default function Hero28() {
             rotate: 35 + mousePos.x * 2
           }}
           transition={{ type: 'spring', damping: 35, stiffness: 160 }}
-          className="absolute w-[440px] h-[320px] sm:w-[620px] sm:h-[420px] md:w-[820px] md:h-[520px] rounded-3xl opacity-80"
+          className="absolute w-[340px] h-[260px] sm:w-[620px] sm:h-[420px] md:w-[820px] md:h-[520px] rounded-3xl opacity-80"
           style={{
             background: 'linear-gradient(135deg, rgba(253, 230, 138, 0.95) 0%, rgba(245, 158, 11, 0.85) 45%, rgba(217, 119, 6, 0.4) 80%, transparent 100%)',
             filter: 'blur(28px)',
@@ -78,7 +78,7 @@ export default function Hero28() {
               y: mousePos.y * -6
             }}
             transition={{ type: 'spring', damping: 40, stiffness: 180 }}
-            className="relative w-full max-w-4xl h-[46vh] sm:h-[60vh] md:h-[85vh] flex items-center justify-center -mt-6 sm:-mt-4 md:mt-0"
+            className="relative w-full max-w-4xl h-[34vh] xs:h-[38vh] sm:h-[60vh] md:h-[85vh] flex items-center justify-center mt-1 sm:-mt-4 md:mt-0"
           >
             <img
               src="/surya.jpeg"
@@ -88,6 +88,9 @@ export default function Hero28() {
           </motion.div>
         </div>
 
+        {/* Mobile Gradient Scrim: seamlessly fades portrait into dark canvas below */}
+        <div className="md:hidden absolute inset-x-0 top-[26vh] xs:top-[29vh] h-[16vh] bg-gradient-to-b from-transparent via-[#080706]/90 to-[#080706] pointer-events-none z-[1]" />
+
         {/* 4. Botanical Foliage Silhouette Shadows (Natural Leaves entering from upper right) */}
         <motion.div
           animate={{
@@ -95,7 +98,7 @@ export default function Hero28() {
             y: mousePos.y * 10
           }}
           transition={{ type: 'spring', damping: 30, stiffness: 140 }}
-          className="absolute top-0 right-0 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] md:w-[580px] md:h-[580px] pointer-events-none opacity-85 select-none"
+          className="absolute top-0 right-0 w-[240px] h-[240px] sm:w-[440px] sm:h-[440px] md:w-[580px] md:h-[580px] pointer-events-none opacity-85 select-none"
         >
           <svg viewBox="0 0 500 500" fill="currentColor" className="w-full h-full text-stone-950 blur-[7px]">
             {/* Main stem branch coming from top-right */}
@@ -132,62 +135,89 @@ export default function Hero28() {
       </div>
 
       {/* ============================================================
-          MOBILE SECTION: EXACT MATCH TO USER'S REFERENCE SCREENSHOT
-          Sunlit visual in upper 50%, text in lower 50%!
+          MOBILE SECTION: CLEAN, BALANCED, HIGH-CONTRAST LAYOUT
+          Sunlit portrait clear in upper zone; content sits cleanly below!
           ============================================================ */}
-      <div className="md:hidden relative z-10 flex flex-col justify-end pt-44 sm:pt-52 pb-4 space-y-4">
+      <div className="md:hidden relative z-10 flex flex-col pt-[31vh] xs:pt-[34vh] pb-4 space-y-3.5 w-full">
         {/* Mobile Headline & Editorial Subtitle */}
-        <div className="space-y-2">
-          <h1 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-[1.12] font-sans">
+        <div className="space-y-1.5">
+          <h1 className="text-2xl xs:text-3xl font-semibold text-white tracking-tight leading-[1.14] font-sans">
             Software for the light you already have.
           </h1>
-          <p className="text-stone-300 text-sm font-sans leading-relaxed">
+          <p className="text-stone-300 text-xs xs:text-sm font-sans leading-relaxed">
             Engineering resilient AIoT hardware, practical machine intelligence, and scalable platforms tailored for your venture.
           </p>
         </div>
 
-        {/* Mobile Project Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          {featuredProjects.map((project, idx) => {
-            const isSelected = idx === activeProjectIndex;
-            return (
-              <button
-                key={project.id}
-                onClick={() => {
-                  setActiveProjectIndex(idx);
-                  openProjectModal(project);
-                }}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-bold whitespace-nowrap transition-all ${
-                  isSelected
-                    ? 'bg-white text-stone-950 shadow-md'
-                    : 'bg-stone-900/80 text-stone-400 border border-stone-800'
-                }`}
-              >
-                {project.title}
-              </button>
-            );
-          })}
+        {/* Mobile Project Selector Tabs + Interactive Preview Card */}
+        <div className="space-y-2 pt-1">
+          {/* Scrollable Project Chips */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 -mx-1 px-1">
+            {featuredProjects.map((project, idx) => {
+              const isSelected = idx === activeProjectIndex;
+              return (
+                <button
+                  key={project.id}
+                  onClick={() => setActiveProjectIndex(idx)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all select-none ${
+                    isSelected
+                      ? 'bg-white text-stone-950 font-bold shadow-md'
+                      : 'bg-stone-900/90 text-stone-400 border border-stone-800 hover:text-stone-200'
+                  }`}
+                >
+                  {project.title}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Project Mobile Summary Card */}
+          <div
+            onClick={() => openProjectModal(activeProject)}
+            className="p-3.5 rounded-2xl bg-stone-900/85 border border-stone-800/90 backdrop-blur-md space-y-1 cursor-pointer active:scale-[0.99] transition-transform shadow-lg"
+          >
+            <div className="flex items-center justify-between text-[11px] font-mono">
+              <span className="text-amber-400 font-bold uppercase tracking-wider text-[10px]">
+                {activeProject.category}
+              </span>
+              <span className="text-stone-500 font-mono text-[10px]">
+                {activeProject.year} • TAP TO EXPAND
+              </span>
+            </div>
+            <div className="font-sans font-bold text-sm text-white flex items-center justify-between">
+              <span>{activeProject.title}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-stone-400" />
+            </div>
+            <p className="text-xs text-stone-300 font-sans line-clamp-2 leading-relaxed">
+              {activeProject.tagline || activeProject.summary}
+            </p>
+          </div>
         </div>
 
         {/* Mobile Action Buttons */}
-        <div className="flex items-center gap-2.5 pt-1">
+        <div className="flex items-center gap-2.5 pt-0.5">
           <button
             onClick={() => openProjectModal(activeProject)}
-            className="flex-1 px-4 py-2.5 rounded-full bg-white text-stone-950 font-sans text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5"
+            className="flex-1 py-3 px-4 rounded-full bg-white text-stone-950 font-sans text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5 active:scale-[0.98] min-h-[44px]"
           >
             <span>View Case Study</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => setActiveRoute('/lab')}
-            className="px-4 py-2.5 rounded-full bg-stone-900/90 text-stone-300 border border-stone-800 text-xs font-mono"
+            className="py-3 px-5 rounded-full bg-stone-900/90 hover:bg-stone-800 text-stone-300 border border-stone-800 text-xs font-mono font-medium min-h-[44px] flex items-center justify-center active:scale-[0.98]"
           >
-            Lab
+            Lab Console
           </button>
         </div>
 
-        <div className="text-[10px] text-stone-500 font-mono tracking-wider pt-1">
-          TAMIL NADU, INDIA // SURYA V M
+        {/* Mobile Status Row */}
+        <div className="flex items-center justify-between pt-1 text-[10px] text-stone-500 font-mono tracking-wider">
+          <span>TAMIL NADU, INDIA // SURYA V M</span>
+          <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            AVAILABLE
+          </span>
         </div>
       </div>
 

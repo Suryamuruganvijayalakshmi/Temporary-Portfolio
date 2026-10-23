@@ -358,12 +358,15 @@ export default function CommandPalette() {
               )}
             </div>
 
-            {/* Accessibility Keyboard Footer */}
-            <div className="px-4 py-2 border-t border-subtle bg-surface text-[11px] font-mono text-muted flex items-center justify-between select-none">
-              <div className="flex items-center gap-3">
+            {/* Accessibility Keyboard & Mobile Footer */}
+            <div className="px-4 py-2.5 border-t border-subtle bg-surface text-[11px] font-mono text-muted flex items-center justify-between select-none">
+              <div className="hidden sm:flex items-center gap-3">
                 <span><kbd className="px-1 py-0.5 rounded bg-card border border-subtle">↑↓</kbd> Navigate</span>
                 <span><kbd className="px-1 py-0.5 rounded bg-card border border-subtle">↵</kbd> Select</span>
                 <span><kbd className="px-1 py-0.5 rounded bg-card border border-subtle">ESC</kbd> Close</span>
+              </div>
+              <div className="sm:hidden text-[10px] text-zinc-400">
+                Tap any command to run
               </div>
               <div className="text-[10px] text-muted">
                 SURYA V M // COMMAND OS

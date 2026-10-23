@@ -105,7 +105,7 @@ export default function AboutPage() {
       {/* ============================================================
           MAIN DESK COMPOSITION (Matching Screenshot 3!)
           ============================================================ */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 lg:gap-14 my-auto">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-14 my-auto">
         
         {/* LEFT COLUMN: IDENTITY POSTCARD + OVERLAPPING TELEMETRY PANEL */}
         <div className="relative w-full lg:w-7/12 flex flex-col items-center">
@@ -119,20 +119,20 @@ export default function AboutPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.25 }}
-                className="relative w-full max-w-xl rounded-2xl bg-[#fbf9f4] dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.12)] p-6 sm:p-8 transform -rotate-1 hover:rotate-0 transition-transform duration-300"
+                className="relative w-full max-w-xl rounded-2xl bg-[#fbf9f4] dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.12)] p-5 sm:p-8 transform rotate-0 sm:-rotate-1 sm:hover:rotate-0 transition-transform duration-300"
               >
-                {/* Protruding Metallic Silver Paper Clip on Top-Left (Exact as in Screenshot 3!) */}
-                <div className="absolute -top-5 left-8 w-6 h-12 border-2 border-zinc-400 dark:border-zinc-500 rounded-full bg-transparent shadow-sm pointer-events-none z-20" />
-                <div className="absolute -top-3 left-9 w-4 h-8 border-2 border-zinc-400 dark:border-zinc-500 rounded-full bg-transparent pointer-events-none z-20" />
+                {/* Protruding Metallic Silver Paper Clip on Top-Left */}
+                <div className="absolute -top-4 sm:-top-5 left-6 sm:left-8 w-5 sm:w-6 h-10 sm:h-12 border-2 border-zinc-400 dark:border-zinc-500 rounded-full bg-transparent shadow-sm pointer-events-none z-20" />
+                <div className="absolute -top-2 sm:-top-3 left-7 sm:left-9 w-3.5 sm:w-4 h-7 sm:h-8 border-2 border-zinc-400 dark:border-zinc-500 rounded-full bg-transparent pointer-events-none z-20" />
 
-                <div className="flex flex-col sm:flex-row gap-6 items-start">
+                <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 items-center sm:items-start text-center sm:text-left">
                   
                   {/* Postage Stamp on Left of Postcard */}
                   <div className="relative shrink-0 flex flex-col items-center">
                     {/* Scalloped Perforated Stamp Edge Container */}
                     <div className="relative p-2 rounded-sm bg-white dark:bg-zinc-950 border-2 border-dashed border-zinc-400 dark:border-zinc-700 shadow-md">
                       {/* High-Contrast Grayscale Portrait (Silhouette/Engraving Style) */}
-                      <div className="w-28 h-36 bg-zinc-900 rounded-xs overflow-hidden relative flex items-center justify-center">
+                      <div className="w-24 h-32 sm:w-28 sm:h-36 bg-zinc-900 rounded-xs overflow-hidden relative flex items-center justify-center">
                         {/* Real Portrait of Surya V M as Archival Postage Stamp */}
                         <img 
                           src="/surya-portrait.jpg" 
@@ -276,10 +276,10 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.35, delay: 0.15 }}
-            className="relative w-full max-w-sm sm:max-w-md rounded-2xl bg-[#14161f] text-zinc-100 p-5 sm:p-6 border border-zinc-800 shadow-[0_24px_50px_-10px_rgba(0,0,0,0.4)] flex flex-col justify-between transform rotate-1 hover:rotate-0 transition-transform duration-300 select-none"
+            className="relative w-full max-w-xs xs:max-w-sm sm:max-w-md rounded-2xl bg-[#14161f] text-zinc-100 p-4 sm:p-6 border border-zinc-800 shadow-[0_24px_50px_-10px_rgba(0,0,0,0.4)] flex flex-col justify-between transform rotate-0 sm:rotate-1 sm:hover:rotate-0 transition-transform duration-300 select-none"
           >
             {/* Turntable Platter Deck & Tone Arm */}
-            <div className="relative w-full aspect-square bg-[#0f1118] rounded-xl border border-zinc-800/90 shadow-inner flex items-center justify-center p-4 overflow-hidden">
+            <div className="relative w-full aspect-square bg-[#0f1118] rounded-xl border border-zinc-800/90 shadow-inner flex items-center justify-center p-3 sm:p-4 overflow-hidden">
               
               {/* Turntable Metallic Controls on Top Right */}
               <div className="absolute top-3 right-3 flex items-center gap-2 z-20">
@@ -289,7 +289,7 @@ export default function AboutPage() {
 
               {/* The Rotating Vinyl Record (Micro-Grooves + Center Label) */}
               <div 
-                className={`relative w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-black border-4 border-zinc-900 shadow-2xl flex items-center justify-center cursor-pointer ${
+                className={`relative w-48 h-48 xs:w-56 xs:h-56 sm:w-64 sm:h-64 rounded-full bg-black border-4 border-zinc-900 shadow-2xl flex items-center justify-center cursor-pointer ${
                   isPlayingLocal ? 'animate-spin' : ''
                 }`}
                 style={{ animationDuration: '4s' }}

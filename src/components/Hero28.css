@@ -73,19 +73,20 @@
 
 @media (max-width: 768px) {
   .cinematic-hero-container {
-    min-height: 100svh;
-    padding: 1rem 1.25rem 2rem 1.25rem;
+    min-height: calc(100svh - 4.25rem);
+    padding: 0.5rem 1rem 1.75rem 1rem;
+    justify-content: flex-start;
   }
 
   .sunlit-face-mask {
     mask-image: radial-gradient(
-      ellipse 260px 150px at 50% 28%,
+      ellipse 250px 140px at 50% 30%,
       black 45%,
       rgba(0, 0, 0, 0.6) 70%,
       transparent 88%
     );
     -webkit-mask-image: radial-gradient(
-      ellipse 260px 150px at 50% 28%,
+      ellipse 250px 140px at 50% 30%,
       black 45%,
       rgba(0, 0, 0, 0.6) 70%,
       transparent 88%

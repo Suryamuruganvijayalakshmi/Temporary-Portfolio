@@ -52,7 +52,7 @@ export default function ProjectModal({ project, onClose }) {
   return (
     <AnimatePresence>
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-label={`${project.title} Case Study`}
@@ -63,7 +63,7 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/60 backdrop-blur-md"
+          className="fixed inset-0 bg-black/75 backdrop-blur-md"
         />
 
         {/* Modal Window */}
@@ -72,11 +72,11 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[90vh] bg-card text-primary rounded-3xl shadow-2xl border border-medium overflow-y-auto z-10 font-sans"
+          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] bg-card text-primary rounded-2xl sm:rounded-3xl shadow-2xl border border-medium overflow-y-auto z-10 font-sans"
         >
           {/* Header Bar */}
-          <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-card/95 backdrop-blur-md border-b border-subtle">
-            <div className="flex items-center space-x-3">
+          <div className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 bg-card/95 backdrop-blur-md border-b border-subtle">
+            <div className="flex items-center space-x-2.5">
               <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded bg-surface text-iris-400 border border-subtle">
                 Nº {project.index || '01'} / {project.totalCount || '06'}
               </span>
@@ -86,14 +86,14 @@ export default function ProjectModal({ project, onClose }) {
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full text-secondary hover:text-primary hover:bg-surface transition-colors"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full text-secondary hover:text-primary hover:bg-surface transition-colors flex items-center justify-center active:scale-95"
               aria-label="Close Case Study"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="p-6 sm:p-8 space-y-8">
+          <div className="p-4 xs:p-5 sm:p-8 space-y-6 sm:space-y-8">
             {/* Title & Headline */}
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -104,10 +104,10 @@ export default function ProjectModal({ project, onClose }) {
                   {project.year || '2026'}
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight editorial-title">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-primary tracking-tight editorial-title">
                 {project.title}
               </h2>
-              <p className="text-base text-secondary mt-2 font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-secondary mt-2 font-normal leading-relaxed">
                 {project.summary || project.tagline}
               </p>
 

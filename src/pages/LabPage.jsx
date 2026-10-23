@@ -609,15 +609,15 @@ export default function LabPage() {
 
       {/* WHEEL View: Rotary Project Dial */}
       {labViewMode === 'wheel' && (
-        <div className="p-6 sm:p-10 rounded-2xl bg-card border-2 border-strong shadow-2xl relative overflow-hidden space-y-8">
-          <div className="text-xs font-mono text-muted flex items-center justify-between border-b border-subtle pb-4">
-            <span>ROTARY PROJECT WHEEL</span>
-            <span>CLICK PROJECTS TO LAUNCH LAB CONSOLE</span>
+        <div className="p-4 sm:p-10 rounded-2xl bg-card border-2 border-strong shadow-2xl relative overflow-hidden space-y-6 sm:space-y-8">
+          <div className="text-xs font-mono text-muted flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-subtle pb-3 sm:pb-4">
+            <span className="font-bold">ROTARY PROJECT WHEEL</span>
+            <span className="text-[11px] text-zinc-500">SELECT PROJECT TO LAUNCH CONSOLE</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             {/* The Curved Wheel Menu */}
-            <div className="lg:col-span-6 space-y-2.5 py-2">
+            <div className="lg:col-span-6 space-y-2 py-1">
               {featuredProjects.map((p, idx) => {
                 const isSelected = idx === labIndex;
 
@@ -625,23 +625,23 @@ export default function LabPage() {
                   <motion.div
                     key={p.id}
                     onClick={() => setLabIndex(idx)}
-                    className={`cursor-pointer transition-all flex items-center gap-4 py-2.5 px-4 rounded-xl ${
+                    className={`cursor-pointer transition-all flex items-center gap-3 sm:gap-4 py-2.5 px-3 sm:px-4 rounded-xl ${
                       isSelected 
-                        ? 'bg-surface border-l-4 border-iris-500 text-primary translate-x-3 shadow-md' 
+                        ? 'bg-surface border-l-4 border-iris-500 text-primary translate-x-2 sm:translate-x-3 shadow-md' 
                         : 'text-muted hover:text-secondary hover:translate-x-1'
                     }`}
                   >
-                    <span className="font-mono text-xs font-bold w-8">
+                    <span className="font-mono text-xs font-bold w-7 sm:w-8">
                       0{idx + 1}
                     </span>
                     <h2 className={`font-mono transition-all ${
                       isSelected 
-                        ? 'text-xl sm:text-2xl font-extrabold text-primary' 
-                        : 'text-base sm:text-lg'
+                        ? 'text-lg sm:text-2xl font-extrabold text-primary' 
+                        : 'text-sm sm:text-lg'
                     }`}>
                       {p.title}
                     </h2>
-                    <span className="font-mono text-[11px] text-muted hidden sm:inline ml-auto">
+                    <span className="font-mono text-[10px] sm:text-[11px] text-muted hidden xs:inline ml-auto">
                       // {p.tag}
                     </span>
                   </motion.div>
@@ -650,12 +650,12 @@ export default function LabPage() {
             </div>
 
             {/* Quick Preview Stage */}
-            <div className="lg:col-span-6 bg-surface/80 rounded-xl border border-subtle p-6 space-y-4 shadow-inner">
+            <div className="lg:col-span-6 bg-surface/80 rounded-xl border border-subtle p-4 sm:p-6 space-y-3 sm:space-y-4 shadow-inner">
               <div className="flex items-center justify-between font-mono text-xs text-muted">
                 <span className="rubber-stamp">{activeProject.tag}</span>
-                <span>PROJECT {activeProject.index} / {activeProject.totalCount}</span>
+                <span className="text-[11px]">PROJECT {activeProject.index} / {activeProject.totalCount}</span>
               </div>
-              <h3 className="editorial-title text-2xl font-extrabold text-primary font-sans">
+              <h3 className="editorial-title text-xl sm:text-2xl font-extrabold text-primary font-sans">
                 {activeProject.title}
               </h3>
               <p className="text-xs text-secondary font-sans leading-relaxed">
@@ -668,15 +668,15 @@ export default function LabPage() {
                   </span>
                 ))}
               </div>
-              <div className="pt-4 border-t border-subtle flex justify-between items-center font-mono text-xs">
+              <div className="pt-3 sm:pt-4 border-t border-subtle flex flex-col xs:flex-row justify-between xs:items-center gap-2.5 font-mono text-xs">
                 <button
                   onClick={() => openProjectModal(activeProject)}
-                  className="px-3 py-1.5 rounded-lg bg-card hover:bg-surface border border-subtle text-primary font-bold flex items-center gap-1.5 transition-colors"
+                  className="px-3.5 py-2 rounded-lg bg-card hover:bg-surface border border-subtle text-primary font-bold flex items-center justify-center gap-1.5 transition-colors active:scale-95 min-h-[40px]"
                 >
                   <span>Open Full Case Study</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </button>
-                <span className="text-iris-500 font-bold">Interactive Lab Active ↓</span>
+                <span className="text-iris-400 font-bold text-[11px]">Interactive Lab Active ↓</span>
               </div>
             </div>
           </div>

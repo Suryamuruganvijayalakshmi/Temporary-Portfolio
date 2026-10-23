@@ -121,7 +121,7 @@ export default function WritingPage() {
             items={folderItems}
             label="Surya V M Manuscripts"
             sublabel="6 floating notes • Click note to read"
-            trigger="hover"
+            trigger={isMobile ? 'click' : 'hover'}
             closeOnSelect={false}
             physics={true}
             drift={0.35}
@@ -132,11 +132,11 @@ export default function WritingPage() {
             itemColor="#fafafa"
             itemTextColor="#18181b"
             labelColor="#ffffff"
-            width={isMobile ? 210 : 260}
-            height={isMobile ? 145 : 165}
+            width={isMobile ? 195 : 260}
+            height={isMobile ? 135 : 165}
             radius={16}
-            spread={isMobile ? 140 : 360}
-            lift={isMobile ? 18 : 24}
+            spread={isMobile ? 115 : 360}
+            lift={isMobile ? 16 : 24}
             tilt={6}
             flapAngle={38}
             restAngle={16}
@@ -145,9 +145,11 @@ export default function WritingPage() {
             bounce={0.25}
           />
 
-          <div className="flex items-center gap-2 font-mono text-xs text-muted mt-8">
-            <span className="rubber-stamp">ZERO-GRAVITY::ACTIVE</span>
-            <span>HOVER TO OPEN FOLDER · DRAG &amp; THROW PAPERS · CLICK TO READ</span>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 font-mono text-xs text-muted text-center mt-8 px-4">
+            <span className="rubber-stamp">ARCHIVE::ACTIVE</span>
+            <span className="text-[11px] sm:text-xs">
+              {isMobile ? 'TAP FOLDER TO OPEN · TAP NOTE TO READ' : 'HOVER TO OPEN FOLDER · DRAG PAPERS · CLICK TO READ'}
+            </span>
           </div>
         </div>
       </div>

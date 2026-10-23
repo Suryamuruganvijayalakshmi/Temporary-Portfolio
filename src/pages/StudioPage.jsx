@@ -47,10 +47,10 @@ export default function StudioPage() {
         </p>
       </div>
 
-      {/* Interactive 3D Hanging Lanyard ID Badge from React Bits - Full Viewport Width */}
-      <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex flex-col items-center justify-center py-2 overflow-x-clip select-none">
+      {/* Interactive 3D Hanging Lanyard ID Badge from React Bits */}
+      <div className="relative w-full flex flex-col items-center justify-center py-2 overflow-hidden select-none">
         {/* Halftone surrounding ring aura */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] sm:w-[680px] sm:h-[680px] pointer-events-none opacity-35 dark:opacity-20 select-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[680px] sm:h-[680px] pointer-events-none opacity-35 dark:opacity-20 select-none">
           <svg viewBox="0 0 400 400" className="w-full h-full animate-[spin_120s_linear_infinite]">
             <circle cx="200" cy="200" r="185" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 9" className="text-stone-400 dark:text-stone-600" />
             <circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 6" className="text-stone-500 dark:text-stone-500" />
@@ -59,16 +59,16 @@ export default function StudioPage() {
           </svg>
         </div>
 
-        {/* 3D Lanyard Canvas Container - Full Viewport Width & Smooth Dragging to Ends */}
-        <div className="w-full h-[520px] sm:h-[660px] lg:h-[760px] relative z-10 flex items-center justify-center">
+        {/* 3D Lanyard Canvas Container */}
+        <div className="w-full h-[360px] xs:h-[420px] sm:h-[660px] lg:h-[760px] relative z-10 flex items-center justify-center">
           <Lanyard 
             frontImage="/card-front.svg"
             backImage="/card-back.svg"
             strapImage="/strap.svg"
             finish="glossy"
             metal="silver"
-            size={isMobile ? 0.52 : 0.62}
-            strapLength={isMobile ? 0.38 : 0.34}
+            size={isMobile ? 0.48 : 0.62}
+            strapLength={isMobile ? 0.36 : 0.34}
             strapWidth={0.65}
             breeze={0.25}
             damping={0.45}
@@ -77,9 +77,11 @@ export default function StudioPage() {
         </div>
 
         {/* Telemetry & Controls Annotation */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 font-mono text-xs text-muted z-10 mt-3">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 font-mono text-xs text-muted text-center z-10 mt-3 px-4">
           <span className="rubber-stamp">PHYSICS::ACTIVE</span>
-          <span>DRAG TO SWING &amp; THROW · CLICK CARD TO FLIP · BREEZE SIMULATION</span>
+          <span className="text-[11px] sm:text-xs">
+            DRAG TO SWING · CLICK CARD TO FLIP · BREEZE SIMULATION
+          </span>
         </div>
       </div>
 

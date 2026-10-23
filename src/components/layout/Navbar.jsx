@@ -107,7 +107,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm"
+              className="w-10 h-10 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm flex items-center justify-center active:scale-95"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -117,69 +117,110 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Backdrop & Drawer Navigation */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-4 top-24 z-50 md:hidden p-4 rounded-2xl bg-surface border border-strong shadow-2xl backdrop-blur-xl"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation menu"
-          >
-            <div className="flex flex-col gap-2">
-              <button
-                onClick={() => handleNavClick('/')}
-                className={`flex items-center justify-between p-3 rounded-xl font-mono text-sm transition-colors ${
-                  activeRoute === '/' ? 'bg-card text-primary font-bold border border-subtle' : 'text-secondary hover:text-primary hover:bg-card/50'
-                }`}
-              >
-                <span>Home</span>
-                <span className="text-xs text-muted">/</span>
-              </button>
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/75 backdrop-blur-md z-40 md:hidden"
+              aria-hidden="true"
+            />
 
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeRoute === item.path;
+            {/* Mobile Menu Card */}
+            <motion.div
+              initial={{ opacity: 0, y: -16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-x-4 top-16 sm:top-20 z-50 md:hidden p-4 rounded-3xl bg-zinc-950/95 border border-zinc-800 shadow-2xl backdrop-blur-2xl max-w-sm mx-auto"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation menu"
+            >
+              <div className="flex flex-col gap-1.5">
+                {/* Drawer Header */}
+                <div className="flex items-center justify-between pb-2 mb-1 border-b border-zinc-800/80 px-1 font-mono text-[11px] text-zinc-400">
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    NAVIGATION MENU
+                  </span>
+                  <span className="text-zinc-500">SURYA V M</span>
+                </div>
 
-                return (
+                {/* Home link */}
+                <button
+                  onClick={() => handleNavClick('/')}
+                  className={`flex items-center justify-between p-3 rounded-2xl font-mono text-xs transition-colors min-h-[44px] ${
+                    activeRoute === '/'
+                      ? 'bg-white text-zinc-950 font-bold shadow-md'
+                      : 'text-zinc-300 hover:text-white hover:bg-zinc-900/80'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Compass className="w-4 h-4 opacity-80" />
+                    <span>Home // Orbit</span>
+                  </div>
+                  <span className="text-[10px] opacity-60">/</span>
+                </button>
+
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeRoute === item.path;
+
+                  return (
+                    <button
+                      key={item.path}
+                      onClick={() => handleNavClick(item.path)}
+                      className={`flex items-center justify-between p-3 rounded-2xl font-mono text-xs transition-colors min-h-[44px] ${
+                        isActive
+                          ? 'bg-white text-zinc-950 font-bold shadow-md'
+                          : 'text-zinc-300 hover:text-white hover:bg-zinc-900/80'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className="w-4 h-4 opacity-80" />
+                        <span>{item.label}</span>
+                      </div>
+                      {item.badge && (
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
+                          isActive
+                            ? 'bg-zinc-200 text-zinc-900'
+                            : 'bg-zinc-800 text-zinc-300 border border-zinc-700/60'
+                        }`}>
+                          {item.badge}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+
+                {/* Command Palette Launcher Button */}
+                <div className="pt-2 mt-1 border-t border-zinc-800/80">
                   <button
-                    key={item.path}
-                    onClick={() => handleNavClick(item.path)}
-                    className={`flex items-center justify-between p-3 rounded-xl font-mono text-sm transition-colors ${
-                      isActive ? 'bg-card text-primary font-bold border border-subtle' : 'text-secondary hover:text-primary hover:bg-card/50'
-                    }`}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      openCommandPalette();
+                    }}
+                    className="w-full flex items-center justify-between p-3 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800/80 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-mono transition-colors min-h-[44px]"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Icon className="w-4 h-4 text-muted" />
-                      <span>{item.label}</span>
+                      <Command className="w-4 h-4 text-iris-400" />
+                      <span>Search &amp; Commands</span>
                     </div>
-                    {item.badge && (
-                      <span className="text-xs px-1.5 py-0.5 rounded bg-card text-muted border border-subtle">
-                        {item.badge}
-                      </span>
-                    )}
+                    <span className="text-[10px] text-zinc-500 bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800">
+                      {osShortcut}
+                    </span>
                   </button>
-                );
-              })}
-
-              <div className="pt-3 mt-1 border-t border-subtle flex items-center justify-between">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    openCommandPalette();
-                  }}
-                  className="flex items-center gap-2 p-2 rounded-lg text-xs font-mono text-muted hover:text-primary"
-                >
-                  <Command className="w-4 h-4" />
-                  <span>Command Menu ({osShortcut})</span>
-                </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

@@ -27,10 +27,10 @@ export default function FloatingAssistant() {
   return (
     <>
       {/* Floating Bottom-Right Circular Trigger */}
-      <div className="fixed bottom-6 right-6 z-40 select-none">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 select-none">
         <motion.button
           onClick={toggleAssistant}
-          className="relative w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center justify-center text-zinc-900 dark:text-zinc-100 group transition-transform focus-visible:ring-2 focus-visible:ring-zinc-400"
+          className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-center text-zinc-900 dark:text-zinc-100 group transition-transform focus-visible:ring-2 focus-visible:ring-zinc-400 active:scale-95"
           aria-expanded={isAssistantOpen}
           aria-label="Toggle portfolio navigation assistant"
           whileHover={{ scale: 1.08 }}
@@ -41,8 +41,8 @@ export default function FloatingAssistant() {
           ) : (
             <div className="relative flex items-center justify-center">
               {/* Colorful gradient assistant emblem matching screenshot */}
-              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 p-0.5 shadow-xs flex items-center justify-center">
-                <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-full flex items-center justify-center text-[11px]">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 p-0.5 shadow-xs flex items-center justify-center">
+                <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-full flex items-center justify-center text-[10px] sm:text-[11px]">
                   ✨
                 </div>
               </div>
@@ -52,18 +52,28 @@ export default function FloatingAssistant() {
         </motion.button>
       </div>
 
-      {/* Assistant Flyout Panel */}
+      {/* Assistant Flyout Panel & Mobile Backdrop */}
       <AnimatePresence>
         {isAssistantOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            transition={{ duration: 0.18 }}
-            className="fixed bottom-20 right-6 z-40 w-80 sm:w-96 rounded-2xl bg-card border border-strong shadow-2xl p-4 flex flex-col gap-3 font-mono"
-            role="region"
-            aria-label="Portfolio Navigator Assistant"
-          >
+          <>
+            {/* Mobile Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeAssistant}
+              className="fixed inset-0 bg-black/50 backdrop-blur-xs z-30 sm:hidden"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.18 }}
+              className="fixed bottom-18 sm:bottom-20 right-3 left-3 sm:left-auto sm:right-6 sm:w-96 rounded-2xl bg-card border border-strong shadow-2xl p-4 flex flex-col gap-3 font-mono z-40 max-h-[82vh] overflow-y-auto"
+              role="region"
+              aria-label="Portfolio Navigator Assistant"
+            >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-subtle pb-2.5">
               <div className="flex items-center gap-2">
@@ -155,6 +165,7 @@ export default function FloatingAssistant() {
               <span>{profileConfig.location}</span>
             </div>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

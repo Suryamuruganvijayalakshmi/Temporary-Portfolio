@@ -73,6 +73,8 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
@@ -80,6 +82,8 @@
     color: var(--color-text-primary);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
+    max-width: 100%;
+    -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
