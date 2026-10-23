@@ -1,9 +1,11 @@
 name = "surya-portfolio"
+main = "src/worker.js"
 compatibility_date = "2026-10-22"
 pages_build_output_dir = "dist"
 
 [assets]
 directory = "./dist"
+binding = "STATIC_ASSETS"
 html_handling = "auto-trailing-slash"
 not_found_handling = "single-page-application"
 

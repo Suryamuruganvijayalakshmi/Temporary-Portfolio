@@ -137,7 +137,12 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        const ticketId = `SVM-${Math.floor(1000 + Math.random() * 9000)}`;
+        let ticketId = `SVM-${Math.floor(1000 + Math.random() * 9000)}`;
+        try {
+          const resData = await response.json();
+          if (resData?.ticketId) ticketId = resData.ticketId;
+        } catch (e) {}
+
         setStatus({
           submitting: false,
           success: true,
@@ -155,7 +160,7 @@ export default function ContactPage() {
         setStatus({
           submitting: false,
           success: false,
-          error: `Endpoint returned HTTP status ${response.status}. No simulated delivery is allowed. You can send directly via verified email.`,
+          error: `Endpoint returned status ${response.status}. You can also send directly via verified email below.`,
           ticketNumber: 'SVM-ERR'
         });
       }
