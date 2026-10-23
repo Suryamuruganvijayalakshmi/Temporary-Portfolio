@@ -19,6 +19,14 @@ import {
 
 export default function StudioPage() {
   const { openProjectModal, activeProjectModal, closeProjectModal, setActiveRoute } = useStore();
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="relative w-full pt-24 sm:pt-28 pb-16 px-4 sm:px-8 max-w-7xl mx-auto space-y-16">
@@ -39,8 +47,8 @@ export default function StudioPage() {
         </p>
       </div>
 
-      {/* Interactive 3D Hanging Lanyard ID Badge from React Bits */}
-      <div className="relative flex flex-col items-center justify-center py-2 overflow-hidden">
+      {/* Interactive 3D Hanging Lanyard ID Badge from React Bits - Full Viewport Width */}
+      <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex flex-col items-center justify-center py-2 overflow-x-clip select-none">
         {/* Halftone surrounding ring aura */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] sm:w-[680px] sm:h-[680px] pointer-events-none opacity-35 dark:opacity-20 select-none">
           <svg viewBox="0 0 400 400" className="w-full h-full animate-[spin_120s_linear_infinite]">
@@ -51,25 +59,25 @@ export default function StudioPage() {
           </svg>
         </div>
 
-        {/* 3D Lanyard Canvas Container */}
-        <div className="w-full max-w-2xl h-[460px] sm:h-[640px] relative z-10 flex items-center justify-center">
+        {/* 3D Lanyard Canvas Container - Full Viewport Width & Smooth Dragging to Ends */}
+        <div className="w-full h-[520px] sm:h-[660px] lg:h-[760px] relative z-10 flex items-center justify-center">
           <Lanyard 
             frontImage="/card-front.svg"
             backImage="/card-back.svg"
             strapImage="/strap.svg"
             finish="glossy"
             metal="silver"
-            size={0.65}
-            strapLength={0.48}
-            strapWidth={0.7}
-            breeze={0.4}
+            size={isMobile ? 0.52 : 0.62}
+            strapLength={isMobile ? 0.38 : 0.34}
+            strapWidth={0.65}
+            breeze={0.25}
             damping={0.45}
-            elasticity={0.55}
+            elasticity={0.65}
           />
         </div>
 
         {/* Telemetry & Controls Annotation */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 font-mono text-xs text-muted z-10 mt-2">
+        <div className="flex flex-col sm:flex-row items-center gap-3 font-mono text-xs text-muted z-10 mt-3">
           <span className="rubber-stamp">PHYSICS::ACTIVE</span>
           <span>DRAG TO SWING &amp; THROW · CLICK CARD TO FLIP · BREEZE SIMULATION</span>
         </div>

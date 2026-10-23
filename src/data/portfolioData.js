@@ -52,7 +52,7 @@ export const featuredProjects = [
   {
     id: "signbridge",
     index: "01",
-    totalCount: "06",
+    totalCount: "05",
     title: "SignBridge",
     category: "Startup • Technology Communication & Products",
     tag: "W/FOUNDER",
@@ -74,7 +74,7 @@ export const featuredProjects = [
   {
     id: "ecoclamp-iot",
     index: "02",
-    totalCount: "06",
+    totalCount: "05",
     title: "EcoClamp",
     category: "AIoT • Industrial Intelligence • Energy Conservation",
     tag: "AIoT // HARDWARE",
@@ -96,7 +96,7 @@ export const featuredProjects = [
   {
     id: "farmcargo",
     index: "03",
-    totalCount: "06",
+    totalCount: "05",
     title: "FarmCargo",
     category: "AI • Agricultural Logistics • Predictive Procurement",
     tag: "AGRITECH // AI",
@@ -118,7 +118,7 @@ export const featuredProjects = [
   {
     id: "sentinel",
     index: "04",
-    totalCount: "06",
+    totalCount: "05",
     title: "SENTINEL",
     category: "Space Tech • Autonomous Orbital Safety • Debris Mitigation",
     tag: "ORBITAL // SIM",
@@ -140,7 +140,7 @@ export const featuredProjects = [
   {
     id: "merryberry",
     index: "05",
-    totalCount: "06",
+    totalCount: "05",
     title: "Merry Berry",
     category: "Interactive Web • Culinary Brand Experience",
     tag: "W/OFF+BRAND",
@@ -158,28 +158,6 @@ export const featuredProjects = [
     status: "Interactive design concept & prototype development under the SignBridge studio portfolio.",
     isProductionLive: false,
     visualType: "culinary"
-  },
-  {
-    id: "esim-visa-alert",
-    index: "06",
-    totalCount: "06",
-    title: "eSIM Visa Alert",
-    category: "AI • Telecom Intelligence • Secure Systems",
-    tag: "AI // TELECOM",
-    year: "2026",
-    role: "Systems Researcher & Developer",
-    liveUrl: "https://signbridge.click",
-    githubUrl: "https://github.com/Suryamuruganvijayalakshmi",
-    tagline: "AI-based secure eSIM visa overstay detection and automated advisory architecture",
-    summary: "An AI and telecom-related project concept for identifying potential visa-overstay situations and generating alerts. Models roaming metadata securely while accounting for subscriber privacy.",
-    problem: "International travelers frequently face severe penalties or complications due to inadvertent visa overstays caused by complex entry rules, multiple-entry calculations, and lack of real-time status awareness.",
-    solution: "Designed an architectural concept combining privacy-preserving on-device eSIM profile triggers and telecom network metadata to proactively notify subscribers of upcoming visa expiration thresholds.",
-    technicalApproach: "Differential privacy modeling applied to cellular country-code transitions (MCC/MNC). Evaluates entry stamp timestamps against destination country visa quotas with zero-knowledge cryptography, ensuring personal itinerary details remain encrypted.",
-    technologies: ["AI Anomaly Detection", "Telecom Roaming Protocol Simulation", "Zero-Knowledge Cryptography", "Node.js", "Python Analytics"],
-    contribution: "Formulated the system security architecture, algorithmic overstay detection workflow, and privacy evaluation model.",
-    status: "Engineering concept and software simulation prototype. Note: Developed as an academic and technological architecture without unverified government deployment.",
-    isProductionLive: false,
-    visualType: "telecom"
   }
 ];
 

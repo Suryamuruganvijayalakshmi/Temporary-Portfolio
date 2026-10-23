@@ -3,14 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../lib/store';
 import { profileConfig } from '../data/portfolioData';
 import { GithubIcon, LinkedinIcon, InstagramIcon } from '../components/SocialIcons';
-import { Play, Pause, ExternalLink, X, MapPin, Award, GraduationCap, ChevronRight, Check, Maximize2, Sparkles, RotateCw } from 'lucide-react';
-import Lanyard from '../components/Lanyard';
+import { Play, Pause, ExternalLink, X, MapPin, Award, GraduationCap, ChevronRight, Check, Sparkles, RotateCw } from 'lucide-react';
 
 export default function AboutPage() {
   const { 
-    currentTime, 
-    onlineCount, 
-    presenceStatus, 
     isPlayingAudio, 
     toggleAudio, 
     listeningTrack,
@@ -18,89 +14,60 @@ export default function AboutPage() {
   } = useStore();
 
   const [bioExpanded, setBioExpanded] = useState(false);
-  const [cardMode, setCardMode] = useState('lanyard'); // 'lanyard' (3D Lanyard Pass) | 'postcard' (Archival Postcard)
-  const [cardFinish, setCardFinish] = useState('glossy');
-  const [isInspectorOpen, setIsInspectorOpen] = useState(false);
   const [isPlayingLocal, setIsPlayingLocal] = useState(false);
-  const audioCtxRef = useRef(null);
-  const synthNodesRef = useRef([]);
+  const audioRef = useRef(null);
 
-  // Synthesize gentle lo-fi analog workspace ambiance upon user interaction
+  // Initialize and manage sounddelicious-portfolio-harmony audio playback
+  useEffect(() => {
+    const audio = new Audio('/portfolio-harmony.mp3');
+    audio.loop = true;
+    audio.volume = 0.65;
+    audioRef.current = audio;
+
+    const handleEnded = () => setIsPlayingLocal(false);
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      try {
+        audio.pause();
+        audio.src = '';
+      } catch (e) {}
+    };
+  }, []);
+
+  // Sync with global store isPlayingAudio if toggled externally (e.g. Command Palette)
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlayingAudio && !isPlayingLocal) {
+      audio.play().then(() => setIsPlayingLocal(true)).catch(() => {});
+    } else if (!isPlayingAudio && isPlayingLocal) {
+      audio.pause();
+      setIsPlayingLocal(false);
+    }
+  }, [isPlayingAudio]);
+
   const handlePlayToggle = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
     if (isPlayingLocal) {
-      // Stop audio
-      synthNodesRef.current.forEach(node => {
-        try { node.stop(); } catch(e) {}
-      });
-      synthNodesRef.current = [];
+      audio.pause();
       setIsPlayingLocal(false);
       if (isPlayingAudio) toggleAudio();
     } else {
-      // Start audio after user gesture
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!audioCtxRef.current) {
-          audioCtxRef.current = new AudioContext();
-        }
-        if (audioCtxRef.current.state === 'suspended') {
-          audioCtxRef.current.resume();
-        }
-
-        const ctx = audioCtxRef.current;
-        const now = ctx.currentTime;
-
-        // Ambient chord oscillators (Warm F# Maj7)
-        const freqs = [185.00, 233.08, 277.18, 369.99]; // F#3, A#3, C#4, F4
-        const gainMaster = ctx.createGain();
-        gainMaster.gain.setValueAtTime(0.08, now);
-        gainMaster.connect(ctx.destination);
-
-        const newNodes = [];
-
-        freqs.forEach((freq, idx) => {
-          const osc = ctx.createOscillator();
-          const oscGain = ctx.createGain();
-          
-          osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-          osc.frequency.setValueAtTime(freq + (Math.random() * 0.4 - 0.2), now);
-
-          // Subtle LFO vibrato
-          const lfo = ctx.createOscillator();
-          const lfoGain = ctx.createGain();
-          lfo.frequency.setValueAtTime(0.2 + idx * 0.05, now);
-          lfoGain.gain.setValueAtTime(0.8, now);
-          lfo.connect(osc.frequency);
-          lfo.start(now);
-          newNodes.push(lfo);
-
-          oscGain.gain.setValueAtTime(0.06, now);
-          osc.connect(oscGain);
-          oscGain.connect(gainMaster);
-          osc.start(now);
-          newNodes.push(osc);
+      audio.play()
+        .then(() => {
+          setIsPlayingLocal(true);
+          if (!isPlayingAudio) toggleAudio();
+        })
+        .catch((err) => {
+          console.warn('Audio play prevented or interrupted:', err);
         });
-
-        synthNodesRef.current = newNodes;
-        setIsPlayingLocal(true);
-        if (!isPlayingAudio) toggleAudio();
-      } catch (err) {
-        console.warn('Audio synthesis fallback active');
-        setIsPlayingLocal(!isPlayingLocal);
-      }
     }
   };
-
-  // Clean up audio on unmount
-  useEffect(() => {
-    return () => {
-      synthNodesRef.current.forEach(node => {
-        try { node.stop(); } catch(e) {}
-      });
-      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
-        try { audioCtxRef.current.close(); } catch(e) {}
-      }
-    };
-  }, []);
 
   return (
     <div className="relative w-full min-h-[calc(100vh-80px)] px-4 sm:px-8 pt-20 sm:pt-24 pb-16 flex items-center justify-center select-none overflow-x-hidden">
@@ -144,212 +111,9 @@ export default function AboutPage() {
         <div className="relative w-full lg:w-7/12 flex flex-col items-center">
           
           {/* ============================================================
-              IDENTITY CARD SWITCHER TABS & ACTIONS
+              OBJECT A: THE ARCHIVAL IDENTITY POSTCARD
               ============================================================ */}
-          <div className="w-full max-w-xl flex items-center justify-between mb-3 px-1">
-            <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-full bg-zinc-200/80 dark:bg-zinc-800/80 border border-zinc-300 dark:border-zinc-700 text-[11px] sm:text-xs font-mono shadow-xs">
-              <button
-                onClick={() => setCardMode('lanyard')}
-                className={`px-2.5 sm:px-3 py-1 rounded-full font-bold transition-all ${
-                  cardMode === 'lanyard'
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-xs'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                ★ 3D LANYARD PASS
-              </button>
-              <button
-                onClick={() => setCardMode('postcard')}
-                className={`px-2.5 sm:px-3 py-1 rounded-full font-bold transition-all ${
-                  cardMode === 'postcard'
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-xs'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                ✉ ARCHIVAL POSTCARD
-              </button>
-            </div>
-
-            {cardMode === 'lanyard' && (
-              <button
-                onClick={() => setIsInspectorOpen(true)}
-                className="flex items-center gap-1 text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-zinc-200/60 dark:bg-zinc-800/60 border border-zinc-300/80 dark:border-zinc-700/80 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white transition-colors"
-                title="Open Fullscreen 3D Pass Inspector"
-              >
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">FULLSCREEN</span>
-              </button>
-            )}
-          </div>
-
-          {/* OBJECT A: THE IDENTITY CARD (3D LANYARD OR ARCHIVAL POSTCARD) */}
-          <AnimatePresence mode="wait">
-            {cardMode === 'lanyard' ? (
-              <motion.div
-                key="lanyard-card"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.25 }}
-                className="relative w-full max-w-xl rounded-2xl bg-[#fbf9f4] dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.12)] p-4 sm:p-6"
-              >
-                {/* 3D Physics Lanyard Canvas Container */}
-                <div className="relative w-full h-[460px] sm:h-[520px] rounded-xl overflow-hidden bg-gradient-to-b from-stone-100/70 to-stone-200/30 dark:from-zinc-950/70 dark:to-zinc-900/40 border border-zinc-200/70 dark:border-zinc-800/70 flex items-center justify-center">
-                  {/* Halftone constellation circular aura behind hanging card */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] pointer-events-none opacity-25 dark:opacity-15 select-none">
-                    <svg viewBox="0 0 400 400" className="w-full h-full animate-[spin_120s_linear_infinite]">
-                      <circle cx="200" cy="200" r="185" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 9" className="text-stone-400 dark:text-stone-600" />
-                      <circle cx="200" cy="200" r="150" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 6" className="text-stone-500 dark:text-stone-500" />
-                      <circle cx="200" cy="200" r="115" fill="none" stroke="currentColor" strokeWidth="0.8" strokeDasharray="4 8" className="text-stone-400 dark:text-stone-700" />
-                    </svg>
-                  </div>
-
-                  {/* 3D Lanyard component */}
-                  <div className="w-full h-full">
-                    <Lanyard 
-                      frontImage="/card-front.svg"
-                      backImage="/card-back.svg"
-                      strapImage="/strap.svg"
-                      finish={cardFinish}
-                      metal="silver"
-                      size={0.68}
-                      strapLength={0.46}
-                      strapWidth={0.7}
-                      breeze={0.4}
-                      damping={0.45}
-                      elasticity={0.55}
-                    />
-                  </div>
-
-                  {/* Bottom Overlay Pill Toolbar */}
-                  <div className="absolute bottom-2.5 inset-x-2.5 flex flex-wrap items-center justify-between gap-1.5 px-3 py-1.5 rounded-xl bg-white/85 dark:bg-zinc-950/85 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 text-[10px] sm:text-[11px] font-mono shadow-sm">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="font-bold text-zinc-800 dark:text-zinc-200">PHYSICS::ACTIVE</span>
-                      <span className="hidden sm:inline text-zinc-400">· DRAG / FLIP</span>
-                    </div>
-
-                    <div className="flex items-center gap-1">
-                      <span className="text-zinc-400 text-[10px] hidden md:inline">SURFACE:</span>
-                      {['glossy', 'holographic', 'metallic', 'matte'].map(f => (
-                        <button
-                          key={f}
-                          onClick={() => setCardFinish(f)}
-                          className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold transition-all ${
-                            cardFinish === f
-                              ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-2xs'
-                              : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'
-                          }`}
-                        >
-                          {f}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Identity Card Summary & Social Info */}
-                <div className="mt-4 space-y-3 font-sans">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight font-sans">
-                        Surya V M
-                      </h2>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-                        FOUNDER // SIGNBRIDGE · AIoT INNOVATOR
-                      </p>
-                    </div>
-
-                    {/* Social Media Icon Row */}
-                    <div className="flex items-center gap-2">
-                      <a
-                        href="https://x.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
-                        title="X Profile"
-                      >
-                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="https://instagram.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
-                        title="Instagram Profile"
-                      >
-                        <InstagramIcon className="w-3.5 h-3.5" />
-                      </a>
-                      <a
-                        href={profileConfig.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
-                        title="GitHub Profile"
-                      >
-                        <GithubIcon className="w-3.5 h-3.5" />
-                      </a>
-                      <a
-                        href={profileConfig.companyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 rounded-full hover:bg-zinc-200/60 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
-                        title="SignBridge Website"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Bottom Row: About Me Button & Route Label */}
-                  <div className="pt-2 border-t border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
-                    <button
-                      onClick={() => setBioExpanded(!bioExpanded)}
-                      className="px-4 py-1.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 font-sans text-xs font-semibold shadow-xs hover:opacity-90 transition-opacity select-none"
-                    >
-                      {bioExpanded ? 'Close Bio' : 'About me'}
-                    </button>
-
-                    <div className="font-mono text-[10px] text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-semibold">
-                      TAMIL NADU → GLOBAL
-                    </div>
-                  </div>
-
-                  {/* Expandable Biography Drawer */}
-                  <AnimatePresence>
-                    {bioExpanded && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 font-sans text-xs text-zinc-700 dark:text-zinc-300"
-                      >
-                        <p className="leading-relaxed">
-                          {profileConfig.bio}
-                        </p>
-                        <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 space-y-1 font-mono text-[11px]">
-                          <div className="font-bold text-zinc-900 dark:text-zinc-100">{profileConfig.education.degree}</div>
-                          <div className="text-zinc-500">{profileConfig.education.institution} • Class of {profileConfig.education.expectedYear}</div>
-                        </div>
-                        <div>
-                          <div className="font-bold text-zinc-900 dark:text-zinc-100 font-mono text-[11px] mb-1.5 uppercase">
-                            Recognitions & Milestones:
-                          </div>
-                          <ul className="space-y-1 list-disc list-inside text-zinc-600 dark:text-zinc-400">
-                            {profileConfig.achievements.map((a, i) => (
-                              <li key={i}><span className="font-semibold text-zinc-900 dark:text-zinc-200">{a.title}</span> — {a.detail} ({a.year})</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
+          <motion.div
                 key="postcard-card"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -369,24 +133,12 @@ export default function AboutPage() {
                     <div className="relative p-2 rounded-sm bg-white dark:bg-zinc-950 border-2 border-dashed border-zinc-400 dark:border-zinc-700 shadow-md">
                       {/* High-Contrast Grayscale Portrait (Silhouette/Engraving Style) */}
                       <div className="w-28 h-36 bg-zinc-900 rounded-xs overflow-hidden relative flex items-center justify-center">
-                        {/* SVG Engraved Halftone Silhouette Portrait */}
-                        <svg className="w-full h-full" viewBox="0 0 100 130" fill="none">
-                          <rect width="100" height="130" fill="#18181b" />
-                          <path 
-                            d="M50 25 C40 25 32 34 32 46 C32 58 38 66 45 70 C40 76 25 84 20 115 H80 C75 84 60 76 55 70 C62 66 68 58 68 46 C68 34 60 25 50 25 Z" 
-                            fill="#f4f4f5" 
-                          />
-                          <g stroke="#18181b" strokeWidth="1" opacity="0.6">
-                            <line x1="20" y1="90" x2="80" y2="90" />
-                            <line x1="20" y1="96" x2="80" y2="96" />
-                            <line x1="20" y1="102" x2="80" y2="102" />
-                            <line x1="20" y1="108" x2="80" y2="108" />
-                            <line x1="34" y1="42" x2="66" y2="42" />
-                            <line x1="34" y1="48" x2="66" y2="48" />
-                            <line x1="34" y1="54" x2="66" y2="54" />
-                          </g>
-                        </svg>
-
+                        {/* Real Portrait of Surya V M as Archival Postage Stamp */}
+                        <img 
+                          src="/surya-portrait.jpg" 
+                          alt="Surya V M" 
+                          className="w-full h-full object-cover grayscale contrast-110" 
+                        />
                         {/* Circular Postmark Ink Stamp */}
                         <div className="absolute top-2 -right-4 w-16 h-16 rounded-full border border-zinc-500/60 flex items-center justify-center transform rotate-12 pointer-events-none">
                           <div className="text-[7px] font-mono text-zinc-400 text-center uppercase tracking-tighter">
@@ -516,67 +268,6 @@ export default function AboutPage() {
                   )}
                 </AnimatePresence>
               </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* OBJECT B: OVERLAPPING TELEMETRY::LIVE PANEL (Matching Screenshot 3!) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.1 }}
-            className="w-full max-w-sm sm:max-w-md rounded-2xl bg-[#12141a] text-zinc-100 p-5 border border-zinc-800 shadow-[0_20px_45px_-10px_rgba(0,0,0,0.35)] -mt-10 sm:-mt-14 z-20 self-start sm:ml-4 font-mono text-xs space-y-3.5 select-none"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2.5">
-              <div className="flex items-center gap-2">
-                <span className="font-bold tracking-wider text-zinc-100">
-                  TELEMETRY::LIVE
-                </span>
-              </div>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            </div>
-
-            {/* Metrics Rows */}
-            <div className="space-y-1.5 text-[11px] text-zinc-300">
-              <div className="flex items-center justify-between">
-                <span className="text-zinc-500">LOCAL::</span>
-                <span className="font-bold text-zinc-100">{currentTime || '20:05IST'}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-zinc-500">POS::</span>
-                <span className="font-bold text-zinc-100">11°21'N / 77°44'E</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-zinc-500">ONLINE::</span>
-                <span className="font-bold text-zinc-100">0{onlineCount || 1}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-zinc-500">COMMITS::</span>
-                <span className="font-bold text-zinc-100">6,165/YR</span>
-              </div>
-            </div>
-
-            {/* Grayscale GitHub Activity Heatmap Grid (Matching Screenshot 3!) */}
-            <div className="pt-2 border-t border-zinc-800/80">
-              <div className="grid grid-cols-12 sm:grid-cols-20 gap-1 opacity-90 overflow-hidden">
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const level = (i * 7 + 13) % 5;
-                  const bgClass =
-                    level === 0 ? 'bg-zinc-800/50' :
-                    level === 1 ? 'bg-zinc-700' :
-                    level === 2 ? 'bg-zinc-500' :
-                    level === 3 ? 'bg-zinc-300' : 'bg-white';
-                  return (
-                    <div 
-                      key={i} 
-                      className={`w-2.5 h-2.5 rounded-xs ${bgClass} transition-colors hover:scale-125`}
-                      title={`Week ${i + 1} Activity`}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
         </div>
 
         {/* RIGHT COLUMN: OBJECT C — THE VINYL TURNTABLE (Matching Screenshot 3!) */}
@@ -621,8 +312,8 @@ export default function AboutPage() {
                     SURYA V M
                   </div>
                   <div className="w-2 h-2 rounded-full bg-zinc-900 my-1" />
-                  <div className="text-[6px] font-mono text-zinc-600">
-                    ANALOG DESK
+                  <div className="text-[6px] font-mono text-zinc-600 truncate max-w-[70px]">
+                    PORTFOLIO HARMONY
                   </div>
                 </div>
               </div>
@@ -657,13 +348,13 @@ export default function AboutPage() {
                   <span className="font-bold text-zinc-100 text-[11px] tracking-wider">
                     {isPlayingLocal ? 'RADIO::LIVE' : 'RADIO::OFF-AIR'}
                   </span>
-                  <span className="text-zinc-500 text-[10px] hidden sm:inline">• 5H AGO</span>
+                  <span className="text-zinc-500 text-[10px] hidden sm:inline">• MASTER AUDIO</span>
                 </div>
-                <div className="text-zinc-200 text-xs font-semibold truncate max-w-[170px] sm:max-w-[200px]">
-                  Analog Desk // Low-Fi Synth
+                <div className="text-zinc-200 text-xs font-semibold truncate max-w-[170px] sm:max-w-[200px]" title="Sounddelicious — Portfolio Harmony">
+                  Sounddelicious // Portfolio Harmony
                 </div>
                 <div className="text-zinc-500 text-[10px]">
-                  Surya V M Studio
+                  Surya V M Studio Master
                 </div>
               </div>
 
@@ -680,93 +371,6 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </div>
-
-      {/* ============================================================
-          FULLSCREEN 3D LANYARD INSPECTOR MODAL
-          ============================================================ */}
-      <AnimatePresence>
-        {isInspectorOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
-            onClick={() => setIsInspectorOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-4xl h-[85vh] max-h-[820px] rounded-3xl bg-zinc-950 border border-zinc-800 shadow-2xl flex flex-col overflow-hidden"
-            >
-              {/* Modal Top Bar */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 text-xs font-mono text-zinc-300">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-bold text-white tracking-widest">
-                    SURYA V M // 3D IDENTITY PASS INSPECTOR
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="hidden sm:flex items-center gap-1">
-                    <span className="text-zinc-500 text-[10px]">SURFACE:</span>
-                    {['glossy', 'holographic', 'metallic', 'matte'].map((f) => (
-                      <button
-                        key={f}
-                        onClick={() => setCardFinish(f)}
-                        className={`px-2.5 py-1 rounded text-[10px] uppercase font-bold transition-all ${
-                          cardFinish === f
-                            ? 'bg-white text-zinc-900 shadow-xs'
-                            : 'text-zinc-400 hover:text-white'
-                        }`}
-                      >
-                        {f}
-                      </button>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => setIsInspectorOpen(false)}
-                    className="p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                    title="Close Inspector (Esc)"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal 3D Canvas Area */}
-              <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden">
-                <Lanyard
-                  frontImage="/card-front.svg"
-                  backImage="/card-back.svg"
-                  strapImage="/strap.svg"
-                  finish={cardFinish}
-                  metal="silver"
-                  size={0.65}
-                  strapLength={0.48}
-                  strapWidth={0.7}
-                  breeze={0.35}
-                  damping={0.45}
-                  elasticity={0.55}
-                />
-              </div>
-
-              {/* Modal Bottom Hints */}
-              <div className="px-6 py-3 border-t border-zinc-800/80 bg-zinc-900/60 font-mono text-[11px] text-zinc-400 flex items-center justify-between">
-                <div>
-                  <span className="text-zinc-200 font-bold">CLICK CARD</span> TO FLIP FRONT/BACK · <span className="text-zinc-200 font-bold">DRAG &amp; THROW</span> FOR PHYSICS
-                </div>
-                <div className="hidden sm:block text-zinc-500">
-                  PRESS ESC TO CLOSE
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

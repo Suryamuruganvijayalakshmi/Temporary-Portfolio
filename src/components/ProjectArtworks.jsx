@@ -291,46 +291,6 @@ export function ProjectPhoto({ projectId, className = "" }) {
         </div>
       );
 
-    case 'esim-visa-alert':
-      return (
-        <div className={`relative w-full h-full rounded-2xl overflow-hidden bg-zinc-950 shadow-2xl flex items-center justify-center select-none ${className}`}>
-          <svg className="w-full h-full p-2" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="simGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#10b981" stopOpacity="0.35" />
-                <stop offset="100%" stopColor="#000" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <rect width="600" height="400" fill="#040b11" />
-            <circle cx="300" cy="200" r="160" fill="url(#simGlow)" />
-
-            {/* eSIM Gold Contact Matrix */}
-            <rect x="200" y="110" width="200" height="180" rx="16" fill="#064e3b" stroke="#10b981" strokeWidth="2.5" />
-            
-            {/* Notch on SIM */}
-            <polygon points="370,110 400,140 400,110" fill="#040b11" stroke="#10b981" strokeWidth="2" />
-
-            {/* Gold Circuit Grid */}
-            <rect x="230" y="140" width="60" height="50" rx="6" fill="#f59e0b" stroke="#fbbf24" strokeWidth="1.5" />
-            <rect x="310" y="140" width="60" height="50" rx="6" fill="#f59e0b" stroke="#fbbf24" strokeWidth="1.5" />
-            <rect x="230" y="210" width="60" height="50" rx="6" fill="#f59e0b" stroke="#fbbf24" strokeWidth="1.5" />
-            <rect x="310" y="210" width="60" height="50" rx="6" fill="#f59e0b" stroke="#fbbf24" strokeWidth="1.5" />
-
-            {/* Central Privacy Shield Icon */}
-            <circle cx="300" cy="200" r="28" fill="#0f172a" stroke="#34d399" strokeWidth="2" />
-            <path d="M300 185 L314 193 V208 C314 218 300 223 300 223 C300 223 286 218 286 208 V193 Z" fill="#059669" stroke="#34d399" strokeWidth="1.5" />
-
-            {/* International Roaming Wave Pulses */}
-            <path d="M140 200 Q200 160 200 200" stroke="#38bdf8" strokeWidth="2" strokeDasharray="4 4" fill="none" />
-            <path d="M460 200 Q400 160 400 200" stroke="#38bdf8" strokeWidth="2" strokeDasharray="4 4" fill="none" />
-
-            <text x="25" y="35" fill="#34d399" fontFamily="monospace" fontSize="11" letterSpacing="1.5">eSIM INTELLIGENCE // ZERO-KNOWLEDGE</text>
-            <text x="25" y="375" fill="#6ee7b7" fontFamily="monospace" fontSize="10">MCC/MNC: 214-07 • PROTOCOL: ANONYMIZED</text>
-            <text x="470" y="375" fill="#10b981" fontFamily="monospace" fontSize="10">ENCRYPTED</text>
-          </svg>
-        </div>
-      );
-
     default:
       return null;
   }
@@ -399,15 +359,6 @@ export function ProjectLogoCard({ projectId, className = "" }) {
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-purple-50 dark:bg-purple-950/60 border-2 border-purple-500 shadow-xl flex items-center justify-center">
             <div className="text-3xl sm:text-4xl">
               🍨
-            </div>
-          </div>
-        );
-
-      case 'esim-visa-alert':
-        return (
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-teal-50 dark:bg-teal-950/60 border-2 border-teal-500 shadow-xl flex items-center justify-center">
-            <div className="text-3xl sm:text-4xl text-teal-500">
-              🛡️
             </div>
           </div>
         );

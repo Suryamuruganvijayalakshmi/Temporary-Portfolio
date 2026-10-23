@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../lib/store';
 import IdentityPill from './IdentityPill';
-import ThemeSwitcher from './ThemeSwitcher';
 import { 
   Command, 
   Menu, 
@@ -56,7 +55,7 @@ export default function Navbar() {
     <>
       <nav
         aria-label="Primary navigation"
-        className="sticky top-6 z-30 w-full px-4 sm:px-8 py-2 pointer-events-none transition-all"
+        className="sticky top-3 sm:top-4 z-30 w-full px-4 sm:px-8 py-2 pointer-events-none transition-all"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
           {/* Left: Identity Monogram Pill */}
@@ -93,7 +92,7 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Separate Standalone ⌘K Button (Exact as in Screenshot 1, 2, 3) */}
+            {/* Separate Standalone ⌘K Button */}
             <button
               onClick={openCommandPalette}
               className="px-3 py-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-all text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 flex items-center justify-center select-none"
@@ -104,36 +103,11 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Right: Notification Bell & Theme Switcher */}
-          <div className="flex items-center gap-2">
-            {/* Notification Bell Button (as in Screenshot 1, 2, 3) */}
-            <button
-              onClick={() => {
-                const el = document.getElementById('visitor-toast');
-                if (el) {
-                  el.classList.add('animate-bounce');
-                  setTimeout(() => el.classList.remove('animate-bounce'), 1000);
-                }
-              }}
-              className="hidden sm:flex w-9 h-9 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:bg-zinc-50 dark:hover:bg-zinc-800 items-center justify-center text-zinc-600 dark:text-zinc-300 transition-colors"
-              title="Activity Notifications"
-              aria-label="Activity notifications"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-              </svg>
-            </button>
-
-            {/* Theme Switcher [☀️ 🌙] */}
-            <div className="flex items-center">
-              <ThemeSwitcher />
-            </div>
-
-            {/* Mobile Hamburger Button */}
+          {/* Right: Mobile Hamburger */}
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm"
+              className="p-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -203,8 +177,6 @@ export default function Navbar() {
                   <Command className="w-4 h-4" />
                   <span>Command Menu ({osShortcut})</span>
                 </button>
-
-                <ThemeSwitcher />
               </div>
             </div>
           </motion.div>

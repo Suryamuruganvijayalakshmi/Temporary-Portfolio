@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../lib/store';
-import { labExperiments } from '../data/portfolioData';
+import { featuredProjects } from '../data/portfolioData';
+import { ProjectPhoto, ProjectLogoCard } from '../components/ProjectArtworks';
+import ProjectModal from '../components/ProjectModal';
 import { 
   Sparkles, 
   List, 
@@ -11,81 +13,162 @@ import {
   ChevronRight, 
   RotateCcw, 
   ExternalLink,
-  Users,
-  Mic,
-  Maximize2,
-  Volume2,
   Sliders,
-  Move,
   Layers,
-  Heart,
-  Globe
+  Activity,
+  Cpu,
+  Radio,
+  Satellite,
+  Compass,
+  Zap,
+  Terminal,
+  CheckCircle2,
+  AlertTriangle
 } from 'lucide-react';
 
-/* -------------------------------------------------------------
- * Experiment 1: Dynamic Scroll Kinematics Simulator
- * ------------------------------------------------------------- */
-function DynamicScrollCanvas() {
-  const [velocity, setVelocity] = useState(25);
-  const [damping, setDamping] = useState(0.85);
-  const [scrollY, setScrollY] = useState(0);
+/* ====================================================================
+ * PROJECT LAB 1: ECOCLAMP AIoT HARMONIC & VIBRATION INTELLIGENCE
+ * ==================================================================== */
+function EcoClampLabStage() {
+  const [motorLoad, setMotorLoad] = useState(45); // Amperes
+  const [vibrationSeverity, setVibrationSeverity] = useState(1.4); // mm/s RMS
+  const [temperature, setTemperature] = useState(48); // °C
 
-  useEffect(() => {
-    let animId;
-    let currentPos = 0;
-    const loop = () => {
-      currentPos = (currentPos + velocity * 0.08) % 360;
-      setScrollY(currentPos);
-      animId = requestAnimationFrame(loop);
-    };
-    animId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(animId);
-  }, [velocity]);
+  const healthScore = Math.max(15, Math.min(99, Math.round(100 - (motorLoad > 70 ? (motorLoad - 70) * 1.5 : 0) - (vibrationSeverity > 2.5 ? (vibrationSeverity - 2.5) * 18 : 0) - (temperature > 65 ? (temperature - 65) * 1.2 : 0))));
+  const isWarning = healthScore < 75 && healthScore >= 50;
+  const isCritical = healthScore < 50;
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-6 space-y-6">
-      <div className="relative w-64 h-48 rounded-2xl bg-card border-2 border-strong shadow-2xl p-6 flex flex-col items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-gradient-to-b from-iris-500/10 via-transparent to-iris-500/20 pointer-events-none"
-          style={{ transform: `translateY(${(scrollY % 40) - 20}px)` }}
-        />
-        <motion.div
-          style={{
-            rotateX: (scrollY % 30) - 15,
-            rotateY: (scrollY % 20) - 10
-          }}
-          className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-iris-600 to-indigo-500 flex items-center justify-center text-white font-mono font-bold text-xs shadow-xl"
-        >
-          VELOCITY
-        </motion.div>
-        <div className="mt-4 font-mono text-[11px] text-muted">
-          POS: {Math.round(scrollY)}px · DAMP: {damping}
+    <div className="w-full flex flex-col p-4 sm:p-6 space-y-6 select-none font-mono">
+      {/* Top Telemetry Header */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-subtle">
+        <div className="flex items-center gap-2">
+          <span className={`w-2.5 h-2.5 rounded-full ${isCritical ? 'bg-rose-500 animate-ping' : isWarning ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}`} />
+          <span className="font-bold text-xs text-primary">ECOCLAMP // SCT-013 + MPU6050 FIRMWARE SIMULATOR</span>
+        </div>
+        <div className="flex items-center gap-2 text-xs">
+          <span className="text-muted">MACHINE STATUS:</span>
+          <span className={`font-bold ${isCritical ? 'text-rose-500' : isWarning ? 'text-amber-500' : 'text-emerald-500'}`}>
+            {isCritical ? 'CRITICAL ANOMALY' : isWarning ? 'HARMONIC WARNING' : 'NOMINAL (OPTIMAL)'}
+          </span>
+          <span className="px-2 py-0.5 rounded bg-card border border-subtle font-bold text-primary">
+            HEALTH: {healthScore}%
+          </span>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-6 font-mono text-xs">
-        <div className="flex items-center gap-2">
-          <span className="text-muted">VELOCITY:</span>
+      {/* Main Dual Oscilloscope Display */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Current Sine & Harmonic Distortion Waveform */}
+        <div className="p-4 rounded-xl bg-card border border-subtle space-y-3">
+          <div className="flex items-center justify-between text-xs text-muted">
+            <span>CURRENT WAVEFORM (SCT-013)</span>
+            <span className="text-primary font-bold">{motorLoad}A RMS · 50 Hz</span>
+          </div>
+          <div className="h-32 w-full bg-zinc-950 rounded-lg p-2 relative overflow-hidden flex items-center justify-center border border-zinc-800">
+            <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+              {/* Background Grid Lines */}
+              <line x1="0" y1="50" x2="400" y2="50" stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
+              <line x1="100" y1="0" x2="100" y2="100" stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
+              <line x1="200" y1="0" x2="200" y2="100" stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
+              <line x1="300" y1="0" x2="300" y2="100" stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
+              
+              {/* Generated Dynamic Sine with Harmonics */}
+              <path
+                d={Array.from({ length: 40 }).map((_, i) => {
+                  const x = i * 10;
+                  const phase = (x / 400) * Math.PI * 6;
+                  const amp = (motorLoad / 100) * 36;
+                  const harmonic = (motorLoad > 65 ? Math.sin(phase * 3) * 8 : 0);
+                  const y = 50 - (Math.sin(phase) * amp + harmonic);
+                  return `${i === 0 ? 'M' : 'L'} ${x} ${y.toFixed(1)}`;
+                }).join(' ')}
+                fill="none"
+                stroke={isCritical ? '#f43f5e' : isWarning ? '#f59e0b' : '#38bdf8'}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+          <div className="flex justify-between text-[11px] text-muted">
+            <span>SAMPLE: 10 kHz ADC</span>
+            <span>THD: {(motorLoad * 0.08).toFixed(1)}%</span>
+          </div>
+        </div>
+
+        {/* 3-Axis Vibration FFT Spectrum */}
+        <div className="p-4 rounded-xl bg-card border border-subtle space-y-3">
+          <div className="flex items-center justify-between text-xs text-muted">
+            <span>VIBRATION FFT SPECTRUM (MPU6050)</span>
+            <span className="text-primary font-bold">{vibrationSeverity} mm/s RMS</span>
+          </div>
+          <div className="h-32 w-full bg-zinc-950 rounded-lg p-3 relative flex items-end justify-between gap-1 border border-zinc-800">
+            {[18, 42, 28, 65, 84, 30, 22, 54, 92, 40, 25, 15].map((h, i) => {
+              const adjustedHeight = Math.min(100, Math.round(h * (vibrationSeverity / 1.5)));
+              const isPeak = adjustedHeight > 75;
+              return (
+                <div key={i} className="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                  <div 
+                    className={`w-full rounded-xs transition-all duration-300 ${isPeak ? 'bg-rose-500' : 'bg-emerald-500/80'}`}
+                    style={{ height: `${adjustedHeight}%` }}
+                  />
+                  <span className="text-[8px] text-zinc-500">{i * 20}Hz</span>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-between text-[11px] text-muted">
+            <span>I2C 400kHz · FILTER: 50Hz LPF</span>
+            <span>TEMP: {temperature}°C (DS18B20)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Interactive Hardware Parameter Sliders */}
+      <div className="p-4 rounded-xl bg-surface/60 border border-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs">
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">MOTOR CURRENT:</span>
+            <span className="font-bold text-primary">{motorLoad} A</span>
+          </div>
           <input
             type="range"
-            min="0"
+            min="10"
             max="100"
-            value={velocity}
-            onChange={(e) => setVelocity(Number(e.target.value))}
-            className="w-28 accent-iris-500"
+            value={motorLoad}
+            onChange={(e) => setMotorLoad(Number(e.target.value))}
+            className="w-full accent-iris-500"
           />
-          <span className="text-primary font-bold">{velocity}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-muted">DAMPING:</span>
+
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">VIBRATION SEVERITY:</span>
+            <span className="font-bold text-primary">{vibrationSeverity} mm/s</span>
+          </div>
           <input
             type="range"
             min="0.5"
-            max="0.99"
-            step="0.01"
-            value={damping}
-            onChange={(e) => setDamping(Number(e.target.value))}
-            className="w-24 accent-iris-500"
+            max="4.5"
+            step="0.1"
+            value={vibrationSeverity}
+            onChange={(e) => setVibrationSeverity(Number(e.target.value))}
+            className="w-full accent-iris-500"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">BEARING TEMP:</span>
+            <span className="font-bold text-primary">{temperature} °C</span>
+          </div>
+          <input
+            type="range"
+            min="25"
+            max="95"
+            value={temperature}
+            onChange={(e) => setTemperature(Number(e.target.value))}
+            className="w-full accent-iris-500"
           />
         </div>
       </div>
@@ -93,613 +176,456 @@ function DynamicScrollCanvas() {
   );
 }
 
-/* -------------------------------------------------------------
- * Experiment 2: Rotating 3D Gallery Carousel
- * ------------------------------------------------------------- */
-function RotatingGalleryCanvas() {
-  const [angle, setAngle] = useState(0);
-  const [autoRotate, setAutoRotate] = useState(true);
+/* ====================================================================
+ * PROJECT LAB 2: FARMCARGO PREDICTIVE AGRITECH LOGISTICS
+ * ==================================================================== */
+function FarmCargoLabStage() {
+  const [harvestInflux, setHarvestInflux] = useState(65); // Tons / day
+  const [procurementCentres, setProcurementCentres] = useState(4);
+  const [transitEfficiency, setTransitEfficiency] = useState(88); // %
 
-  useEffect(() => {
-    if (!autoRotate) return;
-    const interval = setInterval(() => {
-      setAngle((prev) => (prev + 1) % 360);
-    }, 40);
-    return () => clearInterval(interval);
-  }, [autoRotate]);
-
-  const cards = [
-    { title: 'CARD 01', color: 'from-amber-500 to-orange-600', meta: 'EDITORIAL ARCHIVE' },
-    { title: 'CARD 02', color: 'from-blue-500 to-cyan-600', meta: 'AIOT CLUSTERS' },
-    { title: 'CARD 03', color: 'from-purple-500 to-pink-600', meta: 'TACTILE PAPER' },
-    { title: 'CARD 04', color: 'from-emerald-500 to-teal-600', meta: 'ORBITAL MESH' }
-  ];
+  const queueLatencyHours = Math.max(0.5, ((harvestInflux / (procurementCentres * 18)) * (100 / transitEfficiency)).toFixed(1));
+  const capacityUtilization = Math.min(100, Math.round((harvestInflux / (procurementCentres * 22)) * 100));
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-6 space-y-6">
-      <div className="relative w-80 h-56 flex items-center justify-center [perspective:800px]">
-        {cards.map((card, idx) => {
-          const cardAngle = angle + (idx * 360) / cards.length;
-          const rad = (cardAngle * Math.PI) / 180;
-          const x = Math.sin(rad) * 110;
-          const z = Math.cos(rad) * 110;
-          const scale = (z + 160) / 270;
-          const opacity = (z + 110) / 220;
+    <div className="w-full flex flex-col p-4 sm:p-6 space-y-6 select-none font-mono">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-subtle">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="font-bold text-xs text-primary">FARMCARGO // PREDICTIVE HARVEST INTAKE ROUTER</span>
+        </div>
+        <div className="flex items-center gap-3 text-xs">
+          <span className="text-muted">QUEUE ESTIMATE:</span>
+          <span className={`font-bold ${queueLatencyHours > 3 ? 'text-rose-500' : 'text-emerald-500'}`}>
+            ~{queueLatencyHours} HOURS WAIT
+          </span>
+          <span className="px-2 py-0.5 rounded bg-card border border-subtle text-primary font-bold">
+            CAPACITY: {capacityUtilization}%
+          </span>
+        </div>
+      </div>
 
+      {/* Grid of Intake Centers */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {Array.from({ length: 4 }).map((_, i) => {
+          const isActive = i < procurementCentres;
+          const centreLoad = isActive ? Math.min(100, Math.round((harvestInflux / procurementCentres) * (1.1 - i * 0.08))) : 0;
           return (
-            <motion.div
-              key={card.title}
-              style={{
-                transform: `translateX(${x}px) translateZ(${z}px) scale(${scale})`,
-                zIndex: Math.round(z + 200),
-                opacity: Math.max(0.3, opacity)
-              }}
-              className={`absolute w-36 h-48 rounded-xl bg-gradient-to-br ${card.color} p-4 shadow-2xl text-white flex flex-col justify-between cursor-pointer border border-white/20`}
-              onClick={() => setAngle(idx * -90)}
+            <div 
+              key={i} 
+              className={`p-4 rounded-xl border transition-all ${
+                isActive 
+                  ? 'bg-card border-subtle shadow-xs' 
+                  : 'bg-surface/40 border-dashed border-subtle opacity-50'
+              }`}
             >
-              <span className="font-mono text-[10px] opacity-80">{card.meta}</span>
-              <div className="font-bold text-sm tracking-wider">{card.title}</div>
-            </motion.div>
+              <div className="flex items-center justify-between text-[11px] text-muted mb-2">
+                <span>HUB-0{i + 1}</span>
+                <span className={`w-2 h-2 rounded-full ${isActive ? (centreLoad > 85 ? 'bg-amber-500' : 'bg-emerald-500') : 'bg-zinc-600'}`} />
+              </div>
+              <div className="text-sm font-bold text-primary mb-1">
+                {isActive ? `${centreLoad}% INTAKE` : 'OFFLINE'}
+              </div>
+              <div className="w-full bg-surface rounded-full h-1.5 overflow-hidden border border-subtle mt-2">
+                <div 
+                  className={`h-full rounded-full ${centreLoad > 85 ? 'bg-amber-500' : 'bg-emerald-500'}`}
+                  style={{ width: `${centreLoad}%` }}
+                />
+              </div>
+              <div className="mt-2 text-[10px] text-muted">
+                {isActive ? `Silo cap: ${(centreLoad * 0.45).toFixed(1)} MT` : 'Standby'}
+              </div>
+            </div>
           );
         })}
       </div>
 
-      <div className="flex items-center gap-4 font-mono text-xs">
-        <button
-          onClick={() => setAngle((prev) => prev - 45)}
-          className="px-3 py-1.5 rounded-lg bg-surface hover:bg-card border border-subtle text-primary"
-        >
-          ← ROTATE
-        </button>
-        <button
-          onClick={() => setAutoRotate(!autoRotate)}
-          className={`px-3 py-1.5 rounded-lg border text-xs font-bold ${
-            autoRotate ? 'bg-iris-500 text-white border-transparent' : 'bg-surface text-secondary border-subtle'
-          }`}
-        >
-          {autoRotate ? 'AUTO-SPIN ON' : 'PAUSED'}
-        </button>
-        <button
-          onClick={() => setAngle((prev) => prev + 45)}
-          className="px-3 py-1.5 rounded-lg bg-surface hover:bg-card border border-subtle text-primary"
-        >
-          ROTATE →
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------
- * Experiment 3: Paste-Up Draggable Layered Desk
- * ------------------------------------------------------------- */
-function PasteUpCanvas() {
-  const [items, setItems] = useState([
-    { id: 'item-1', title: 'FIELD SPEC Nº04', type: 'POSTCARD', x: -80, y: -20, rotate: -4, color: 'bg-card' },
-    { id: 'item-2', title: 'PASS/ACCEPT TICKET', type: 'STAMP', x: 60, y: -40, rotate: 6, color: 'bg-iris-600 text-white' },
-    { id: 'item-3', title: 'TELEMETRY NOTE', type: 'PAPER', x: 10, y: 50, rotate: 2, color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-900 dark:text-amber-200' }
-  ]);
-
-  const bringToFront = (id) => {
-    setItems((prev) => {
-      const idx = prev.findIndex((i) => i.id === id);
-      if (idx === -1) return prev;
-      const copy = [...prev];
-      const [item] = copy.splice(idx, 1);
-      copy.push(item);
-      return copy;
-    });
-  };
-
-  return (
-    <div className="relative w-full h-[320px] rounded-xl bg-surface/50 border border-subtle overflow-hidden flex items-center justify-center p-4">
-      <div className="absolute top-3 left-3 font-mono text-[10px] text-muted">
-        DRAG TACTILE SHEETS · CLICK TO BRING TO FRONT
-      </div>
-
-      {items.map((item, idx) => (
-        <motion.div
-          key={item.id}
-          drag
-          dragConstraints={{ left: -140, right: 140, top: -100, bottom: 100 }}
-          onPointerDown={() => bringToFront(item.id)}
-          initial={{ x: item.x, y: item.y, rotate: item.rotate }}
-          style={{ zIndex: 10 + idx }}
-          className={`absolute p-5 rounded-xl border-2 border-strong shadow-xl cursor-grab active:cursor-grabbing font-mono select-none w-48 ${item.color}`}
-        >
-          <div className="flex items-center justify-between text-[9px] opacity-75 border-b border-current/20 pb-1 mb-2">
-            <span>{item.type}</span>
-            <span>::2026</span>
+      {/* Controls */}
+      <div className="p-4 rounded-xl bg-surface/60 border border-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs">
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">HARVEST INFLUX:</span>
+            <span className="font-bold text-primary">{harvestInflux} MT/day</span>
           </div>
-          <div className="font-bold text-xs">{item.title}</div>
-          <div className="text-[10px] opacity-70 mt-1 font-sans">
-            Tactile draggable object with momentum damping.
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------
- * Experiment 4: Vocal Orb Audio-Reactive Visualizer
- * ------------------------------------------------------------- */
-function VocalOrbCanvas() {
-  const [micActive, setMicActive] = useState(false);
-  const [micVolume, setMicVolume] = useState(0.4);
-  const audioContextRef = useRef(null);
-  const streamRef = useRef(null);
-
-  const startMic = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      streamRef.current = stream;
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      audioContextRef.current = audioCtx;
-      const source = audioCtx.createMediaStreamSource(stream);
-      const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 64;
-      source.connect(analyser);
-
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
-      setMicActive(true);
-
-      const checkVolume = () => {
-        if (!streamRef.current) return;
-        analyser.getByteFrequencyData(dataArray);
-        const avg = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
-        setMicVolume(Math.max(0.2, avg / 128));
-        requestAnimationFrame(checkVolume);
-      };
-      checkVolume();
-    } catch (err) {
-      alert('Microphone permission not granted. Running in procedural audio mode.');
-      setMicActive(false);
-    }
-  };
-
-  const stopMic = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop());
-      streamRef.current = null;
-    }
-    if (audioContextRef.current) {
-      audioContextRef.current.close();
-      audioContextRef.current = null;
-    }
-    setMicActive(false);
-  };
-
-  useEffect(() => {
-    return () => stopMic();
-  }, []);
-
-  return (
-    <div className="w-full flex flex-col items-center justify-center p-6 space-y-6">
-      <div className="relative w-52 h-52 flex items-center justify-center">
-        {/* Glow rings */}
-        <motion.div
-          animate={{
-            scale: [1, 1 + micVolume * 0.4, 1],
-            opacity: [0.3, 0.7, 0.3]
-          }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute inset-0 rounded-full bg-iris-500/20 blur-xl"
-        />
-
-        {/* Dynamic Sphere */}
-        <motion.div
-          animate={{
-            scale: 0.9 + micVolume * 0.4,
-            rotate: [0, 180, 360]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-          className="w-32 h-32 rounded-full bg-gradient-to-tr from-cyan-400 via-iris-500 to-purple-600 shadow-2xl flex items-center justify-center text-white font-mono text-xs font-bold border-2 border-white/30"
-        >
-          {micActive ? 'AUDIO LIVE' : 'SYNTH ORB'}
-        </motion.div>
-      </div>
-
-      <div className="flex flex-col items-center gap-2 font-mono text-xs">
-        <button
-          onClick={micActive ? stopMic : startMic}
-          className={`px-4 py-2 rounded-full flex items-center gap-2 font-bold transition-all ${
-            micActive 
-              ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/25' 
-              : 'bg-primary text-canvas hover:opacity-90'
-          }`}
-        >
-          <Mic className="w-4 h-4" />
-          <span>{micActive ? 'Disconnect Microphone' : 'Enable Microphone (Gesture Required)'}</span>
-        </button>
-        <span className="text-[10px] text-muted text-center max-w-sm font-sans">
-          Audio is processed entirely locally via Web Audio API. Audio is never recorded or transmitted.
-        </span>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------
- * Experiment 5: Live Cursors Multi-Client Presence
- * ------------------------------------------------------------- */
-function LiveCursorsCanvas() {
-  const { presenceEnabled, togglePresence } = useStore();
-  const [peerCursors, setPeerCursors] = useState([
-    { id: 'peer-1', name: 'Keen Lynx', x: 25, y: 35, color: '#6366f1' },
-    { id: 'peer-2', name: 'Swift Otter', x: 65, y: 70, color: '#10b981' }
-  ]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPeerCursors((prev) =>
-        prev.map((peer) => ({
-          ...peer,
-          x: Math.min(85, Math.max(15, peer.x + (Math.random() * 20 - 10))),
-          y: Math.min(80, Math.max(20, peer.y + (Math.random() * 20 - 10)))
-        }))
-      );
-    }, 1800);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="relative w-full h-[320px] rounded-xl bg-surface/60 border border-subtle overflow-hidden p-6 flex flex-col justify-between">
-      <div className="flex items-center justify-between font-mono text-xs">
-        <div className="flex items-center gap-2">
-          <Users className="w-4 h-4 text-iris-500" />
-          <span className="text-primary font-bold">PRESENCE PIPELINE</span>
-        </div>
-        <span className="rubber-stamp">
-          {presenceEnabled ? 'BROADCASTING' : 'MUTED'}
-        </span>
-      </div>
-
-      {/* Simulated Peer Cursors */}
-      {peerCursors.map((peer) => (
-        <motion.div
-          key={peer.id}
-          animate={{ left: `${peer.x}%`, top: `${peer.y}%` }}
-          transition={{ type: 'spring', damping: 25, stiffness: 120 }}
-          className="absolute pointer-events-none flex items-start gap-1 z-20"
-        >
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill={peer.color}>
-            <path d="M4 0l16 12-7 2-4 9-5-23z" />
-          </svg>
-          <span 
-            className="px-2 py-0.5 rounded text-[10px] font-mono font-bold text-white shadow-md whitespace-nowrap"
-            style={{ backgroundColor: peer.color }}
-          >
-            {peer.name}
-          </span>
-        </motion.div>
-      ))}
-
-      <div className="text-center space-y-2">
-        <button
-          onClick={togglePresence}
-          className="px-4 py-2 rounded-lg bg-card hover:bg-surface border border-strong font-mono text-xs text-primary shadow-sm"
-        >
-          {presenceEnabled ? 'Broadcast Active · Click to Pause' : 'Click to Enable Live Presence Broadcast'}
-        </button>
-        <p className="font-mono text-[10px] text-muted">
-          Multi-tab broadcast synchronized via LocalChannel & Supabase Realtime channels.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------
- * Experiment 6: Tactile Rotary Dial
- * ------------------------------------------------------------- */
-function RotaryDialCanvas() {
-  const [angle, setAngle] = useState(135);
-
-  return (
-    <div className="w-full flex flex-col items-center justify-center p-6 space-y-6">
-      <div 
-        className="relative w-40 h-40 rounded-full bg-stone-900 border-4 border-stone-700 shadow-2xl flex items-center justify-center select-none"
-      >
-        {/* Ticks ring */}
-        <div className="absolute inset-0 rounded-full border border-stone-600/50" />
-        
-        {/* Rotating Knob */}
-        <div 
-          className="w-28 h-28 rounded-full bg-gradient-to-b from-stone-800 to-stone-950 border border-stone-700 shadow-inner flex items-center justify-center relative transition-transform duration-75"
-          style={{ transform: `rotate(${angle}deg)` }}
-        >
-          {/* Indicator Dot */}
-          <div className="absolute top-2 w-2.5 h-2.5 rounded-full bg-iris-400 shadow-md shadow-iris-400/50" />
-          <div className="font-mono text-xs font-bold text-stone-400">
-            {Math.round((angle / 300) * 100)}%
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center gap-3 font-mono text-xs">
-        <input
-          type="range"
-          min="0"
-          max="300"
-          value={angle}
-          onChange={(e) => setAngle(Number(e.target.value))}
-          className="w-56 accent-iris-500"
-        />
-        <div className="text-muted">
-          POTENTIOMETER READOUT: <strong className="text-primary">{angle}°</strong> / 300°
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------
- * Experiment 7: Polka Dots Cursor Halftone Matrix
- * ------------------------------------------------------------- */
-function PolkaDotsCanvas() {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let width = (canvas.width = canvas.parentElement.clientWidth);
-    let height = (canvas.height = 300);
-
-    let mouse = { x: -100, y: -100 };
-    const spacing = 24;
-    const rows = Math.floor(height / spacing);
-    const cols = Math.floor(width / spacing);
-
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-
-    const handleMouseLeave = () => {
-      mouse = { x: -100, y: -100 };
-    };
-
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('mouseleave', handleMouseLeave);
-
-    let animId;
-    const draw = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const x = c * spacing + spacing / 2;
-          const y = r * spacing + spacing / 2;
-          const dist = Math.hypot(x - mouse.x, y - mouse.y);
-          const maxDist = 80;
-
-          let radius = 2.5;
-          let offsetX = 0;
-          let offsetY = 0;
-
-          if (dist < maxDist) {
-            const factor = (1 - dist / maxDist);
-            radius = 2.5 + factor * 4.5;
-            const angle = Math.atan2(y - mouse.y, x - mouse.x);
-            offsetX = Math.cos(angle) * factor * 10;
-            offsetY = Math.sin(angle) * factor * 10;
-          }
-
-          ctx.beginPath();
-          ctx.arc(x + offsetX, y + offsetY, radius, 0, Math.PI * 2);
-          ctx.fillStyle = dist < maxDist ? '#6366f1' : 'rgba(150, 150, 150, 0.45)';
-          ctx.fill();
-        }
-      }
-
-      animId = requestAnimationFrame(draw);
-    };
-
-    animId = requestAnimationFrame(draw);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  return (
-    <div className="relative w-full h-[300px] flex items-center justify-center overflow-hidden">
-      <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
-      <div className="absolute bottom-3 left-4 font-mono text-[10px] text-muted pointer-events-none">
-        HOVER CURSOR OVER MATRIX TO DISPLACE HALFTONE GRID
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------
- * Experiment 8: Parametric Kinetic Heart
- * ------------------------------------------------------------- */
-function KineticHeartCanvas() {
-  const [pulseSpeed, setPulseSpeed] = useState(1.2);
-  const [intensity, setIntensity] = useState(1);
-
-  return (
-    <div className="w-full flex flex-col items-center justify-center p-6 space-y-6">
-      <div 
-        onClick={() => setIntensity((prev) => (prev >= 1.6 ? 1 : prev + 0.2))}
-        className="cursor-pointer select-none"
-      >
-        <motion.div
-          animate={{ scale: [1, 1.25 * intensity, 1, 1.15 * intensity, 1] }}
-          transition={{ duration: pulseSpeed, repeat: Infinity, ease: 'easeInOut' }}
-          className="text-7xl drop-shadow-xl"
-        >
-          ❤️
-        </motion.div>
-      </div>
-
-      <div className="flex flex-col items-center gap-2 font-mono text-xs">
-        <div className="flex items-center gap-2">
-          <span className="text-muted">PULSE FREQUENCY:</span>
           <input
             type="range"
-            min="0.5"
-            max="2.5"
-            step="0.1"
-            value={pulseSpeed}
-            onChange={(e) => setPulseSpeed(Number(e.target.value))}
-            className="w-32 accent-rose-500"
+            min="20"
+            max="120"
+            value={harvestInflux}
+            onChange={(e) => setHarvestInflux(Number(e.target.value))}
+            className="w-full accent-iris-500"
           />
         </div>
-        <span className="text-[11px] text-muted">
-          Parametric cardiod equation: click heart to surge amplitude (current: {intensity.toFixed(1)}x)
-        </span>
+
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">ACTIVE CENTRES:</span>
+            <span className="font-bold text-primary">{procurementCentres} / 4 HUBS</span>
+          </div>
+          <input
+            type="range"
+            min="1"
+            max="4"
+            value={procurementCentres}
+            onChange={(e) => setProcurementCentres(Number(e.target.value))}
+            className="w-full accent-iris-500"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">TRANSIT EFFICIENCY:</span>
+            <span className="font-bold text-primary">{transitEfficiency}%</span>
+          </div>
+          <input
+            type="range"
+            min="50"
+            max="100"
+            value={transitEfficiency}
+            onChange={(e) => setTransitEfficiency(Number(e.target.value))}
+            className="w-full accent-iris-500"
+          />
+        </div>
       </div>
     </div>
   );
 }
 
-/* -------------------------------------------------------------
- * Experiment 9: Procedural Three.js / WebGL Node Mesh
- * ------------------------------------------------------------- */
-function ThreeOrbitCanvas() {
-  const [rotationSpeed, setRotationSpeed] = useState(1);
+/* ====================================================================
+ * PROJECT LAB 3: SENTINEL AUTONOMOUS ORBITAL SAFETY SIMULATOR
+ * ==================================================================== */
+function SentinelLabStage() {
+  const [orbitAltitude, setOrbitAltitude] = useState(420); // km
+  const [debrisDistance, setDebrisDistance] = useState(14.8); // km
+  const [interceptBurn, setInterceptBurn] = useState(false);
+
+  const deltaV = (debrisDistance * 0.18 + (420 / orbitAltitude) * 0.4).toFixed(2);
+  const timeToCollision = (debrisDistance / 7.66).toFixed(1);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-6 space-y-6">
-      <div className="relative w-64 h-64 flex items-center justify-center">
-        {/* Outer Orbit */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 18 / rotationSpeed, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-0 rounded-full border border-dashed border-iris-500/40"
-        >
-          <div className="w-3.5 h-3.5 rounded-full bg-iris-400 absolute -top-1.5 left-1/2 -translate-x-1/2 shadow-lg shadow-iris-400/50" />
-        </motion.div>
+    <div className="w-full flex flex-col p-4 sm:p-6 space-y-6 select-none font-mono">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-subtle">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
+          <span className="font-bold text-xs text-primary">SENTINEL // CLOHESSY-WILTSHIRE ORBITAL RENDEZVOUS</span>
+        </div>
+        <div className="flex items-center gap-3 text-xs">
+          <span className="text-muted">LEO ALT:</span>
+          <span className="font-bold text-primary">{orbitAltitude} km</span>
+          <span className="text-muted">DELTA-V REQ:</span>
+          <span className="px-2 py-0.5 rounded bg-card border border-subtle text-cyan-400 font-bold">
+            {deltaV} m/s
+          </span>
+        </div>
+      </div>
 
-        {/* Inner Counter Orbit */}
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 10 / rotationSpeed, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-8 rounded-full border border-subtle"
-        >
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute -bottom-1 left-1/2 -translate-x-1/2 shadow-md shadow-emerald-400/50" />
-        </motion.div>
+      {/* Radar Scope */}
+      <div className="relative w-full h-48 bg-zinc-950 rounded-xl border border-zinc-800 overflow-hidden flex items-center justify-center p-4">
+        {/* Radar concentric circles */}
+        <div className="absolute w-40 h-40 rounded-full border border-cyan-500/20" />
+        <div className="absolute w-28 h-28 rounded-full border border-cyan-500/30" />
+        <div className="absolute w-16 h-16 rounded-full border border-cyan-500/40" />
+        <line x1="0" y1="50%" x2="100%" y2="50%" stroke="rgba(6,182,212,0.15)" />
+        
+        {/* Sweep line */}
+        <div className="absolute w-40 h-40 rounded-full border-r border-cyan-400/40 animate-spin [animation-duration:4s]" />
 
-        {/* Central Core Node */}
-        <motion.div
-          animate={{ rotateX: [0, 360], rotateY: [0, 360] }}
-          transition={{ duration: 12 / rotationSpeed, repeat: Infinity, ease: 'linear' }}
-          className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-stone-900 to-stone-700 border border-stone-600 shadow-2xl flex items-center justify-center text-white font-mono text-[10px] font-bold"
+        {/* Central Satellite */}
+        <div className="relative z-10 w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_15px_#06b6d4] flex items-center justify-center text-[8px] text-zinc-950 font-bold">
+          S
+        </div>
+
+        {/* Target Debris Blip */}
+        <motion.div 
+          animate={{
+            x: [debrisDistance * 5, debrisDistance * 5 - (interceptBurn ? 40 : 0)],
+            y: [-debrisDistance * 3, -debrisDistance * 3 + (interceptBurn ? 25 : 0)]
+          }}
+          transition={{ duration: 0.5 }}
+          className="absolute w-3 h-3 rounded-full bg-rose-500 shadow-[0_0_12px_#f43f5e] flex items-center justify-center"
         >
-          GPU::NODE
+          <div className="absolute -top-4 whitespace-nowrap text-[8px] text-rose-400 font-mono">
+            LEO-FRAG {debrisDistance}km
+          </div>
         </motion.div>
       </div>
 
-      <div className="flex items-center gap-3 font-mono text-xs">
-        <span className="text-muted">ORBIT VELOCITY:</span>
-        <button
-          onClick={() => setRotationSpeed((prev) => (prev >= 3 ? 0.5 : prev + 0.5))}
-          className="px-3 py-1.5 rounded-lg bg-surface hover:bg-card border border-subtle text-primary font-bold"
-        >
-          {rotationSpeed}x SPEED
-        </button>
+      {/* Controls */}
+      <div className="p-4 rounded-xl bg-surface/60 border border-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs items-center">
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">DEBRIS PROXIMITY:</span>
+            <span className="font-bold text-primary">{debrisDistance} km</span>
+          </div>
+          <input
+            type="range"
+            min="2"
+            max="30"
+            step="0.5"
+            value={debrisDistance}
+            onChange={(e) => setDebrisDistance(Number(e.target.value))}
+            className="w-full accent-cyan-500"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-muted">ORBIT ALTITUDE:</span>
+            <span className="font-bold text-primary">{orbitAltitude} km</span>
+          </div>
+          <input
+            type="range"
+            min="300"
+            max="600"
+            value={orbitAltitude}
+            onChange={(e) => setOrbitAltitude(Number(e.target.value))}
+            className="w-full accent-cyan-500"
+          />
+        </div>
+
+        <div className="flex items-center justify-center pt-2">
+          <button
+            onClick={() => setInterceptBurn(!interceptBurn)}
+            className={`w-full py-2.5 px-4 rounded-lg font-bold text-xs transition-all ${
+              interceptBurn 
+                ? 'bg-rose-500 text-white shadow-md' 
+                : 'bg-card hover:bg-surface border border-subtle text-primary'
+            }`}
+          >
+            {interceptBurn ? '🔥 THRUSTERS ENGAGED' : 'EXECUTE INTERCEPT BURN'}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
-/* -------------------------------------------------------------
- * Main Lab Page Component
- * ------------------------------------------------------------- */
+/* ====================================================================
+ * PROJECT LAB 4: SIGNBRIDGE CLOUD & EDGE NETWORK LAB
+ * ==================================================================== */
+function SignBridgeLabStage() {
+  const [latency, setLatency] = useState(8);
+  const [activeEdgeNode, setActiveEdgeNode] = useState('BOM1 (Mumbai)');
+
+  return (
+    <div className="w-full flex flex-col p-4 sm:p-6 space-y-6 select-none font-mono">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-subtle">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse" />
+          <span className="font-bold text-xs text-primary">SIGNBRIDGE // GLOBAL CLOUD EDGE TELEMETRY</span>
+        </div>
+        <div className="flex items-center gap-3 text-xs">
+          <span className="text-muted">EDGE POP:</span>
+          <span className="font-bold text-indigo-400">{activeEdgeNode}</span>
+          <span className="px-2 py-0.5 rounded bg-card border border-subtle text-primary font-bold">
+            {latency}ms RTT
+          </span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          { title: 'EDGE RUNTIME', tech: 'Cloudflare Pages Functions', status: 'HEALTHY // 99.98%' },
+          { title: 'DATABASE', tech: 'Supabase PostgreSQL + RLS', status: 'SYNCHRONIZED' },
+          { title: 'APPLICATION', tech: 'React 19 + Vite Rollup', status: 'OPTIMIZED // 60 FPS' }
+        ].map((node, i) => (
+          <div key={i} className="p-4 rounded-xl bg-card border border-subtle space-y-2">
+            <div className="text-[10px] text-muted">{node.title}</div>
+            <div className="text-sm font-bold text-primary font-sans">{node.tech}</div>
+            <div className="text-xs text-emerald-500 font-bold">{node.status}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="p-4 rounded-xl bg-surface/60 border border-subtle flex flex-wrap items-center justify-between gap-4 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="text-muted">SELECT EDGE NODE:</span>
+          {['BOM1 (Mumbai)', 'SIN1 (Singapore)', 'FRA1 (Frankfurt)', 'SFO1 (California)'].map((node) => (
+            <button
+              key={node}
+              onClick={() => {
+                setActiveEdgeNode(node);
+                setLatency(node.includes('Mumbai') ? 8 : node.includes('Singapore') ? 34 : 110);
+              }}
+              className={`px-2.5 py-1 rounded text-[11px] transition-colors ${
+                activeEdgeNode === node ? 'bg-primary text-canvas font-bold' : 'bg-card hover:bg-surface border border-subtle text-secondary'
+              }`}
+            >
+              {node.split(' ')[0]}
+            </button>
+          ))}
+        </div>
+        <a 
+          href="https://signbridge.click" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-iris-400 hover:underline flex items-center gap-1 font-bold"
+        >
+          <span>Visit Production Domain</span>
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ====================================================================
+ * PROJECT LAB 5: MERRY BERRY KINETIC FLAVOR MATRIX
+ * ==================================================================== */
+function MerryBerryLabStage() {
+  const [sweetness, setSweetness] = useState(70);
+  const [fruitNotes, setFruitNotes] = useState('Wild Boysenberry');
+
+  return (
+    <div className="w-full flex flex-col p-4 sm:p-6 space-y-6 select-none font-mono">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-surface border border-subtle">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse" />
+          <span className="font-bold text-xs text-primary">MERRY BERRY // KINETIC FLAVOR MATRIX & PARALLAX</span>
+        </div>
+        <div className="flex items-center gap-3 text-xs">
+          <span className="text-muted">ACTIVE PROFILE:</span>
+          <span className="font-bold text-purple-400">{fruitNotes}</span>
+        </div>
+      </div>
+
+      <div className="h-44 rounded-xl bg-gradient-to-tr from-purple-950 via-zinc-950 to-pink-950 border border-purple-900/40 p-6 flex flex-col items-center justify-center relative overflow-hidden text-center">
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], rotate: [0, 4, -4, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="text-5xl mb-2"
+        >
+          🍨
+        </motion.div>
+        <div className="font-sans font-bold text-lg text-white">
+          Handcrafted Artisanal Gelato Experience
+        </div>
+        <div className="text-xs text-purple-300 font-mono mt-1">
+          Sweetness index: {sweetness}% · Kinetic Micro-Animations Active
+        </div>
+      </div>
+
+      <div className="p-4 rounded-xl bg-surface/60 border border-subtle flex flex-wrap items-center justify-between gap-4 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="text-muted">FLAVOR ESSENCE:</span>
+          {['Wild Boysenberry', 'Sicilian Pistachio', 'Madagascar Vanilla'].map(f => (
+            <button
+              key={f}
+              onClick={() => setFruitNotes(f)}
+              className={`px-3 py-1 rounded text-[11px] transition-colors ${
+                fruitNotes === f ? 'bg-purple-600 text-white font-bold' : 'bg-card hover:bg-surface border border-subtle text-secondary'
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-muted">SWEETNESS:</span>
+          <input
+            type="range"
+            min="30"
+            max="100"
+            value={sweetness}
+            onChange={(e) => setSweetness(Number(e.target.value))}
+            className="w-28 accent-purple-500"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ====================================================================
+ * MAIN LAB PAGE COMPONENT
+ * ==================================================================== */
 export default function LabPage() {
-  const { labIndex, setLabIndex, labViewMode, setLabViewMode } = useStore();
+  const { openProjectModal, activeProjectModal, closeProjectModal } = useStore();
+  const [labIndex, setLabIndex] = useState(0);
+  const [labViewMode, setLabViewMode] = useState('wheel'); // 'wheel' | 'grid' | 'list'
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const activeExp = labExperiments[labIndex] || labExperiments[0];
+  const activeProject = featuredProjects[labIndex] || featuredProjects[0];
 
   const handleNext = () => {
-    setLabIndex((labIndex + 1) % labExperiments.length);
+    setLabIndex((prev) => (prev + 1) % featuredProjects.length);
   };
 
   const handlePrev = () => {
-    setLabIndex((labIndex - 1 + labExperiments.length) % labExperiments.length);
+    setLabIndex((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length);
   };
 
   return (
-    <div className="relative w-full pt-24 sm:pt-28 pb-16 px-4 sm:px-8 max-w-7xl mx-auto space-y-10">
+    <div className="relative w-full pt-20 sm:pt-24 pb-16 px-4 sm:px-8 max-w-7xl mx-auto space-y-10">
       {/* Background Micro-Grid */}
       <div className="absolute inset-0 technical-grid opacity-25 pointer-events-none" />
 
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="space-y-3 max-w-2xl">
+      {/* Header and View Mode Switcher */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-subtle">
+        <div className="space-y-2 max-w-2xl">
           <div className="flex items-center gap-2 font-mono text-xs text-muted">
-            <span className="w-2 h-2 rounded-full bg-iris-500" />
-            <span>LABORATORY // EXPERIMENTAL GRAPHICS & PHYSICS</span>
+            <span className="w-2 h-2 rounded-full bg-iris-500 animate-pulse" />
+            <span>ENGINEERING LABS &amp; PROJECT EXPERIMENTS</span>
           </div>
           <h1 className="editorial-title text-4xl sm:text-5xl font-extrabold text-primary">
-            Lab Playground
+            Interactive Project Labs
           </h1>
-          <p className="text-base sm:text-lg text-secondary font-sans leading-relaxed">
-            Nine working experiments spanning scroll kinematics, 3D spatial rotation, audio-reactive shaders, multi-user cursors, and tactile physics.
+          <p className="text-sm sm:text-base text-secondary font-sans leading-relaxed">
+            Live interactive simulations, hardware telemetry consoles, and architectural deep-dives for Surya's engineering initiatives.
           </p>
         </div>
 
-        {/* View Mode Switcher: LIST | WHEEL | GRID */}
-        <div className="inline-flex items-center p-1 rounded-full bg-surface border border-subtle font-mono text-xs">
+        {/* View Switcher Pills */}
+        <div className="flex items-center gap-1.5 p-1 rounded-full bg-surface border border-subtle font-mono text-xs select-none shadow-xs">
           <button
             onClick={() => setLabViewMode('wheel')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all ${
-              labViewMode === 'wheel' ? 'bg-card text-primary font-bold shadow-xs' : 'text-muted hover:text-secondary'
+              labViewMode === 'wheel' ? 'bg-primary text-canvas font-bold shadow-xs' : 'text-muted hover:text-primary'
             }`}
           >
             <Disc className="w-3.5 h-3.5" />
             <span>WHEEL</span>
           </button>
           <button
-            onClick={() => setLabViewMode('list')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all ${
-              labViewMode === 'list' ? 'bg-card text-primary font-bold shadow-xs' : 'text-muted hover:text-secondary'
-            }`}
-          >
-            <List className="w-3.5 h-3.5" />
-            <span>LIST</span>
-          </button>
-          <button
             onClick={() => setLabViewMode('grid')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all ${
-              labViewMode === 'grid' ? 'bg-card text-primary font-bold shadow-xs' : 'text-muted hover:text-secondary'
+              labViewMode === 'grid' ? 'bg-primary text-canvas font-bold shadow-xs' : 'text-muted hover:text-primary'
             }`}
           >
             <Grid className="w-3.5 h-3.5" />
             <span>GRID</span>
           </button>
+          <button
+            onClick={() => setLabViewMode('list')}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all ${
+              labViewMode === 'list' ? 'bg-primary text-canvas font-bold shadow-xs' : 'text-muted hover:text-primary'
+            }`}
+          >
+            <List className="w-3.5 h-3.5" />
+            <span>LIST</span>
+          </button>
         </div>
       </div>
 
-      {/* WHEEL View: Curved Interactive Dial / Wheel with Active Typography */}
+      {/* WHEEL View: Rotary Project Dial */}
       {labViewMode === 'wheel' && (
-        <div className="p-8 sm:p-12 rounded-2xl bg-card border-2 border-strong shadow-2xl relative overflow-hidden space-y-8">
+        <div className="p-6 sm:p-10 rounded-2xl bg-card border-2 border-strong shadow-2xl relative overflow-hidden space-y-8">
           <div className="text-xs font-mono text-muted flex items-center justify-between border-b border-subtle pb-4">
-            <span>ROTARY EXPERIMENT WHEEL</span>
-            <span>USE MOUSE WHEEL OR CLICK ITEMS</span>
+            <span>ROTARY PROJECT WHEEL</span>
+            <span>CLICK PROJECTS TO LAUNCH LAB CONSOLE</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* The Curved Experiment Wheel Menu */}
-            <div className="lg:col-span-7 space-y-2 py-4">
-              {labExperiments.map((exp, idx) => {
+            {/* The Curved Wheel Menu */}
+            <div className="lg:col-span-6 space-y-2.5 py-2">
+              {featuredProjects.map((p, idx) => {
                 const isSelected = idx === labIndex;
-                const isHovered = idx === hoveredIndex;
 
                 return (
                   <motion.div
-                    key={exp.id}
+                    key={p.id}
                     onClick={() => setLabIndex(idx)}
-                    onMouseEnter={() => setHoveredIndex(idx)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    className={`cursor-pointer transition-all flex items-center gap-4 py-2 px-4 rounded-xl ${
+                    className={`cursor-pointer transition-all flex items-center gap-4 py-2.5 px-4 rounded-xl ${
                       isSelected 
                         ? 'bg-surface border-l-4 border-iris-500 text-primary translate-x-3 shadow-md' 
                         : 'text-muted hover:text-secondary hover:translate-x-1'
@@ -711,136 +637,119 @@ export default function LabPage() {
                     <h2 className={`font-mono transition-all ${
                       isSelected 
                         ? 'text-xl sm:text-2xl font-extrabold text-primary' 
-                        : isHovered 
-                        ? 'text-lg sm:text-xl text-secondary' 
                         : 'text-base sm:text-lg'
                     }`}>
-                      {exp.name}
+                      {p.title}
                     </h2>
                     <span className="font-mono text-[11px] text-muted hidden sm:inline ml-auto">
-                      // {exp.category}
+                      // {p.tag}
                     </span>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Quick Preview & Switch Stage */}
-            <div className="lg:col-span-5 bg-surface/80 rounded-xl border border-subtle p-6 space-y-4 shadow-inner">
+            {/* Quick Preview Stage */}
+            <div className="lg:col-span-6 bg-surface/80 rounded-xl border border-subtle p-6 space-y-4 shadow-inner">
               <div className="flex items-center justify-between font-mono text-xs text-muted">
-                <span className="rubber-stamp">SELECTED</span>
-                <span>EXP {activeExp.number} / {activeExp.totalCount}</span>
+                <span className="rubber-stamp">{activeProject.tag}</span>
+                <span>PROJECT {activeProject.index} / {activeProject.totalCount}</span>
               </div>
-              <h3 className="editorial-title text-2xl font-extrabold text-primary">
-                {activeExp.name}
+              <h3 className="editorial-title text-2xl font-extrabold text-primary font-sans">
+                {activeProject.title}
               </h3>
               <p className="text-xs text-secondary font-sans leading-relaxed">
-                {activeExp.description}
+                {activeProject.summary}
               </p>
-              <div className="flex flex-wrap gap-1.5 pt-2">
-                {activeExp.technologies?.map((tech, tIdx) => (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {activeProject.technologies?.slice(0, 4).map((tech, tIdx) => (
                   <span key={tIdx} className="technical-label text-[10px]">
                     {tech}
                   </span>
                 ))}
               </div>
               <div className="pt-4 border-t border-subtle flex justify-between items-center font-mono text-xs">
-                <span className="text-muted">{activeExp.status}</span>
-                <span className="text-iris-500 font-bold">Interactive Stage Active ↓</span>
+                <button
+                  onClick={() => openProjectModal(activeProject)}
+                  className="px-3 py-1.5 rounded-lg bg-card hover:bg-surface border border-subtle text-primary font-bold flex items-center gap-1.5 transition-colors"
+                >
+                  <span>Open Full Case Study</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </button>
+                <span className="text-iris-500 font-bold">Interactive Lab Active ↓</span>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Main Experiment Display Stage (Canvas for all 9 experiments) */}
-      <div className="bg-card rounded-2xl border-2 border-strong shadow-2xl p-6 sm:p-8 space-y-6">
-        {/* Experiment Meta Header */}
+      {/* Main Interactive Lab Canvas */}
+      <div className="bg-card rounded-2xl border-2 border-strong shadow-2xl p-4 sm:p-6 space-y-4">
+        {/* Lab Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-subtle pb-4 font-mono text-xs">
           <div className="flex items-center gap-3">
             <span className="rubber-stamp">
-              EXP {activeExp.number}
+              LAB 0{labIndex + 1}
             </span>
-            <span className="text-primary font-bold text-base">
-              {activeExp.name}
-            </span>
-            <span className="text-muted hidden sm:inline">
-              // {activeExp.category}
+            <span className="text-primary font-bold text-base font-sans">
+              {activeProject.title} Interactive Engineering Station
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-muted font-bold">
-              {activeExp.number} / {activeExp.totalCount}
-            </span>
-          </div>
-        </div>
-
-        {/* Interactive Experiment Stage */}
-        <div className="relative min-h-[360px] rounded-xl bg-surface/70 border border-subtle overflow-hidden flex items-center justify-center">
-          {/* Subtle grid in canvas */}
-          <div className="absolute inset-0 technical-grid opacity-20 pointer-events-none" />
-
-          {/* Render Active Experiment Visual Canvas */}
-          {activeExp.id === 'dynamic-scroll' && <DynamicScrollCanvas />}
-          {activeExp.id === 'rotating-gallery' && <RotatingGalleryCanvas />}
-          {activeExp.id === 'paste-up' && <PasteUpCanvas />}
-          {activeExp.id === 'vocal-orb' && <VocalOrbCanvas />}
-          {activeExp.id === 'live-cursors' && <LiveCursorsCanvas />}
-          {activeExp.id === 'rotary-dial' && <RotaryDialCanvas />}
-          {activeExp.id === 'polka-dots' && <PolkaDotsCanvas />}
-          {activeExp.id === 'kinetic-heart' && <KineticHeartCanvas />}
-          {activeExp.id === 'three-orbit' && <ThreeOrbitCanvas />}
-        </div>
-
-        {/* Description & Navigation Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-          <p className="text-xs text-secondary font-sans max-w-md leading-relaxed">
-            {activeExp.description}
-          </p>
-
-          <div className="flex items-center gap-2 font-mono text-xs">
+          <div className="flex items-center gap-2">
             <button
               onClick={handlePrev}
-              className="px-4 py-2 rounded-lg bg-surface hover:bg-card border border-subtle text-primary transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-iris-400"
+              className="p-1.5 rounded-lg bg-surface hover:bg-card border border-subtle text-primary transition-colors"
+              title="Previous Lab Station"
             >
               <ChevronLeft className="w-4 h-4" />
-              <span>PREV</span>
             </button>
+            <span className="px-2 font-bold text-muted">
+              0{labIndex + 1} / 0{featuredProjects.length}
+            </span>
             <button
               onClick={handleNext}
-              className="px-4 py-2 rounded-lg bg-surface hover:bg-card border border-subtle text-primary transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-iris-400"
+              className="p-1.5 rounded-lg bg-surface hover:bg-card border border-subtle text-primary transition-colors"
+              title="Next Lab Station"
             >
-              <span>NEXT</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
+
+        {/* Dynamic Project Stage */}
+        <div className="relative min-h-[360px] rounded-xl bg-surface/70 border border-subtle overflow-hidden flex items-center justify-center">
+          {activeProject.id === 'signbridge' && <SignBridgeLabStage />}
+          {activeProject.id === 'ecoclamp-iot' && <EcoClampLabStage />}
+          {activeProject.id === 'farmcargo' && <FarmCargoLabStage />}
+          {activeProject.id === 'sentinel' && <SentinelLabStage />}
+          {activeProject.id === 'merryberry' && <MerryBerryLabStage />}
+        </div>
       </div>
 
-      {/* Grid Catalog View */}
+      {/* Grid View */}
       {labViewMode === 'grid' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {labExperiments.map((exp, idx) => (
+          {featuredProjects.map((p, idx) => (
             <button
-              key={exp.id}
+              key={p.id}
               onClick={() => setLabIndex(idx)}
               className={`p-5 rounded-xl border-2 text-left font-mono transition-all ${
                 idx === labIndex ? 'bg-card border-iris-500 shadow-xl ring-2 ring-iris-500/20' : 'bg-surface hover:bg-card border-subtle text-secondary'
               }`}
             >
               <div className="flex items-center justify-between text-xs text-muted mb-2">
-                <span className="font-bold">0{idx + 1} / 09</span>
-                <span className="text-[10px]">{exp.status}</span>
+                <span className="font-bold">0{idx + 1} / 0{featuredProjects.length}</span>
+                <span className="text-[10px] uppercase font-bold text-iris-400">{p.tag}</span>
               </div>
-              <div className="text-base font-bold text-primary mb-1">
-                {exp.name}
+              <div className="text-base font-bold text-primary mb-1 font-sans">
+                {p.title}
               </div>
               <div className="text-xs text-muted font-sans line-clamp-2">
-                {exp.description}
+                {p.summary}
               </div>
               <div className="mt-3 flex flex-wrap gap-1">
-                {exp.technologies?.slice(0, 2).map((tech, tIdx) => (
+                {p.technologies?.slice(0, 3).map((tech, tIdx) => (
                   <span key={tIdx} className="technical-label text-[9px]">
                     {tech}
                   </span>
@@ -851,12 +760,12 @@ export default function LabPage() {
         </div>
       )}
 
-      {/* List Catalog View */}
+      {/* List View */}
       {labViewMode === 'list' && (
         <div className="divide-y divide-subtle border-y-2 border-subtle font-mono text-xs">
-          {labExperiments.map((exp, idx) => (
+          {featuredProjects.map((p, idx) => (
             <div
-              key={exp.id}
+              key={p.id}
               onClick={() => setLabIndex(idx)}
               className={`py-4 px-4 flex items-center justify-between cursor-pointer transition-colors ${
                 idx === labIndex ? 'bg-surface text-primary font-bold border-l-4 border-iris-500' : 'text-secondary hover:text-primary hover:bg-surface/50'
@@ -864,16 +773,26 @@ export default function LabPage() {
             >
               <div className="flex items-center gap-4">
                 <span className="text-muted font-bold">0{idx + 1}</span>
-                <span className="text-sm font-semibold">{exp.name}</span>
-                <span className="text-muted hidden md:inline">// {exp.category}</span>
+                <span className="text-sm font-semibold font-sans">{p.title}</span>
+                <span className="text-muted hidden md:inline">// {p.category}</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-muted text-[11px] hidden sm:inline">{exp.technologies?.[0]}</span>
-                <span className="text-muted text-[11px]">{exp.status}</span>
+                <span className="text-muted text-[11px] hidden sm:inline">{p.technologies?.[0]}</span>
+                <span className="px-2 py-0.5 rounded bg-card border border-subtle text-primary font-bold text-[10px]">
+                  {p.year}
+                </span>
               </div>
             </div>
           ))}
         </div>
+      )}
+
+      {/* Case Study Modal Window */}
+      {activeProjectModal && (
+        <ProjectModal
+          project={activeProjectModal}
+          onClose={closeProjectModal}
+        />
       )}
     </div>
   );

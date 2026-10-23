@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
 @theme {
   --color-canvas: var(--color-bg-canvas);
   --color-surface: var(--color-bg-surface);
@@ -37,6 +39,7 @@
 
 @layer base {
   :root,
+  html,
   html.dark,
   [data-theme="dark"] {
     --color-bg-canvas: #0a0c10;
@@ -67,39 +70,9 @@
     --film-grain-opacity: 0.035;
   }
 
-  html.light,
-  [data-theme="light"] {
-    --color-bg-canvas: #f7f6f0;
-    --color-bg-surface: #eeece2;
-    --color-bg-card: #ffffff;
-    --color-bg-card-hover: #faf9f5;
-    --color-bg-elevated: #e6e3d6;
-
-    --color-border-subtle: rgba(18, 19, 24, 0.08);
-    --color-border-medium: rgba(18, 19, 24, 0.16);
-    --color-border-strong: rgba(18, 19, 24, 0.28);
-
-    --color-text-primary: #12141a;
-    --color-text-secondary: #4b5563;
-    --color-text-muted: #6b7280;
-    --color-text-dim: #9ca3af;
-
-    --color-accent-iris: #4f46e5;
-    --color-accent-iris-deep: #4338ca;
-    --color-accent-iris-glow: rgba(79, 70, 229, 0.12);
-    --color-accent-stamp: #dc2626;
-    --color-accent-stamp-bg: rgba(220, 38, 38, 0.08);
-    --color-accent-amber: #d97706;
-    --color-accent-emerald: #059669;
-
-    --dot-color: rgba(0, 0, 0, 0.06);
-    --grid-line: rgba(0, 0, 0, 0.04);
-    --film-grain-opacity: 0.025;
-  }
-
   html {
     scroll-behavior: smooth;
-    color-scheme: dark light;
+    color-scheme: dark;
   }
 
   body {

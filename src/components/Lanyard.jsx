@@ -937,8 +937,8 @@ const Lanyard = ({
     const frameView = () => {
       const s = settingsRef.current;
       const aspect = view.width / view.height;
-      let viewHeight = layout.height / clamp(s.size, 0.15, 0.9);
-      const minimumWidth = layout.width / 0.72;
+      let viewHeight = layout.height / clamp(s.size, 0.15, 1.3);
+      const minimumWidth = layout.width / Math.max(0.72, clamp(s.size, 0.5, 1.3) * 0.95);
       if (viewHeight * aspect < minimumWidth) viewHeight = minimumWidth / aspect;
       const viewWidth = viewHeight * aspect;
       camera.aspect = aspect;
@@ -1181,10 +1181,9 @@ const Lanyard = ({
 
     const toPointer = event => {
       const rect = canvas.getBoundingClientRect();
-      pointer.set(
-        ((event.clientX - rect.left) / rect.width) * 2 - 1,
-        -((event.clientY - rect.top) / rect.height) * 2 + 1
-      );
+      const nx = clamp(((event.clientX - rect.left) / rect.width) * 2 - 1, -1.2, 1.2);
+      const ny = clamp(-((event.clientY - rect.top) / rect.height) * 2 + 1, -1.2, 1.2);
+      pointer.set(nx, ny);
       raycaster.setFromCamera(pointer, camera);
     };
 
@@ -1223,7 +1222,9 @@ const Lanyard = ({
         target: hit.point.clone()
       };
       press = { x: event.clientX, y: event.clientY, time: performance.now(), point: hit.point.clone() };
-      canvas.setPointerCapture?.(event.pointerId);
+      try { canvas.setPointerCapture?.(event.pointerId); } catch (e) {}
+      window.addEventListener('pointermove', onPointerMove);
+      window.addEventListener('pointerup', onPointerUp);
       setCursor('grabbing');
       event.preventDefault();
       start();
@@ -1244,11 +1245,13 @@ const Lanyard = ({
     };
 
     const onPointerUp = event => {
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
       if (!sim.grab) return;
       sim.grab = null;
       if (press && event.type === 'pointerup' && performance.now() - press.time < 450) flip(press.point);
       press = null;
-      canvas.releasePointerCapture?.(event.pointerId);
+      try { canvas.releasePointerCapture?.(event.pointerId); } catch (e) {}
       setCursor(hovering && event.pointerType !== 'touch' ? 'grab' : '');
       start();
     };
@@ -1297,6 +1300,8 @@ const Lanyard = ({
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
       canvas.removeEventListener('pointerdown', onPointerDown);
       canvas.removeEventListener('pointermove', onPointerMove);
       canvas.removeEventListener('pointerup', onPointerUp);

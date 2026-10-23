@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { profileConfig } from '../data/portfolioData';
+import { submitContactToSupabase, isSupabaseConfigured } from '../lib/supabase';
 import { 
   Send, 
   Check, 
@@ -74,8 +75,47 @@ export default function ContactPage() {
 
     setStatus((prev) => ({ ...prev, submitting: true, error: null }));
 
-    // 3. Real submission integration
+    // 3. Real submission integration (Supabase prioritized, with honest API fallback)
     try {
+      if (isSupabaseConfigured) {
+        const ticketId = `SVM-${Math.floor(1000 + Math.random() * 9000)}`;
+        const supabaseRes = await submitContactToSupabase({
+          name: formData.name,
+          email: formData.email,
+          purpose: formData.purpose,
+          source: formData.source,
+          message: formData.message,
+          signature: formData.signature,
+          ticketId
+        });
+
+        if (supabaseRes.success) {
+          setStatus({
+            submitting: false,
+            success: true,
+            error: null,
+            ticketNumber: ticketId
+          });
+          try {
+            confetti({
+              particleCount: 50,
+              spread: 60,
+              origin: { y: 0.7 }
+            });
+          } catch (e) {}
+          return;
+        } else {
+          console.error('[Supabase Error]:', supabaseRes.error);
+          setStatus({
+            submitting: false,
+            success: false,
+            error: `Supabase: ${supabaseRes.error}. Please ensure the INSERT policy is enabled in your Supabase SQL Editor.`,
+            ticketNumber: 'SVM-DB-ERR'
+          });
+          return;
+        }
+      }
+
       const formspreeId = import.meta.env?.VITE_FORMSPREE_ID;
       const apiUrl = formspreeId ? `https://formspree.io/f/${formspreeId}` : (import.meta.env?.VITE_CONTACT_API_URL || '/api/contact');
 

@@ -1,41 +1,22 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import { useStore } from '../../lib/store';
-import TopHUD from './TopHUD';
 import Navbar from './Navbar';
 import CommandPalette from '../command-palette/CommandPalette';
 import FloatingAssistant from './FloatingAssistant';
-import VisitorToast from './VisitorToast';
 
 export default function RootLayout({ children }) {
-  const { theme, resolvedTheme, setTheme, setActiveRoute } = useStore();
+  const { setActiveRoute } = useStore();
 
-  // 1. Theme Synchronization & System Listener
+  // 1. Permanent Dark Theme Enforcement
   useEffect(() => {
-    const applyTheme = () => {
-      const isDark = resolvedTheme === 'dark';
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-        document.documentElement.setAttribute('data-theme', 'dark');
-      } else {
-        document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('dark');
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
-    };
-
-    applyTheme();
-
-    if (theme === 'system') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleThemeChange = (e) => {
-        setTheme('system');
-      };
-      mediaQuery.addEventListener('change', handleThemeChange);
-      return () => mediaQuery.removeEventListener('change', handleThemeChange);
-    }
-  }, [theme, resolvedTheme, setTheme]);
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    try {
+      localStorage.setItem('surya-theme', 'dark');
+    } catch (e) {}
+  }, []);
 
   // 2. Browser Back/Forward PopState Synchronization
   useEffect(() => {
@@ -86,9 +67,6 @@ export default function RootLayout({ children }) {
       {/* Subtle tactile film grain overlay */}
       <div className="film-grain" aria-hidden="true" />
 
-      {/* Top Persistent Monospace Telemetry HUD */}
-      <TopHUD />
-
       {/* Center Navigation & Monogram Pill */}
       <Navbar />
 
@@ -99,9 +77,6 @@ export default function RootLayout({ children }) {
 
       {/* Global Command Palette Dialog */}
       <CommandPalette />
-
-      {/* Bottom-Left Realtime Visitor Toast */}
-      <VisitorToast />
 
       {/* Floating Bottom-Right Assistant */}
       <FloatingAssistant />

@@ -10,23 +10,17 @@ const generatePseudonym = () => {
   return `${adj} ${animal}`;
 };
 
-// Initial theme resolution: default to 'light' matching reference screenshots
+// Permanent Dark Theme Enforcement
 const getInitialTheme = () => {
-  if (typeof window === 'undefined') return { theme: 'light', resolvedTheme: 'light' };
-  try {
-    const saved = localStorage.getItem('surya-theme');
-    if (saved === 'dark' || saved === 'light') {
-      return { theme: saved, resolvedTheme: saved };
-    }
-    if (saved === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      return { theme: 'system', resolvedTheme: prefersDark ? 'dark' : 'light' };
-    }
-    // Default light mode matches reference screenshots
-    return { theme: 'light', resolvedTheme: 'light' };
-  } catch (e) {
-    return { theme: 'light', resolvedTheme: 'light' };
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('surya-theme', 'dark');
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) {}
   }
+  return { theme: 'dark', resolvedTheme: 'dark' };
 };
 
 const initialThemeData = getInitialTheme();
@@ -45,30 +39,17 @@ export const useStore = create((set, get) => ({
     set({ activeRoute: cleanRoute });
   },
 
-  // Theme Management
-  theme: initialThemeData.theme, // 'system' | 'dark' | 'light'
-  resolvedTheme: initialThemeData.resolvedTheme, // 'dark' | 'light'
-  setTheme: (newTheme) => {
-    let resolved = 'dark';
-    if (newTheme === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      resolved = prefersDark ? 'dark' : 'light';
-    } else {
-      resolved = newTheme;
+  // Theme Management (Locked to Dark)
+  theme: 'dark',
+  resolvedTheme: 'dark',
+  setTheme: () => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('surya-theme', 'dark');
     }
-
-    try {
-      localStorage.setItem('surya-theme', newTheme);
-      if (resolved === 'dark') {
-        document.documentElement.classList.add('dark');
-        document.documentElement.setAttribute('data-theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
-    } catch (e) {}
-
-    set({ theme: newTheme, resolvedTheme: resolved });
+    set({ theme: 'dark', resolvedTheme: 'dark' });
   },
 
   // Command Palette
@@ -102,7 +83,7 @@ export const useStore = create((set, get) => ({
     const nextState = !state.isPlayingAudio;
     return {
       isPlayingAudio: nextState,
-      listeningTrack: nextState ? 'ANALOG DESK // SURYA V M' : 'PAUSED // VINYL IDLE'
+      listeningTrack: nextState ? 'Portfolio Harmony // Sounddelicious' : 'PAUSED // VINYL IDLE'
     };
   }),
 

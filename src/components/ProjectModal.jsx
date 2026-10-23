@@ -6,8 +6,7 @@ import {
   AgriFlowVisual,
   SignBridgeVisual,
   SentinelVisual,
-  MerryBerryVisual,
-  EsimVisaVisual
+  MerryBerryVisual
 } from './ProjectVisuals';
 
 export default function ProjectModal({ project, onClose }) {
@@ -39,8 +38,6 @@ export default function ProjectModal({ project, onClose }) {
         return <SentinelVisual />;
       case 'merryberry':
         return <MerryBerryVisual />;
-      case 'esim-visa-alert':
-        return <EsimVisaVisual />;
       default:
         return null;
     }
