@@ -116,8 +116,8 @@ export default function Section06Skills() {
           </p>
         </div>
 
-        {/* Filter Badges with Spring Motion */}
-        <div className="flex flex-wrap gap-2 mb-12">
+        {/* Filter Badges with Spring Motion - Scrollable on mobile */}
+        <div className="flex gap-2 mb-8 sm:mb-12 overflow-x-auto pb-2 scrollbar-none sm:flex-wrap -mx-6 px-6 sm:mx-0 sm:px-0">
           {[
             { id: 'all', label: 'All Disciplines' },
             { id: 'programming', label: 'Languages' },
@@ -129,7 +129,7 @@ export default function Section06Skills() {
             <button
               key={f.id}
               onClick={() => handleFilterChange(f.id)}
-              className={`relative px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all cursor-pointer ${
+              className={`relative px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all cursor-pointer shrink-0 whitespace-nowrap active:scale-95 ${
                 selectedFilter === f.id
                   ? 'text-white'
                   : 'text-stone-700 hover:text-stone-950 border border-stone-200/80 hover:border-stone-300 bg-white'

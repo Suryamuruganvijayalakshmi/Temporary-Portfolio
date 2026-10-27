@@ -425,7 +425,7 @@ export default function Section05Projects() {
             </div>
 
             <a
-              href="https://github.com/Suryamuruganvijayalakshmi/Surya-Portfolio.git"
+              href="https://github.com/Suryamuruganvijayalakshmi/Temporary-Portfolio.git"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-full bg-stone-950 hover:bg-blue-600 text-white font-mono text-xs font-bold inline-flex items-center gap-2 transition-all shadow-sm shrink-0"

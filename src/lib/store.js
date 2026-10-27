@@ -100,10 +100,5 @@ export const useStore = create((set, get) => ({
   labIndex: 0,
   labViewMode: 'list', // 'list' | 'wheel' | 'grid'
   setLabIndex: (index) => set({ labIndex: index }),
-  setLabViewMode: (mode) => set({ labViewMode: mode }),
-
-  // Floating Navigator
-  isAssistantOpen: false,
-  toggleAssistant: () => set((state) => ({ isAssistantOpen: !state.isAssistantOpen })),
-  closeAssistant: () => set({ isAssistantOpen: false })
+  setLabViewMode: (mode) => set({ labViewMode: mode })
 }));

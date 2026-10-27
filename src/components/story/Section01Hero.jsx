@@ -67,7 +67,7 @@ export default function Section01Hero() {
 
               {/* Oversized Editorial Name with DecryptedText Scramble Animation! */}
               <div className="space-y-3">
-                <div className="text-4xl sm:text-7xl lg:text-8xl font-black text-stone-950 tracking-tighter leading-[0.95] font-sans">
+                <div className="text-[2.2rem] xs:text-4xl sm:text-7xl lg:text-8xl font-black text-stone-950 tracking-tighter leading-[0.95] font-sans">
                   <DecryptedText
                     text="SURYA V M"
                     speed={35}
@@ -77,7 +77,7 @@ export default function Section01Hero() {
                 </div>
 
                 {/* Roles Subtitle with ShinyText & TextLoop */}
-                <div className="text-base sm:text-xl font-medium text-stone-600 flex flex-wrap items-center gap-x-2 gap-y-1">
+                <div className="text-sm sm:text-xl font-medium text-stone-600 flex flex-wrap items-center gap-x-2 gap-y-1">
                   <ShinyText className="font-semibold text-stone-900">
                     Creative Developer ·
                   </ShinyText>
@@ -94,37 +94,37 @@ export default function Section01Hero() {
               </div>
 
               {/* Core Manifesto Quote with BlurText */}
-              <div className="border-l-3 border-blue-600 pl-5 sm:pl-6 space-y-2 bg-gradient-to-r from-blue-50/40 to-transparent py-2 rounded-r-2xl">
-                <blockquote className="text-xl sm:text-2xl font-medium text-stone-900 tracking-tight leading-snug">
+              <div className="border-l-3 border-blue-600 pl-4 sm:pl-6 space-y-2 bg-gradient-to-r from-blue-50/40 to-transparent py-2 rounded-r-2xl">
+                <blockquote className="text-lg sm:text-2xl font-medium text-stone-900 tracking-tight leading-snug">
                   <BlurText
                     text="“I turn ideas into meaningful products through code, experimentation, and entrepreneurship.”"
                     duration={0.7}
                   />
                 </blockquote>
-                <p className="text-sm sm:text-base text-stone-600 leading-relaxed font-normal pt-1">
+                <p className="text-xs sm:text-base text-stone-600 leading-relaxed font-normal pt-1">
                   Engineering full-stack software, machine learning predictive models, and physical AIoT hardware prototypes from Tamil Nadu, India. Founder of SignBridge.
                 </p>
               </div>
 
               {/* Magnetic Action Buttons (React Bits) with tactile micro sound */}
               <AnimatedContent delay={0.25} yOffset={15}>
-                <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <div onMouseEnter={() => playHoverSound()}>
+                <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-3 sm:gap-4 pt-2">
+                  <div onMouseEnter={() => playHoverSound()} className="w-full xs:w-auto">
                     <MagneticButton
                       onClick={() => handleScrollTo('projects')}
                       pullStrength={0.4}
-                      className="px-7 py-3.5 rounded-full bg-stone-950 hover:bg-blue-600 text-white font-sans text-sm font-bold tracking-tight shadow-lg shadow-stone-900/15 hover:shadow-blue-500/30 flex items-center gap-2 group cursor-pointer"
+                      className="w-full xs:w-auto justify-center px-6 sm:px-7 py-3.5 rounded-full bg-stone-950 hover:bg-blue-600 text-white font-sans text-sm font-bold tracking-tight shadow-lg shadow-stone-900/15 hover:shadow-blue-500/30 flex items-center gap-2 group cursor-pointer"
                     >
                       <span>Explore My Work</span>
                       <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
                     </MagneticButton>
                   </div>
 
-                  <div onMouseEnter={() => playHoverSound()}>
+                  <div onMouseEnter={() => playHoverSound()} className="w-full xs:w-auto">
                     <MagneticButton
                       onClick={() => handleScrollTo('contact')}
                       pullStrength={0.35}
-                      className="px-7 py-3.5 rounded-full bg-white hover:bg-stone-50 text-stone-900 border border-stone-200/90 font-sans text-sm font-bold tracking-tight shadow-xs hover:border-blue-400 flex items-center gap-2 group cursor-pointer"
+                      className="w-full xs:w-auto justify-center px-6 sm:px-7 py-3.5 rounded-full bg-white hover:bg-stone-50 text-stone-900 border border-stone-200/90 font-sans text-sm font-bold tracking-tight shadow-xs hover:border-blue-400 flex items-center gap-2 group cursor-pointer"
                     >
                       <span>Let's Connect</span>
                       <Send className="w-4 h-4 text-blue-600 group-hover:translate-x-1 transition-transform" />
@@ -134,24 +134,24 @@ export default function Section01Hero() {
               </AnimatedContent>
 
               {/* Interactive Telemetry Counters (NumberTicker) */}
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-stone-200/70 max-w-lg font-mono text-xs">
-                <div className="p-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-stone-200/60 hover:border-blue-400 transition-colors">
-                  <span className="block text-stone-400 text-[10px] uppercase tracking-wider font-semibold">EDUCATION</span>
-                  <div className="text-sm font-bold text-stone-900 mt-0.5">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-stone-200/70 max-w-lg font-mono text-xs">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-stone-200/60 hover:border-blue-400 transition-colors">
+                  <span className="block text-stone-400 text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold">EDUCATION</span>
+                  <div className="text-xs sm:text-sm font-bold text-stone-900 mt-0.5 truncate">
                     MKCE '<NumberTicker value={29} duration={1.5} />
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-stone-200/60 hover:border-blue-400 transition-colors">
-                  <span className="block text-stone-400 text-[10px] uppercase tracking-wider font-semibold">EDGE SAMPLING</span>
-                  <div className="text-sm font-bold text-blue-600 mt-0.5">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-stone-200/60 hover:border-blue-400 transition-colors">
+                  <span className="block text-stone-400 text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold">SAMPLING</span>
+                  <div className="text-xs sm:text-sm font-bold text-blue-600 mt-0.5 truncate">
                     <NumberTicker value={10} duration={1.2} suffix=" kHz" />
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-stone-200/60 hover:border-blue-400 transition-colors">
-                  <span className="block text-stone-400 text-[10px] uppercase tracking-wider font-semibold">ANOMALY EARLY</span>
-                  <div className="text-sm font-bold text-amber-600 mt-0.5">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-white/70 backdrop-blur-sm border border-stone-200/60 hover:border-blue-400 transition-colors">
+                  <span className="block text-stone-400 text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold">ALERTING</span>
+                  <div className="text-xs sm:text-sm font-bold text-amber-600 mt-0.5 truncate">
                     <NumberTicker value={48} duration={1.3} suffix="h Alert" />
                   </div>
                 </div>
@@ -203,14 +203,14 @@ export default function Section01Hero() {
         </div>
 
         {/* Bottom Section Jump Link */}
-        <div className="max-w-6xl mx-auto w-full flex items-center justify-between text-xs font-mono text-stone-400 pt-6 border-t border-stone-200/60 mt-auto">
+        <div className="max-w-6xl mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono text-stone-400 pt-6 border-t border-stone-200/60 mt-auto gap-3">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
             <span className="font-semibold text-stone-600">ONE CONTINUOUS STORY · SCROLL DOWN</span>
           </div>
           <button
             onClick={() => handleScrollTo('about')}
-            className="flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer font-bold"
+            className="flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer font-bold self-end sm:self-auto"
           >
             <span>Section 02 — About Me</span>
             <ArrowDown className="w-3.5 h-3.5 animate-bounce" />

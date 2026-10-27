@@ -112,7 +112,9 @@ export default function SignBridgeInteractiveStage({ compact = false }) {
 
                 // Native gestures: Hover or press & hold to form 3D globe, release to restore logo
                 const onPointerDown = (e) => {
-                    e.preventDefault();
+                    if (e.pointerType !== 'touch') {
+                        e.preventDefault();
+                    }
                     setTarget(1.0);
                     playChime(880, 'triangle', 0.16, 0.04);
                 };

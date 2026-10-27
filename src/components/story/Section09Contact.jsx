@@ -284,7 +284,7 @@ export default function Section09Contact() {
                         onChange={handleChange}
                         placeholder="Alex Parker"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-base sm:text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans"
                       />
                     </div>
 
@@ -300,7 +300,7 @@ export default function Section09Contact() {
                         onChange={handleChange}
                         placeholder="alex@example.com"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-base sm:text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -317,7 +317,7 @@ export default function Section09Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="e.g. AIoT Industrial Monitoring / SignBridge Initiative"
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-base sm:text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans"
                     />
                   </div>
 
@@ -334,7 +334,7 @@ export default function Section09Contact() {
                       onChange={handleChange}
                       placeholder="Share project goals, technical requirements, or collaboration context..."
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-base sm:text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-sans resize-none"
                     />
                   </div>
 

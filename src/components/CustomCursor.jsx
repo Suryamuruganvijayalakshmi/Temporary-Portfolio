@@ -260,7 +260,7 @@ export default function CustomCursor() {
   return (
     <canvas
       ref={canvasRef}
-      className="neat-cursor-canvas pointer-events-none fixed top-0 left-0 w-screen h-screen z-[999999] overflow-hidden bg-transparent border-0 m-0 p-0"
+      className="neat-cursor-canvas hidden md:block pointer-events-none fixed top-0 left-0 w-screen h-screen z-[999999] overflow-hidden bg-transparent border-0 m-0 p-0"
       popover="manual"
       aria-hidden="true"
     />

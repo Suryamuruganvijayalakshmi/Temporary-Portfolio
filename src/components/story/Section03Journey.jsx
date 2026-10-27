@@ -72,7 +72,7 @@ export default function Section03Journey() {
         </div>
 
         {/* Vertical Timeline with animated glowing line & traveling laser pulse */}
-        <div className="relative pl-6 sm:pl-10 space-y-12">
+        <div className="relative pl-7 sm:pl-10 space-y-8 sm:space-y-12">
           {/* Base track */}
           <div className="absolute left-3 sm:left-5 top-2 bottom-2 w-0.5 bg-stone-200" />
           {/* Glowing gradient track */}
@@ -91,7 +91,7 @@ export default function Section03Journey() {
               <AnimatedContent key={milestone.initiative} delay={idx * 0.12} yOffset={20}>
                 <div className="relative group">
                   {/* Glowing Node Icon Indicator with Radar Wave */}
-                  <div className="absolute -left-[30px] sm:-left-[46px] top-1 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white border-2 border-stone-300 group-hover:border-blue-600 flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-125 z-10">
+                  <div className="absolute -left-[27px] sm:-left-[39px] top-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white border-2 border-stone-300 group-hover:border-blue-600 flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-125 z-10">
                     <span className={`w-2 h-2 rounded-full ${milestone.color} animate-pulse`} />
                     <span className={`absolute -inset-1.5 rounded-full ${milestone.color} opacity-25 animate-ping`} />
                   </div>
@@ -100,7 +100,7 @@ export default function Section03Journey() {
                   <SpotlightCard
                     spotlightColor={milestone.spotlight}
                     borderColor="rgba(0, 102, 255, 0.4)"
-                    className="p-6 sm:p-8 hover:-translate-y-1.5 transition-all duration-300 shadow-xs hover:shadow-xl hover:border-blue-300"
+                    className="p-5 sm:p-8 hover:-translate-y-1.5 transition-all duration-300 shadow-xs hover:shadow-xl hover:border-blue-300"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
                       <div className="flex items-center gap-2">

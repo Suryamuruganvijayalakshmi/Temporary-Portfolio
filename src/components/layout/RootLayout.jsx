@@ -5,7 +5,6 @@ import StoryNavbar from '../StoryNavbar';
 import CustomCursor from '../CustomCursor';
 import { ScrollProgress } from '../animations/ScrollProgress';
 import CommandPalette from '../command-palette/CommandPalette';
-import FloatingAssistant from './FloatingAssistant';
 
 export default function RootLayout({ children }) {
   const { setActiveRoute } = useStore();
@@ -82,9 +81,6 @@ export default function RootLayout({ children }) {
 
       {/* Global Command Palette Dialog */}
       <CommandPalette />
-
-      {/* Floating Bottom-Right Assistant */}
-      <FloatingAssistant />
     </div>
   );
 }

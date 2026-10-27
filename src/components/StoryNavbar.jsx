@@ -186,53 +186,80 @@ export default function StoryNavbar() {
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu & Backdrop */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-20 left-4 right-4 z-40 lg:hidden bg-white/95 backdrop-blur-2xl rounded-2xl border border-stone-200/90 shadow-2xl p-4 space-y-1 font-sans"
-          >
-            {navLinks.map((link) => {
-              const sectionId = link.href.replace('#', '');
-              const isActive = activeSection === sectionId;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
-                  className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-700 font-bold'
-                      : 'text-stone-700 hover:bg-stone-50'
-                  }`}
-                >
-                  {link.label}
-                </a>
-              );
-            })}
+          <>
+            {/* Darkened backdrop tap-to-close */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-stone-950/40 backdrop-blur-xs z-30 lg:hidden"
+              aria-hidden="true"
+            />
 
-            <div className="pt-3 mt-2 border-t border-stone-100 flex items-center gap-2">
-              <a
-                href="https://signbridge.click/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-2 text-center rounded-xl bg-stone-100 text-stone-800 text-xs font-mono font-bold"
-              >
-                SignBridge ↗
-              </a>
-              <a
-                href="#contact"
-                onClick={(e) => handleScrollTo(e, '#contact')}
-                className="flex-1 py-2 text-center rounded-xl bg-blue-600 text-white text-xs font-bold"
-              >
-                Contact
-              </a>
-            </div>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-20 left-4 right-4 z-40 lg:hidden bg-white/95 backdrop-blur-2xl rounded-2xl border border-stone-200/90 shadow-2xl p-4 space-y-1 font-sans"
+            >
+              {navLinks.map((link) => {
+                const sectionId = link.href.replace('#', '');
+                const isActive = activeSection === sectionId;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => handleScrollTo(e, link.href)}
+                    className={`block px-4 py-3 rounded-xl text-sm font-semibold transition-colors active:scale-98 ${
+                      isActive
+                        ? 'bg-blue-50 text-blue-700 font-bold'
+                        : 'text-stone-700 hover:bg-stone-50'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
+
+              <div className="pt-3 mt-2 border-t border-stone-100 flex items-center gap-2">
+                <button
+                  onClick={handleToggleSound}
+                  className="p-3 rounded-xl bg-stone-100 text-stone-700 flex items-center justify-center border border-stone-200/60 transition-colors active:scale-95 shrink-0"
+                  aria-label="Toggle interactive sound effects"
+                  title={soundOn ? 'Sound is ON' : 'Sound is MUTED'}
+                >
+                  {soundOn ? (
+                    <Volume2 className="w-4 h-4 text-blue-600" />
+                  ) : (
+                    <VolumeX className="w-4 h-4 text-stone-400" />
+                  )}
+                </button>
+
+                <a
+                  href="https://signbridge.click/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 text-center rounded-xl bg-stone-100 text-stone-800 text-xs font-mono font-bold hover:bg-stone-200 transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <img src="/sign-logo.png" alt="" className="w-3.5 h-3.5 object-contain rounded bg-black/80 p-0.5" />
+                  <span>SignBridge ↗</span>
+                </a>
+
+                <a
+                  href="#contact"
+                  onClick={(e) => handleScrollTo(e, '#contact')}
+                  className="flex-1 py-3 text-center rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors shadow-sm"
+                >
+                  Contact
+                </a>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
