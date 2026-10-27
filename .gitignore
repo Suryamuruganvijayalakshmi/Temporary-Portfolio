@@ -1,5 +1,11 @@
 node_modules
 dist
 .env
+.env.local
 .DS_Store
+Thumbs.db
 *.log
+.wrangler
+.vscode
+.idea
+*.fig

@@ -10,83 +10,23 @@ export function ProjectPhoto({ projectId, className = "" }) {
   switch (projectId) {
     case 'signbridge':
       return (
-        <div className={`relative w-full h-full rounded-2xl overflow-hidden bg-[#0d0f17] shadow-2xl flex items-center justify-center select-none ${className}`}>
-          {/* Hardware & Cloud Console High-Contrast Illustration */}
-          <svg className="w-full h-full p-2" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="sbGlowVivid" cx="50%" cy="50%" r="55%">
-                <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.6" />
-                <stop offset="60%" stopColor="#818cf8" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#0d0f17" stopOpacity="0" />
-              </radialGradient>
-              <linearGradient id="sbPillar" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#312e81" />
-                <stop offset="100%" stopColor="#0f172a" />
-              </linearGradient>
-              <linearGradient id="sbBeamVivid" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#06b6d4" />
-                <stop offset="50%" stopColor="#818cf8" />
-                <stop offset="100%" stopColor="#ec4899" />
-              </linearGradient>
-            </defs>
-
-            {/* Background Glow */}
-            <rect width="600" height="400" fill="#0d0f17" />
-            <circle cx="300" cy="200" r="220" fill="url(#sbGlowVivid)" />
-
-            {/* Perspective Light Grid */}
-            <g opacity="0.6" stroke="#6366f1" strokeWidth="1.5">
-              <line x1="30" y1="360" x2="570" y2="360" />
-              <line x1="80" y1="310" x2="520" y2="310" />
-              <line x1="140" y1="270" x2="460" y2="270" />
-              <line x1="190" y1="240" x2="410" y2="240" />
-              <line x1="300" y1="200" x2="30" y2="360" />
-              <line x1="300" y1="200" x2="160" y2="360" />
-              <line x1="300" y1="200" x2="300" y2="360" stroke="#06b6d4" strokeWidth="2" />
-              <line x1="300" y1="200" x2="440" y2="360" />
-              <line x1="300" y1="200" x2="570" y2="360" />
-            </g>
-
-            {/* Central Hardware Server / Terminal Console */}
-            <rect x="210" y="70" width="180" height="210" rx="16" fill="url(#sbPillar)" stroke="#818cf8" strokeWidth="2.5" />
-            
-            {/* Illuminated Glass Display Screen */}
-            <rect x="226" y="90" width="148" height="95" rx="8" fill="#030712" stroke="#4338ca" strokeWidth="2" />
-            
-            {/* Glowing Terminal Line Readouts */}
-            <line x1="242" y1="112" x2="315" y2="112" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
-            <line x1="242" y1="126" x2="350" y2="126" stroke="#e0e7ff" strokeWidth="2.5" strokeLinecap="round" />
-            <line x1="242" y1="140" x2="295" y2="140" stroke="#a5b4fc" strokeWidth="2.5" strokeLinecap="round" />
-            <line x1="242" y1="154" x2="335" y2="154" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" />
-            <circle cx="352" cy="112" r="3" fill="#38bdf8" />
-
-            {/* Central Energy Reactor Ring */}
-            <circle cx="300" cy="225" r="32" fill="#1e1b4b" stroke="#818cf8" strokeWidth="3" strokeDasharray="6 4" />
-            <circle cx="300" cy="225" r="20" fill="#312e81" stroke="#06b6d4" strokeWidth="2" />
-            <circle cx="300" cy="225" r="8" fill="#ffffff" />
-            
-            {/* High-Tech Circuit Traces & External Nodes */}
-            <path d="M210 135 L120 135 L80 180" stroke="url(#sbBeamVivid)" strokeWidth="3" strokeLinecap="round" />
-            <circle cx="80" cy="180" r="14" fill="#0c4a6e" stroke="#38bdf8" strokeWidth="2.5" />
-            <circle cx="80" cy="180" r="5" fill="#ffffff" />
-
-            <path d="M390 135 L480 135 L520 180" stroke="url(#sbBeamVivid)" strokeWidth="3" strokeLinecap="round" />
-            <circle cx="520" cy="180" r="14" fill="#500724" stroke="#f43f5e" strokeWidth="2.5" />
-            <circle cx="520" cy="180" r="5" fill="#ffffff" />
-
-            {/* Top & Bottom Status Readouts */}
-            <rect x="24" y="24" width="240" height="28" rx="6" fill="#1e1b4b" stroke="#4338ca" />
-            <text x="36" y="43" fill="#c7d2fe" fontFamily="monospace" fontSize="12" fontWeight="bold" letterSpacing="1">
-              SIGNBRIDGE :: VENTURE 01
-            </text>
-
-            <text x="36" y="380" fill="#38bdf8" fontFamily="monospace" fontSize="11" fontWeight="bold">
-              PLATFORM // ACTIVE CLOUD EDGE
-            </text>
-            <text x="564" y="380" textAnchor="end" fill="#c7d2fe" fontFamily="monospace" fontSize="11">
-              LATENCY: 8ms · 60 FPS
-            </text>
-          </svg>
+        <div className={`relative w-full h-full rounded-2xl overflow-hidden bg-[#0c0e14] shadow-2xl flex flex-col items-center justify-center p-6 border border-stone-800 select-none ${className}`}>
+          {/* Ambient Glow */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-orange-500/20 pointer-events-none" />
+          <div className="relative z-10 p-3 rounded-2xl bg-black/80 border border-white/10 shadow-2xl max-w-[280px]">
+            <img
+              src="/sign-logo.png"
+              alt="SignBridge Official Brand Logo"
+              className="w-full h-auto object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
+            />
+          </div>
+          <div className="relative z-10 mt-3 flex items-center justify-between w-full max-w-[280px] text-[10px] font-mono text-stone-400 px-1">
+            <span className="text-emerald-400 font-bold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              signbridge.click
+            </span>
+            <span className="text-stone-400">EDGE // 60 FPS</span>
+          </div>
         </div>
       );
 

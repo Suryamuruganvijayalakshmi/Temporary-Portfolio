@@ -146,7 +146,7 @@ export const featuredProjects = [
     tag: "W/OFF+BRAND",
     year: "2026",
     role: "Creative Developer & UI Designer",
-    liveUrl: "https://signbridge.click",
+    liveUrl: "https://merry-berry.vercel.app",
     githubUrl: "https://github.com/Suryamuruganvijayalakshmi",
     tagline: "Cinematic interactive ice-cream cafe website concept & product storytelling",
     summary: "An interactive ice-cream cafe website concept featuring cinematic food photography, vibrant fruit-inspired palettes, playful purple accents, oversized editorial typography, smooth scrolling, and scroll-controlled product storytelling.",
@@ -155,8 +155,8 @@ export const featuredProjects = [
     technicalApproach: "Built with fluid WebGL canvas shaders, Lenis inertial smooth scroll, and GSAP scroll triggers that reveal flavor notes and fruit textures in sync with user scrolling.",
     technologies: ["React.js", "GSAP ScrollTrigger", "Framer Motion", "Tailwind CSS", "Canvas Effects", "Responsive Web"],
     contribution: "Crafted interactive creative direction, custom typography treatments, animation choreographies, and responsive layout architecture.",
-    status: "Interactive design concept & prototype development under the SignBridge studio portfolio.",
-    isProductionLive: false,
+    status: "Interactive digital concept live at https://merry-berry.vercel.app.",
+    isProductionLive: true,
     visualType: "culinary"
   }
 ];

@@ -38,41 +38,43 @@
 }
 
 @layer base {
-  :root,
-  html,
-  html.dark,
-  [data-theme="dark"] {
-    --color-bg-canvas: #0a0c10;
-    --color-bg-surface: #11141a;
-    --color-bg-card: #161a22;
-    --color-bg-card-hover: #1e232e;
-    --color-bg-elevated: #232936;
+  :root {
+    --color-bg-canvas: #fbfbf9;
+    --color-bg-surface: #ffffff;
+    --color-bg-card: #ffffff;
+    --color-bg-card-hover: #f5f5f1;
+    --color-bg-elevated: #efefe9;
     
-    --color-border-subtle: rgba(255, 255, 255, 0.08);
-    --color-border-medium: rgba(255, 255, 255, 0.16);
-    --color-border-strong: rgba(255, 255, 255, 0.28);
+    --color-border-subtle: rgba(18, 19, 22, 0.08);
+    --color-border-medium: rgba(18, 19, 22, 0.15);
+    --color-border-strong: rgba(18, 19, 22, 0.28);
 
-    --color-text-primary: #f3f4f6;
-    --color-text-secondary: #9ca3af;
+    --color-text-primary: #121316;
+    --color-text-secondary: #475569;
     --color-text-muted: #64748b;
-    --color-text-dim: #475569;
+    --color-text-dim: #94a3b8;
 
-    --color-accent-iris: #818cf8;
-    --color-accent-iris-deep: #6366f1;
-    --color-accent-iris-glow: rgba(129, 140, 248, 0.18);
-    --color-accent-stamp: #ef4444;
-    --color-accent-stamp-bg: rgba(239, 68, 68, 0.1);
+    --color-accent-blue: #0066ff;
+    --color-accent-blue-deep: #2563eb;
+    --color-accent-blue-glow: rgba(0, 102, 255, 0.15);
+    --color-accent-orange: #f97316;
+    --color-accent-orange-deep: #ea580c;
     --color-accent-amber: #f59e0b;
     --color-accent-emerald: #10b981;
 
-    --dot-color: rgba(255, 255, 255, 0.05);
-    --grid-line: rgba(255, 255, 255, 0.035);
-    --film-grain-opacity: 0.035;
+    --color-accent-iris: #2563eb;
+    --color-accent-iris-deep: #0066ff;
+    --color-accent-iris-glow: rgba(0, 102, 255, 0.15);
+    --color-accent-stamp: #f97316;
+    --color-accent-stamp-bg: rgba(249, 115, 22, 0.1);
+
+    --dot-color: rgba(18, 19, 22, 0.06);
+    --grid-line: rgba(18, 19, 22, 0.04);
+    --film-grain-opacity: 0.025;
   }
 
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
     overflow-x: hidden;
     max-width: 100%;
   }
@@ -111,6 +113,63 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-accent-iris);
   }
+}
+
+/* Keyframes for React Bits ShinyText */
+@keyframes shine {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+.animate-shine {
+  animation: shine 4s linear infinite;
+}
+
+/* Keyframes for React Bits BorderBeam */
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam var(--duration) infinite linear;
+}
+
+/* Floating ambient fluid aurora glow */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(25px, -35px) scale(1.08);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
 }
 
 /* ====================================================================

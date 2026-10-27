@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import { useStore } from '../../lib/store';
-import Navbar from './Navbar';
+import StoryNavbar from '../StoryNavbar';
+import CustomCursor from '../CustomCursor';
+import { ScrollProgress } from '../animations/ScrollProgress';
 import CommandPalette from '../command-palette/CommandPalette';
 import FloatingAssistant from './FloatingAssistant';
 
 export default function RootLayout({ children }) {
   const { setActiveRoute } = useStore();
 
-  // 1. Permanent Dark Theme Enforcement
+  // 1. Theme Configuration
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-    document.documentElement.setAttribute('data-theme', 'dark');
-    try {
-      localStorage.setItem('surya-theme', 'dark');
-    } catch (e) {}
+    // Allows clean warm off-white canvas with dark accents
+    document.documentElement.classList.remove('dark');
+    document.documentElement.setAttribute('data-theme', 'light');
   }, []);
 
   // 2. Browser Back/Forward PopState Synchronization
@@ -67,8 +66,14 @@ export default function RootLayout({ children }) {
       {/* Subtle tactile film grain overlay */}
       <div className="film-grain" aria-hidden="true" />
 
-      {/* Center Navigation & Monogram Pill */}
-      <Navbar />
+      {/* Top Laser Scroll Progress Bar */}
+      <ScrollProgress />
+
+      {/* Interactive Custom Cursor */}
+      <CustomCursor />
+
+      {/* Sticky Compact Story Navigation */}
+      <StoryNavbar />
 
       {/* Main Viewport Content */}
       <main id="main-content" className="flex-1 w-full relative z-10">
